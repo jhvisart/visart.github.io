@@ -815,124 +815,7 @@
           </div>
         </div>
 
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-thumb">
-              <!-- Si tienes imagen, descomenta esta línea y cambia la ruta -->
-              <!-- <img src="assets/previews/ente-fantasia-azul.jpg" alt="Vista previa Ente Fantasía Azul"> -->
-
-              <div class="project-placeholder">
-                <strong>Ente Fantasía Azul</strong>
-                <span>Vista previa del proyecto</span>
-              </div>
-              <span class="project-badge">Demo en vivo</span>
-            </div>
-
-            <div class="project-body">
-              <div class="project-top">
-                <h3>Ente Fantasía Azul</h3>
-                <span class="project-tag">Experimental</span>
-              </div>
-
-              <p>
-                Experiencia visual con estética surrealista, atmósfera oscura y
-                energía luminosa. Pensado como pieza creativa para demo web.
-              </p>
-
-              <div class="project-meta">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
-              </div>
-
-              <div class="project-actions">
-                <a class="btn btn-primary" href="https://visart.dev/ente-fantasia-azul/" target="_blank" rel="noopener noreferrer">
-                  Ver demo
-                </a>
-                <a class="btn btn-secondary" href="https://visart.dev/ente-fantasia-azul" target="_blank" rel="noopener noreferrer">
-                  Ver código
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb">
-              <!-- <img src="assets/previews/proyecto-2.jpg" alt="Vista previa proyecto 2"> -->
-
-              <div class="project-placeholder">
-                <strong>Proyecto Visual 2</strong>
-                <span>Agrega aquí tu siguiente trabajo</span>
-              </div>
-              <span class="project-badge">Nuevo</span>
-            </div>
-
-            <div class="project-body">
-              <div class="project-top">
-                <h3>Nombre del Proyecto</h3>
-                <span class="project-tag">Visualizer</span>
-              </div>
-
-              <p>
-                Sustituye este texto por una descripción breve y fuerte del proyecto.
-                Ideal para mostrar una pieza visual o una experiencia interactiva.
-              </p>
-
-              <div class="project-meta">
-                <span>Web</span>
-                <span>Interactive</span>
-                <span>Creative</span>
-              </div>
-
-              <div class="project-actions">
-                <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
-                  Ver demo
-                </a>
-                <a class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">
-                  Ver código
-                </a>
-              </div>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb">
-              <!-- <img src="assets/previews/proyecto-3.jpg" alt="Vista previa proyecto 3"> -->
-
-              <div class="project-placeholder">
-                <strong>Proyecto Visual 3</strong>
-                <span>Espacio listo para otro demo</span>
-              </div>
-              <span class="project-badge">Portfolio</span>
-            </div>
-
-            <div class="project-body">
-              <div class="project-top">
-                <h3>Otro Proyecto</h3>
-                <span class="project-tag">Concept</span>
-              </div>
-
-              <p>
-                Usa esta tercera tarjeta para otro proyecto importante dentro de tu
-                página principal y mantener una galería más completa.
-              </p>
-
-              <div class="project-meta">
-                <span>Landing</span>
-                <span>Design</span>
-                <span>Motion</span>
-              </div>
-
-              <div class="project-actions">
-                <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">
-                  Ver demo
-                </a>
-                <a class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">
-                  Ver código
-                </a>
-              </div>
-            </div>
-          </article>
+        <div class="projects-grid" id="proyects-container">
         </div>
       </div>
     </section>
@@ -1025,5 +908,43 @@
       heroCard.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
     });
   </script>
+    <script>
+fetch('proyectos.json')
+  .then(res => res.json())
+  .then(proyectos => {
+
+    const container = document.getElementById("projects-container");
+
+    proyectos.forEach(p => {
+
+      const card = document.createElement("article");
+      card.className = "project-card";
+
+      card.innerHTML = `
+        <div class="project-thumb">
+          <img src="${p.img}" alt="${p.titulo}">
+          <span class="project-badge">Demo en vivo</span>
+        </div>
+
+        <div class="project-body">
+          <div class="project-top">
+            <h3>${p.titulo}</h3>
+            <span class="project-tag">${p.tag || 'Proyecto'}</span>
+          </div>
+
+          <p>${p.descripcion}</p>
+
+          <div class="project-actions">
+            <a class="btn btn-primary" href="${p.demo}" target="_blank">Ver demo</a>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+
+  })
+  .catch(err => console.error("Error cargando JSON:", err));
+</script>
 </body>
 </html>
