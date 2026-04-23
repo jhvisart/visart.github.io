@@ -1,18 +1,38 @@
 [
   {
-    "id": "ente-azul",
-    "titulo": "Ente Fantasia",
-    "descripcion": "Visualizer reactivo futurista.",
-    "img": "assets/ente-fantasia-azul.png",
-    "manifestacion": "https://visart.dev/ente-fantasia-azul/",
+    "id": "ente-fantasia-azul",
+    "titulo": "Ente Fantasía Azul",
+    "descripcion": "Entidad visual surreal y luminica con estilo fantástico.",
+    "categoria": "arte_digital",
+    "tipo": "manifestacion",
+    "labelTipo": "manifestación",
+    "preview": "assets/img/ente-fantasia-azul.jpg",
+    "demo": "https://jhvisart.github.io/ente-fantasia-azul/",
+    "estado": "activo",
+    "fecha": "2026-04-23"
+  },
+  {
+    "id": "quantum-visual",
+    "titulo": "Quantum Visual",
+    "descripcion": "Experiencia visual abstracta con energía y profundidad.",
+    "categoria": "visual_experimental",
+    "tipo": "demo",
+    "labelTipo": "demo",
+    "preview": "assets/img/quantum-visual.jpg",
+    "demo": "https://jhvisart.github.io/quantum-visual/",
+    "estado": "activo",
     "fecha": "2026-04-20"
   },
-   {
-    "id": "proyecto-2",
-    "titulo": "Proyecto Nuevo",
-    "descripcion": "Segundo proyecto",
-    "img": "assets/ente-fantasia-azul.png",
-    "manifestacion": "https://google.com",
-    "fecha": "2026-04-22"
+  {
+    "id": "portal-organico",
+    "titulo": "Portal Orgánico",
+    "descripcion": "Composición visual con apariencia viva y comportamiento fluido.",
+    "categoria": "fantasia_surreal",
+    "tipo": "manifestacion",
+    "labelTipo": "manifestación",
+    "preview": "assets/img/portal-organico.jpg",
+    "demo": "https://visart.dev/portal-organico/",
+    "estado": "proceso",
+    "fecha": "2026-04-18"
   }
 ]
