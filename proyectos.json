@@ -19,7 +19,7 @@
     "tipo": "demo",
     "labelTipo": "demo",
     "img": "assets/ente-fantasia-azul.png",
-    "manifestacion": "https://visart.dev/ente-fantasia-azul/",
+    "manifestacion": "https://visart.dev/eidolon/",
     "estado": "activo",
     "fecha": "2026-04-20"
   },
@@ -31,7 +31,7 @@
     "tipo": "manifestacion",
     "labelTipo": "manifestación",
     "img": "assets/img/portal-organico.jpg",
-    "manifestacion": "https://visart.dev/portal-organico/",
+    "manifestacion": "https://visart.dev/axiom/",
     "estado": "proceso",
     "fecha": "2026-04-18"
   }
