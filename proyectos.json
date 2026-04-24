@@ -18,7 +18,7 @@
     "categoria": "visual_experimental",
     "tipo": "demo",
     "labelTipo": "demo",
-    "img": "assets/ente-fantasia-azul.png",
+    "img": "assets/eidolon.png",
     "manifestacion": "https://visart.dev/eidolon/",
     "estado": "activo",
     "fecha": "2026-04-20"
@@ -30,7 +30,7 @@
     "categoria": "fantasia_surreal",
     "tipo": "manifestacion",
     "labelTipo": "manifestación",
-    "img": "assets/img/portal-organico.jpg",
+    "img": "assets/axiom.png",
     "manifestacion": "https://visart.dev/axiom/",
     "estado": "proceso",
     "fecha": "2026-04-18"
