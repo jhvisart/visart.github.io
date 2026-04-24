@@ -711,7 +711,8 @@
       .hero-mini-stats{
         grid-template-columns:1fr;
       }
-      /* === VISART CARD PRO UPGRADE === */
+    }
+    /* === VISART CARD PRO UPGRADE === */
 
 .project-card {
   position: relative;
@@ -758,8 +759,119 @@
   pointer-events: none;
 }
 
-.project-card > *
-    }
+.project-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-10px) scale(1.025);
+  border-color: rgba(0,255,220,0.55);
+  box-shadow:
+    0 0 28px rgba(0,255,220,0.25),
+    0 0 60px rgba(120,80,255,0.16),
+    inset 0 0 22px rgba(255,255,255,0.055);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-thumb img {
+  width: 100%;
+  display: block;
+  transition:
+    transform 0.55s ease,
+    filter 0.55s ease;
+}
+
+.project-card:hover .project-thumb img {
+  transform: scale(1.08);
+  filter: contrast(1.15) saturate(1.25) brightness(1.08);
+}
+
+.project-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 40%, transparent 25%, rgba(0,0,0,0.3) 100%),
+    linear-gradient(to top, rgba(3,5,12,0.8), transparent 55%);
+  pointer-events: none;
+}
+
+.project-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.62);
+  color: #00ffe0;
+  border: 1px solid rgba(0,255,220,0.35);
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 0 16px rgba(0,255,220,0.25);
+  backdrop-filter: blur(8px);
+}
+
+.project-actions .btn,
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(0,255,220,0.25);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+.project-actions .btn:hover,
+.btn-primary:hover {
+  transform: scale(1.06);
+  box-shadow:
+    0 0 18px rgba(0,255,220,0.75),
+    0 0 42px rgba(120,80,255,0.35);
+  filter: brightness(1.12);
+}
+
+.project-actions .btn::after,
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.65),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+.project-actions .btn:hover::after,
+.btn-primary:hover::after {
+  animation: visartShine 0.75s ease forwards;
+}
+
+@keyframes visartShine {
+  from {
+    left: -80%;
+  }
+  to {
+    left: 130%;
+  }
+}
   </style>
 </head>
 <body>
