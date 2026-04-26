@@ -267,7 +267,10 @@ h1 span { background: linear-gradient(135deg, #ffffff, #9fdcff 45%, #66b2ff 100%
 .brand{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:6px;
+}
+.brand-text span{
+  font-weight: 600; /* opcional si tu texto es fuerte */
 }
 
 /* SVG */
@@ -279,21 +282,42 @@ h1 span { background: linear-gradient(135deg, #ffffff, #9fdcff 45%, #66b2ff 100%
 /* estilo de la V */
 .v-nav path{
   fill:none;
-  stroke:#5ab0ff;
-  stroke-width:8;
+  stroke:#7bc3ff;
+  stroke-width:12;
   stroke-linecap:round;
   stroke-linejoin:round;
 
+  stroke-dasharray:200;
+  stroke-dashoffset: 200;
+
    filter:
-    drop-shadow(0 0 4px #5ab0ff)
+    drop-shadow(0 0 6px #7bc3ff)
     drop-shadow(0 0 10px #5ab0ff)
-    drop-shadow(0 0 20px rgba(90,176,255,0.6));
+    drop-shadow(0 0 14px rgba(123,195,255,0.7));
 
   stroke-dasharray:200;
   stroke-dashoffset:200;
 
-  animation: drawNavV 1.2s ease-out forwards,
-             navGlow 3s ease-in-out infinite;
+  animation: drawNavV 0.8s ease-out forwards,
+    energyPulse 2s ease-in-out infinite,
+    energyShift 4s linear infinite;
+}
+
+@keyframes energyPulse{
+  0%,100%{
+    transform: scale(1);
+    filter: drop-shadow(0 0 6px #7bc3ff);
+  }
+  50%{
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 16px #7b61ff);
+  }
+}
+
+@keyframes energyShift{
+  0%{ stroke:#7bc3ff; }
+  50%{ stroke:#7b61ff; }
+  100%{ stroke:#7bc3ff; }
 }
 
 /* animación de dibujo */
