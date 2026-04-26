@@ -173,3 +173,32 @@ if (v) {
 
   playSafe();
 }
+
+const container = document.querySelector('.v-particles');
+
+function createParticle() {
+  const p = document.createElement('span');
+
+  // colores VISART
+  const colors = ['#00eaff', '#3b82f6', '#7b61ff'];
+  p.style.background = colors[Math.floor(Math.random()*colors.length)];
+  p.style.boxShadow = `0 0 8px ${p.style.background}`;
+
+  // posición inicial (centro)
+  p.style.left = '50%';
+  p.style.top = '50%';
+
+  // dirección aleatoria
+  const x = (Math.random() - 0.5) * 80 + 'px';
+  const y = (Math.random() - 0.5) * 80 + 'px';
+
+  p.style.setProperty('--x', x);
+  p.style.setProperty('--y', y);
+
+  container.appendChild(p);
+
+  setTimeout(() => p.remove(), 2000);
+}
+
+// generar partículas continuamente
+setInterval(createParticle, 120);
