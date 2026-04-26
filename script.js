@@ -149,3 +149,27 @@ if (c) {
 
   loop();
 }
+
+const v = document.querySelector('.bg-video');
+
+if (v) {
+  v.muted = true;
+  v.loop = true;
+
+  const playSafe = () => v.play().catch(()=>{});
+
+  v.addEventListener('ended', () => {
+    v.currentTime = 0;
+    playSafe();
+  });
+
+  v.addEventListener('pause', () => {
+    playSafe();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) playSafe();
+  });
+
+  playSafe();
+}
