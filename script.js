@@ -85,3 +85,67 @@ function aplicarColorDominante(img, badge) {
     // Forzar ejecución si ya cargó
     if (img.complete) img.onload();
 }
+const c = document.getElementById('bgFX');
+
+// ⚠️ si no existe, evita errores
+if (c) {
+  const ctx = c.getContext('2d');
+
+  function resize(){
+    c.width = c.offsetWidth;
+    c.height = c.offsetHeight;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  const P = [];
+  for(let i=0;i<100;i++){
+    P.push({
+      x: Math.random()*c.width,
+      y: Math.random()*c.height,
+      r: Math.random()*1.5+0.5,
+      vx: (Math.random()-0.5)*0.3,
+      vy: (Math.random()-0.5)*0.3,
+      a: Math.random()*Math.PI*2
+    });
+  }
+
+  function loop(){
+    ctx.clearRect(0,0,c.width,c.height);
+
+    // glow central suave
+    const g = ctx.createRadialGradient(
+      c.width/2, c.height/2, 0,
+      c.width/2, c.height/2, c.width*0.6
+    );
+    g.addColorStop(0, "rgba(40,120,255,0.15)");
+    g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,c.width,c.height);
+
+    // partículas
+    P.forEach(p=>{
+      p.x += p.vx;
+      p.y += p.vy;
+      p.a += 0.02;
+
+      if(p.x<0||p.x>c.width) p.vx*=-1;
+      if(p.y<0||p.y>c.height) p.vy*=-1;
+
+      const pulse = Math.sin(p.a)*0.7+1;
+
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*pulse,0,Math.PI*2);
+      ctx.fillStyle = `rgba(120,180,255,${0.5*pulse})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = "#5aa0ff";
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
+}
