@@ -208,11 +208,11 @@ setInterval(createParticle, 120);
   if(!container) return;
 
   const points = [
-    { x: 25, y: 20 },
-    { x: 35, y: 50 },
-    { x: 50, y: 90 },
-    { x: 65, y: 50 },
-    { x: 75, y: 20 }
+    { x: 30, y: 20 },
+    { x: 40, y: 50 },
+    { x: 50, y: 85 },
+    { x: 60, y: 50 },
+    { x: 70, y: 20 }
   ];
 
   function createParticle() {
