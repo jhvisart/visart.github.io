@@ -244,6 +244,12 @@ h1 span { background: linear-gradient(135deg, #ffffff, #9fdcff 45%, #66b2ff 100%
 /* contenedor */
 .v-particles {
   position: absolute;
+   width: 70%;
+  height: 70%;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   inset: 0;
   pointer-events: none;
   overflow: hidden;
