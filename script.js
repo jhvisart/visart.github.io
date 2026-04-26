@@ -202,3 +202,43 @@ function createParticle() {
 
 // generar partículas continuamente
 setInterval(createParticle, 120);
+
+(function(){
+  const container = document.querySelector('.v-particles');
+  if(!container) return;
+
+  const points = [
+    { x: 25, y: 20 },
+    { x: 35, y: 50 },
+    { x: 50, y: 90 },
+    { x: 65, y: 50 },
+    { x: 75, y: 20 }
+  ];
+
+  function createParticle() {
+    const p = document.createElement('span');
+
+    const colors = ['#00eaff', '#3b82f6', '#7b61ff'];
+    const color = colors[Math.floor(Math.random()*colors.length)];
+
+    p.style.background = color;
+    p.style.boxShadow = `0 0 8px ${color}`;
+
+    const point = points[Math.floor(Math.random()*points.length)];
+
+    p.style.left = point.x + '%';
+    p.style.top = point.y + '%';
+
+    const x = (Math.random() - 0.5) * 60 + 'px';
+    const y = (Math.random() - 0.5) * 60 + 'px';
+
+    p.style.setProperty('--x', x);
+    p.style.setProperty('--y', y);
+
+    container.appendChild(p);
+
+    setTimeout(() => p.remove(), 2000);
+  }
+
+  setInterval(createParticle, 120);
+})();
