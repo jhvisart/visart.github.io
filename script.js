@@ -13,7 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('mouseleave', () => {
         if (heroCard) heroCard.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
     });
+    
+const path = window.location.pathname;
 
+let tipo = null;
+
+if (path.includes("visualizers")) {
+  tipo = "visualizer";
+}
+
+if (path.includes("interactivos")) {
+  tipo = "interactivo";
+}
     // 2. Carga de Proyectos desde JSON
     fetch('proyectos.json')
         .then(res => res.json())
