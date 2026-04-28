@@ -121,11 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 5. FONDO CANVAS
   // =====================================================
   iniciarFondoCanvas();
-
-  // =====================================================
-  // 6. PARTÍCULAS SOLO EN LA V
-  // =====================================================
-  iniciarParticulasV();
 });
 
 
@@ -289,44 +284,3 @@ function iniciarFondoCanvas() {
   loop();
 }
 
-
-// =====================================================
-// PARTÍCULAS EXACTAS SOBRE LA V
-// =====================================================
-function iniciarParticulasV() {
-  const path = document.querySelector('.v-nav path');
-  const container = document.querySelector('.v-particles');
-
-  if (!path || !container) return;
-
-  const length = path.getTotalLength();
-
-  function crearParticula() {
-    const particle = document.createElement('span');
-
-    const colors = ['#00eaff', '#3b82f6', '#7b61ff'];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-
-    particle.style.background = color;
-    particle.style.boxShadow = `0 0 8px ${color}`;
-
-    const point = path.getPointAtLength(Math.random() * length);
-
-    particle.style.left = point.x + 'px';
-    particle.style.top = point.y + 'px';
-
-    const x = (Math.random() - 0.5) * 40 + 'px';
-    const y = (Math.random() - 0.5) * 40 + 'px';
-
-    particle.style.setProperty('--x', x);
-    particle.style.setProperty('--y', y);
-
-    container.appendChild(particle);
-
-    setTimeout(() => {
-      particle.remove();
-    }, 1500);
-  }
-
-  setInterval(crearParticula, 120);
-}
