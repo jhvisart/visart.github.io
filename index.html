@@ -3,69 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>visart | Portafolio Creativo</title>
+
+  <title>VisArt | Portafolio Creativo</title>
+
   <meta name="google" content="notranslate">
-  <meta name="description" content="Portafolio creativo de visart con proyectos visuales, experimentales e interactivos." />
-  
+  <meta name="description" content="Portafolio creativo de VisArt con proyectos visuales, visualizers e interactivos." />
+
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <div class="bg-grid"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
 
   <header class="header">
-  <div class="container header-inner">
+    <div class="container header-inner">
 
-    <!-- BRAND -->
-    <a href="#" class="brand">
-      
-      <div class="brand-mark">
-        <svg viewBox="0 0 100 100" class="v-nav">
-          <defs>
-            <linearGradient id="vGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#00d4ff"/>
-              <stop offset="100%" stop-color="#3b82f6"/>
-            </linearGradient>
-          </defs>
+      <!-- BRAND -->
+      <a href="/" class="brand" aria-label="Ir al inicio de VisArt">
+        <div class="brand-mark">
+          <svg viewBox="0 0 100 100" class="v-nav" aria-hidden="true">
+            <defs>
+              <linearGradient id="vGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00d4ff"/>
+                <stop offset="100%" stop-color="#3b82f6"/>
+              </linearGradient>
+            </defs>
 
-          <path d="M10 10 L50 90 L90 10" />
-        </svg>
-        <div class="v-particles"></div>
-      </div>
+            <path d="M10 10 L50 90 L90 10" />
+          </svg>
 
-      <div class="brand-text">
-        <span>ISART</span>
-        <small>Creative Studio</small>
-      </div>
+          <div class="v-particles"></div>
+        </div>
 
-    </a>
+        <div class="brand-text">
+          <span>ISART</span>
+          <small>Creative Studio</small>
+        </div>
+      </a>
 
-    <!-- NAV -->
-    <nav class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#proyectos">Proyectos</a>
-      <a href="#sobre-mi">Sobre mí</a>
-      <a href="#contacto">Contacto</a>
-      <a class="nav-cta" href="#proyectos">Ver trabajos</a>
-    </nav>
+      <!-- NAV -->
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="/visuales/">Visuales</a>
+        <a href="/visualizers/">Visualizers</a>
+        <a href="/interactivos/">Interactivos</a>
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#contacto">Contacto</a>
+        <a class="nav-cta" href="#proyectos">Ver trabajos</a>
+      </nav>
 
-  </div>
-</header>
+    </div>
+  </header>
 
   <main>
     <section class="hero" id="inicio">
       <div class="container hero-grid">
+
         <div class="hero-content">
           <div class="eyebrow">Portafolio visual e interactivo</div>
-          <h1>Diseños y experiencias <span>creativas</span> con identidad digital.</h1>
-          <p>Bienvenido al espacio creativo de <strong>visart</strong>. Aquí se muestran proyectos experimentales, visuales interactivos y piezas digitales pensadas para impactar.</p>
+
+          <h1>
+            Diseños y experiencias <span>creativas</span> con identidad digital.
+          </h1>
+
+          <p>
+            Bienvenido al espacio creativo de <strong>VisArt</strong>. Aquí se muestran proyectos experimentales,
+            visuales interactivos y piezas digitales pensadas para impactar.
+          </p>
+
           <div class="hero-actions">
             <a class="btn btn-primary" href="#proyectos">Explorar proyectos</a>
             <a class="btn btn-secondary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">Ver visart.dev</a>
           </div>
+
           <div class="hero-points">
             <span>Visual Design</span>
             <span>Audio Reactive</span>
@@ -79,15 +89,27 @@
               <source src="assets/hero-card.mp4" type="video/mp4">
             </video>
 
-           <canvas id="bgFX"></canvas>
-            
+            <canvas id="bgFX"></canvas>
           </div>
+
           <div class="hero-mini-stats">
-            <div class="mini"><strong>VISART</strong><small>Creative Studio</small></div>
-            <div class="mini"><strong>Audio Reactive</strong><small>Visual Systems</small></div>
-            <div class="mini"><strong>LIVE</strong><small>visart.dev</small></div>
+            <div class="mini">
+              <strong>VISART</strong>
+              <small>Creative Studio</small>
+            </div>
+
+            <div class="mini">
+              <strong>Audio Reactive</strong>
+              <small>Visual Systems</small>
+            </div>
+
+            <div class="mini">
+              <strong>LIVE</strong>
+              <small>visart.dev</small>
+            </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -95,26 +117,38 @@
       <div class="container">
         <div class="section-head">
           <h2>Proyectos destacados</h2>
-          <p>Una selección de trabajos digitales y visuales cargados dinámicamente.</p>
+          <p>Una selección de trabajos digitales y visuales cargados dinámicamente desde JSON.</p>
         </div>
-        <div class="projects-grid" id="projects-container">
-          </div>
+
+        <!-- El JS coloca aquí las tarjetas desde data/proyectos.json -->
+        <div class="projects-grid" id="projects-container"></div>
       </div>
     </section>
 
     <section class="section" id="sobre-mi">
       <div class="container about-grid">
+
         <div class="glass">
           <h3>Identidad</h3>
-          <p><strong>visart</strong> reúne piezas web visuales y conceptos creativos modernos.</p>
+          <p>
+            <strong>VisArt</strong> reúne piezas web visuales, visualizers y conceptos creativos modernos.
+          </p>
+
           <div class="skills">
-            <span>Pages</span><span>Diseño Visual</span><span>Frontend</span>
+            <span>Pages</span>
+            <span>Diseño Visual</span>
+            <span>Frontend</span>
           </div>
         </div>
+
         <div class="glass">
           <h3>Estructura</h3>
-          <p>Repositorios independientes enlazados desde este núcleo central.</p>
+          <p>
+            Repositorios independientes enlazados desde este núcleo central, organizados por visuales,
+            visualizers e interactivos.
+          </p>
         </div>
+
       </div>
     </section>
 
@@ -122,8 +156,9 @@
       <div class="container">
         <div class="glass contact-box">
           <h2>Contacto</h2>
+
           <div class="hero-actions" style="justify-content:center;">
-            <a class="btn btn-primary" href="https://visart.dev">VISART</a>
+            <a class="btn btn-primary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">VISART</a>
             <a class="btn btn-secondary" href="#inicio">Volver arriba</a>
           </div>
         </div>
@@ -133,7 +168,7 @@
 
   <footer>
     <div class="container footer-line">
-      <div>© 2026 <strong>visart</strong>.</div>
+      <div>© 2026 <strong>VisArt</strong>.</div>
       <div>Diseño web visual Pro Max.</div>
     </div>
   </footer>
