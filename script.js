@@ -95,9 +95,9 @@ function iniciarParticulasV() {
       vy: (dy / len) * force - Math.random() * 0.45,
       life: 1,
       decay: 0.015 + Math.random() * 0.018,
-      size: 0.8 + Math.random() * 2.2,
+      size: 0.45 + Math.random() * 1.1,
       color: randomColor(),
-      glow: 8 + Math.random() * 14
+      glow: 4 + Math.random() * 7
     });
   }
 
@@ -121,7 +121,7 @@ function iniciarParticulasV() {
 
     ctx.clearRect(0, 0, rect.width, rect.height);
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 2; i++) {
       crearParticula();
     }
 
@@ -145,8 +145,8 @@ function iniciarParticulasV() {
       pintarParticula(p);
     }
 
-    if (particles.length > 180) {
-      particles.splice(0, particles.length - 180);
+    if (particles.length > 70) {
+      particles.splice(0, particles.length - 70);
     }
 
     requestAnimationFrame(loop);
