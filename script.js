@@ -2,12 +2,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroCard = document.querySelector('.hero-card');
   const projectsContainer = document.getElementById("projects-container");
 
-  // =====================================================
-  // 1. ANIMACIÓN DEL HERO
-  // =====================================================
-  window.addEventListener('mousemove', (e) => {
-    if (!heroCard) return;
+  iniciarHeroTilt(heroCard);
+  iniciarParticulasV();
+  iniciarProyectos(projectsContainer);
+  iniciarVideoFondo();
+  iniciarFondoCanvas();
+});
 
+
+// =====================================================
+// 1. ANIMACIÓN DEL HERO
+// =====================================================
+function iniciarHeroTilt(heroCard) {
+  if (!heroCard) return;
+
+  window.addEventListener('mousemove', (e) => {
     const x = (e.clientX / window.innerWidth - 0.5) * 10;
     const y = (e.clientY / window.innerHeight - 0.5) * 10;
 
@@ -16,119 +25,226 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   window.addEventListener('mouseleave', () => {
-    if (!heroCard) return;
-
     heroCard.style.transform =
       'perspective(900px) rotateY(0deg) rotateX(0deg)';
   });
+}
 
-  // =====================================================
-  // 2. DETECTAR PÁGINA ACTUAL
-  // =====================================================
+
+// =====================================================
+// 2. PARTICULAS PRO EN LA V
+// =====================================================
+function iniciarParticulasV() {
+  const canvas = document.querySelector(".v-canvas");
+  const svg = document.querySelector(".v-nav");
+  const path = document.querySelector(".v-nav path");
+
+  if (!canvas || !svg || !path) return;
+
+  const ctx = canvas.getContext("2d");
+  const particles = [];
+  const pathLength = path.getTotalLength();
+
+  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.max(1, Math.floor(rect.width * dpr));
+    canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function randomColor() {
+    const colors = [
+      "rgba(0, 234, 255,",
+      "rgba(59, 130, 246,",
+      "rgba(123, 97, 255,",
+      "rgba(255, 0, 200,"
+    ];
+
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function crearParticula() {
+    const canvasRect = canvas.getBoundingClientRect();
+    const t = Math.random() * pathLength;
+    const point = path.getPointAtLength(t);
+
+    const viewBox = svg.viewBox.baseVal;
+
+    const x = ((point.x - viewBox.x) / viewBox.width) * canvasRect.width;
+    const y = ((point.y - viewBox.y) / viewBox.height) * canvasRect.height;
+
+    const centerX = canvasRect.width / 2;
+    const centerY = canvasRect.height / 2;
+
+    const dx = x - centerX;
+    const dy = y - centerY;
+    const len = Math.hypot(dx, dy) || 1;
+
+    const force = 0.25 + Math.random() * 0.75;
+
+    particles.push({
+      x,
+      y,
+      vx: (dx / len) * force + (Math.random() - 0.5) * 0.45,
+      vy: (dy / len) * force - Math.random() * 0.45,
+      life: 1,
+      decay: 0.015 + Math.random() * 0.018,
+      size: 0.8 + Math.random() * 2.2,
+      color: randomColor(),
+      glow: 8 + Math.random() * 14
+    });
+  }
+
+  function pintarParticula(p) {
+    const alpha = Math.max(0, p.life);
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size * (0.6 + alpha), 0, Math.PI * 2);
+
+    const color = `${p.color}${alpha})`;
+
+    ctx.fillStyle = color;
+    ctx.shadowBlur = p.glow;
+    ctx.shadowColor = color;
+    ctx.fill();
+    ctx.shadowBlur = 0;
+  }
+
+  function loop() {
+    const rect = canvas.getBoundingClientRect();
+
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    for (let i = 0; i < 5; i++) {
+      crearParticula();
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      p.vx *= 0.985;
+      p.vy *= 0.985;
+      p.vy += 0.012;
+
+      p.life -= p.decay;
+
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      pintarParticula(p);
+    }
+
+    if (particles.length > 180) {
+      particles.splice(0, particles.length - 180);
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  loop();
+}
+
+
+// =====================================================
+// 3. PROYECTOS DESDE JSON
+// =====================================================
+function iniciarProyectos(projectsContainer) {
+  if (!projectsContainer) return;
+
   const path = window.location.pathname.toLowerCase();
 
   let tipoPagina = null;
 
-  if (path.includes("visualizers")) {
-    tipoPagina = "visualizer";
-  }
+  if (path.includes("visualizers")) tipoPagina = "visualizer";
+  if (path.includes("interactivos")) tipoPagina = "interactivo";
+  if (path.includes("visuales")) tipoPagina = "visual";
 
-  if (path.includes("interactivos")) {
-    tipoPagina = "interactivo";
-  }
+  cargarJSON('/data/proyectos.json')
+    .catch(() => cargarJSON('data/proyectos.json'))
+    .then(data => {
+      const listaProyectos = data.proyectos || [];
 
-  if (path.includes("visuales")) {
-    tipoPagina = "visual";
-  }
+      listaProyectos.sort((a, b) => {
+        return new Date(b.fecha) - new Date(a.fecha);
+      });
 
-  // =====================================================
-  // 3. CARGAR PROYECTOS DESDE JSON
-  // =====================================================
-  if (projectsContainer) {
-    cargarJSON('/data/proyectos.json')
-      .catch(() => cargarJSON('data/proyectos.json'))
-      .then(data => {
-        const listaProyectos = data.proyectos || [];
+      let proyectosMostrados = 0;
 
-        listaProyectos.sort((a, b) => {
-          return new Date(b.fecha) - new Date(a.fecha);
-        });
+      listaProyectos.forEach(p => {
+        if (tipoPagina && p.tipo !== tipoPagina) return;
 
-        let proyectosMostrados = 0;
+        proyectosMostrados++;
 
-        listaProyectos.forEach(p => {
-          if (tipoPagina && p.tipo !== tipoPagina) return;
+        const card = document.createElement("article");
+        card.className = "project-card";
 
-          proyectosMostrados++;
+        card.innerHTML = `
+          <div class="project-thumb">
+            <img src="${p.img}" alt="${p.titulo}" crossorigin="anonymous" loading="lazy">
+            <span class="project-badge">${p.labelTipo || 'Demo en vivo'}</span>
+          </div>
 
-          const card = document.createElement("article");
-          card.className = "project-card";
-
-          card.innerHTML = `
-            <div class="project-thumb">
-              <img src="${p.img}" alt="${p.titulo}" crossorigin="anonymous" loading="lazy">
-              <span class="project-badge">${p.labelTipo || 'Demo en vivo'}</span>
+          <div class="project-body">
+            <div class="project-top">
+              <h3>${p.titulo}</h3>
+              <span class="project-tag">${p.categoria || 'Proyecto'}</span>
             </div>
 
-            <div class="project-body">
-              <div class="project-top">
-                <h3>${p.titulo}</h3>
-                <span class="project-tag">${p.categoria || 'Proyecto'}</span>
-              </div>
+            <p>${p.descripcion || ''}</p>
 
-              <p>${p.descripcion || ''}</p>
-
-              <div class="project-actions">
-                <a class="btn btn-primary" href="${p.manifestacion}" target="_blank" rel="noopener noreferrer">
-                  Ver demo
-                </a>
-              </div>
+            <div class="project-actions">
+              <a class="btn btn-primary" href="${p.manifestacion}" target="_blank" rel="noopener noreferrer">
+                Ver demo
+              </a>
             </div>
-          `;
+          </div>
+        `;
 
-          projectsContainer.appendChild(card);
+        projectsContainer.appendChild(card);
 
-          const img = card.querySelector("img");
-          const badge = card.querySelector(".project-badge");
+        const img = card.querySelector("img");
+        const badge = card.querySelector(".project-badge");
 
-          aplicarColorDominante(img, badge);
-        });
+        aplicarColorDominante(img, badge);
+      });
 
-        if (proyectosMostrados === 0) {
-          projectsContainer.innerHTML = `
-            <article class="project-card">
-              <div class="project-body">
-                <h3>No hay proyectos para esta sección</h3>
-                <p>Revisa que el campo <strong>tipo</strong> del JSON coincida con esta página.</p>
-              </div>
-            </article>
-          `;
-        }
-      })
-      .catch(err => {
-        console.error("Error cargando JSON:", err);
-
+      if (proyectosMostrados === 0) {
         projectsContainer.innerHTML = `
           <article class="project-card">
             <div class="project-body">
-              <h3>No se pudieron cargar los proyectos</h3>
-              <p>Revisa la ruta del archivo JSON: <strong>/data/proyectos.json</strong></p>
+              <h3>No hay proyectos para esta sección</h3>
+              <p>Revisa que el campo <strong>tipo</strong> del JSON coincida con esta página.</p>
             </div>
           </article>
         `;
-      });
-  }
+      }
+    })
+    .catch(err => {
+      console.error("Error cargando JSON:", err);
 
-  // =====================================================
-  // 4. VIDEO DE FONDO SEGURO
-  // =====================================================
-  iniciarVideoFondo();
-
-  // =====================================================
-  // 5. FONDO CANVAS
-  // =====================================================
-  iniciarFondoCanvas();
-});
+      projectsContainer.innerHTML = `
+        <article class="project-card">
+          <div class="project-body">
+            <h3>No se pudieron cargar los proyectos</h3>
+            <p>Revisa la ruta del archivo JSON: <strong>/data/proyectos.json</strong></p>
+          </div>
+        </article>
+      `;
+    });
+}
 
 
 // =====================================================
@@ -232,7 +348,7 @@ function iniciarVideoFondo() {
 
 
 // =====================================================
-// FONDO CANVAS
+// FONDO CANVAS HERO
 // =====================================================
 function iniciarFondoCanvas() {
   const c = document.getElementById('bgFX');
