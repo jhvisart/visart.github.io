@@ -315,6 +315,7 @@ function aplicarColorDominante(img, badge) {
 // =====================================================
 // VIDEO DE FONDO
 // =====================================================
+
 function iniciarVideoFondo() {
   const video = document.querySelector('.bg-video');
 
@@ -323,19 +324,16 @@ function iniciarVideoFondo() {
   video.muted = true;
   video.loop = true;
   video.playsInline = true;
+  video.autoplay = true;
 
   const playSafe = () => {
-    video.play().catch(() => {});
+    if (video.paused) {
+      video.play().catch(() => {});
+    }
   };
 
-  video.addEventListener('ended', () => {
-    video.currentTime = 0;
-    playSafe();
-  });
-
-  video.addEventListener('pause', () => {
-    playSafe();
-  });
+  video.addEventListener('loadeddata', playSafe);
+  video.addEventListener('canplay', playSafe);
 
   document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
@@ -345,7 +343,6 @@ function iniciarVideoFondo() {
 
   playSafe();
 }
-
 
 // =====================================================
 // FONDO CANVAS HERO
