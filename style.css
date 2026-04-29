@@ -155,13 +155,16 @@ a {
 
 .vp {
   position: absolute;
-  width: 3px;
-  height: 3px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  opacity: 0;
+  opacity: 1;
   background: #00eaff;
-  box-shadow: 0 0 8px #00eaff;
-  animation: vParticlePop 1.6s infinite ease-out;
+  box-shadow:
+    0 0 6px #00eaff,
+    0 0 14px #00eaff,
+    0 0 24px #3b82f6;
+  animation: vParticlePop 1.4s infinite ease-out;
 }
 
 /* puntos siguiendo la forma de la V */
@@ -627,16 +630,22 @@ footer {
 @keyframes vParticlePop {
   0% {
     opacity: 0;
-    transform: translate(0, 0) scale(.5);
+    transform: translate(0, 0) scale(.7);
   }
 
-  20% {
+  15% {
     opacity: 1;
+    transform: translate(0, 0) scale(1.4);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translate(0, -3px) scale(1);
   }
 
   100% {
     opacity: 0;
-    transform: translate(0, -8px) scale(0);
+    transform: translate(0, -10px) scale(.2);
   }
 }
 
