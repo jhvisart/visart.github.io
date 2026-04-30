@@ -117,7 +117,7 @@ a {
 .v-nav path {
   fill: none;
   stroke: url(#vGradient);
-  stroke-width: 9;
+  stroke-width: 11;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 200;
