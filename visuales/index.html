@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Visuales | VisArt</title>
+  <meta name="google" content="notranslate">
+  <meta name="description" content="Galería de proyectos visuales de VisArt." />
+
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <div class="bg-grid"></div>
+
+  <header class="header">
+    <div class="container header-inner">
+
+      <a href="../" class="brand" aria-label="Ir al inicio de VisArt">
+        <div class="brand-mark">
+          <svg viewBox="0 0 100 100" class="v-nav" aria-hidden="true">
+            <defs>
+              <linearGradient id="vGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00d4ff"/>
+                <stop offset="100%" stop-color="#3b82f6"/>
+              </linearGradient>
+            </defs>
+            <path d="M10 10 L50 90 L90 10" />
+          </svg>
+
+          <canvas class="v-canvas" aria-hidden="true"></canvas>
+        </div>
+
+        <div class="brand-text">
+          <span>ISART</span>
+          <small>Creative Studio</small>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="../">Inicio</a>
+        <a href="../visuales/">Visuales</a>
+        <a href="../visualizers/">Visualizers</a>
+        <a href="../interactivos/">Interactivos</a>
+        <a href="../#sobre-mi">Sobre mí</a>
+        <a href="../#contacto">Contacto</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Colección Visual</div>
+
+          <h1>
+            Proyectos <span>visuales</span> de VisArt.
+          </h1>
+
+          <p>
+            Aquí se muestran piezas visuales, conceptos gráficos, mundos digitales y composiciones creativas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Visuales</h2>
+          <p>Proyectos filtrados automáticamente desde el JSON por tipo visual.</p>
+        </div>
+
+        <div class="projects-grid" id="projects-container"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-line">
+      <div>© 2026 <strong>VisArt</strong>.</div>
+      <div>Visuales creativos.</div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
