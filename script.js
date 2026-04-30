@@ -430,3 +430,22 @@ function iniciarFondoCanvas() {
 
   loop();
 }
+function getAccentColors() {
+  const style = getComputedStyle(document.body);
+
+  const c1 = style.getPropertyValue("--accent1").trim();
+  const c2 = style.getPropertyValue("--accent2").trim();
+
+  return [c1, c2];
+}
+function getParticleColor(alpha = 1) {
+  const colors = getAccentColors();
+  const color = colors[Math.floor(Math.random() * colors.length)];
+
+  // convierte hex → rgba
+  const r = parseInt(color.slice(1, 3), 16);
+  const g = parseInt(color.slice(3, 5), 16);
+  const b = parseInt(color.slice(5, 7), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
