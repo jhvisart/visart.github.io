@@ -145,7 +145,7 @@ a {
   font-weight: 700;
   font-size: 16px;
   line-height: 1;
-  background: linear-gradient(90deg, #00eaff, #ff00c8);
+   background: linear-gradient(90deg, var(--accent1), var(--accent2));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -185,7 +185,7 @@ a {
   bottom: -4px;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, #00d4ff, #3b82f6);
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
   transition: 0.3s;
 }
 
@@ -294,8 +294,8 @@ h1 span {
 
 .btn-primary {
   color: #05111d;
-  background: linear-gradient(135deg, var(--blue1), var(--blue2));
-  box-shadow: 0 14px 35px var(--glow);
+ background: linear-gradient(135deg, var(--accent1), var(--accent2));
+  box-shadow: 0 14px 35px color-mix(in srgb, var(--accent2) 35%, transparent);
 }
 
 .btn-secondary {
@@ -405,13 +405,14 @@ h1 span {
   border-radius: 28px;
   border: 1px solid rgba(0, 255, 220, 0.18);
   background: rgba(3, 5, 12, 0.72);
+   border-color: color-mix(in srgb, var(--accent1) 25%, transparent);
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
 }
 
 .project-card:hover {
   transform: translateY(-10px) scale(1.025);
-  border-color: rgba(0, 255, 220, 0.55);
-  box-shadow: 0 0 28px rgba(0, 255, 220, 0.25);
+  border-color: color-mix(in srgb, var(--accent1) 70%, transparent);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--accent1) 35%, transparent);
 }
 
 .project-thumb {
@@ -463,11 +464,11 @@ h1 span {
 .project-tag {
   flex-shrink: 0;
   font-size: 11px;
-  color: #9fdcff;
+  color: var(--accent1);
   padding: 5px 8px;
   border-radius: 999px;
-  background: rgba(0, 212, 255, .08);
-  border: 1px solid rgba(0, 212, 255, .16);
+ background: color-mix(in srgb, var(--accent1) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent1) 20%, transparent);
 }
 
 .project-body p {
