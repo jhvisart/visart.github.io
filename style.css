@@ -769,3 +769,80 @@ body.page-interactivos {
     radial-gradient(circle at 50% 100%, rgba(255, 80, 0, .12), transparent 35%),
     linear-gradient(180deg, #160805, #22100a);
 }
+/* ============================= */
+/* COLORES Y FONDOS POR PAGINA */
+/* ============================= */
+
+body.page-home {
+  --accent1: #00eaff;
+  --accent2: #3b82f6;
+  --blue1: #7ad7ff;
+  --blue2: #4ca5ff;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(60, 120, 255, .15), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(0, 200, 255, .10), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(100, 80, 255, .12), transparent 35%),
+    linear-gradient(180deg, #050816, #0b1224);
+}
+
+body.page-visuales {
+  --accent1: #00eaff;
+  --accent2: #7b61ff;
+  --blue1: #00eaff;
+  --blue2: #7b61ff;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 234, 255, .20), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(123, 97, 255, .18), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(80, 60, 255, .20), transparent 35%),
+    linear-gradient(180deg, #040816, #0a1022);
+}
+
+body.page-visualizers {
+  --accent1: #00ff88;
+  --accent2: #00c2ff;
+  --blue1: #00ff88;
+  --blue2: #00c2ff;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 136, .20), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(0, 194, 255, .18), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(0, 255, 180, .14), transparent 35%),
+    linear-gradient(180deg, #031611, #09241d);
+}
+
+body.page-interactivos {
+  --accent1: #ff7a00;
+  --accent2: #ff00c8;
+  --blue1: #ff7a00;
+  --blue2: #ff00c8;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 122, 0, .20), transparent 35%),
+    radial-gradient(circle at 80% 10%, rgba(255, 0, 200, .18), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(255, 80, 0, .14), transparent 35%),
+    linear-gradient(180deg, #160805, #22100a);
+}
+
+body .brand-text span,
+body .mini strong {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+body .btn-primary,
+body .nav-cta {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2)) !important;
+}
+
+body .nav-links a::after {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2)) !important;
+}
+
+body .v-nav path {
+  filter:
+    drop-shadow(0 0 8px var(--accent1))
+    drop-shadow(0 0 18px var(--accent2)) !important;
+}
