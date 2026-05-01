@@ -60,10 +60,10 @@ function iniciarParticulasV() {
 
   function randomColor() {
     const colors = [
-      "rgba(0, 234, 255,",
-      "rgba(59, 130, 246,",
-      "rgba(123, 97, 255,",
-      "rgba(255, 0, 200,"
+      "rgba(0, 234, 255, 1)",
+      "rgba(59, 130, 246, 1)",
+      "rgba(123, 97, 255, 1)",
+      "rgba(255, 0, 200, 1)"
     ];
 
     return colors[Math.floor(Math.random() * colors.length)];
@@ -107,7 +107,7 @@ function iniciarParticulasV() {
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size * (0.6 + alpha), 0, Math.PI * 2);
 
-    const color = `${p.color}${alpha})`;
+   const color = p.color.replace("1)", `${alpha})`);
 
     ctx.fillStyle = getParticleColor(p.life);
     ctx.shadowBlur = p.glow;
