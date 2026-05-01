@@ -659,7 +659,7 @@ footer {
   }
 }
 /* ===== VISUALES (AZUL / VIOLETA) ===== */
-.page-visuales {
+body.page-visuales {
   --blue1: #00eaff;
   --blue2: #7b61ff;
   --accent1: #00eaff;
@@ -667,7 +667,7 @@ footer {
 }
 
 /* ===== VISUALIZERS (VERDE / CYAN) ===== */
-.page-visualizers {
+body.page-visualizers {
   --blue1: #00ff88;
   --blue2: #00c2ff;
   --accent1: #00ff88;
@@ -675,7 +675,7 @@ footer {
 }
 
 /* ===== INTERACTIVOS (MAGENTA / NARANJA) ===== */
-.page-interactivos {
+body.page-interactivos {
   --blue1: #ff00c8;
   --blue2: #ff7a00;
   --accent1: #ff00c8;
