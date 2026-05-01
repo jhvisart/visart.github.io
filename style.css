@@ -687,3 +687,51 @@ body.page-home {
   --blue1: #7ad7ff;
   --blue2: #4ca5ff;
 }
+/* ============================= */
+/* COLORES POR PAGINA - FINAL */
+/* ============================= */
+
+body.page-home {
+  --accent1: #00eaff;
+  --accent2: #3b82f6;
+}
+
+body.page-visuales {
+  --accent1: #ff00c8;
+  --accent2: #7b61ff;
+}
+
+body.page-visualizers {
+  --accent1: #00ff88;
+  --accent2: #00c2ff;
+}
+
+body.page-interactivos {
+  --accent1: #ff7a00;
+  --accent2: #ff00c8;
+}
+
+body .brand-text span,
+body.page-home .brand-text span,
+body.page-visuales .brand-text span,
+body.page-visualizers .brand-text span,
+body.page-interactivos .brand-text span {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+body .btn-primary,
+body .nav-cta {
+  background: linear-gradient(135deg, var(--accent1), var(--accent2)) !important;
+}
+
+body .nav-links a::after {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2)) !important;
+}
+
+body .v-nav path {
+  filter:
+    drop-shadow(0 0 8px var(--accent1))
+    drop-shadow(0 0 18px var(--accent2)) !important;
+}
