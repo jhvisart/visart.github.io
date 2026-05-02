@@ -196,8 +196,8 @@ function iniciarParticulasV() {
     particles.push({
       x,
       y,
-      vx: (dx / len) * (0.25 + Math.random() * 0.8) + (Math.random() - 0.5) * 0.7,
-      vy: (dy / len) * (0.25 + Math.random() * 0.8) + (Math.random() - 0.5) * 0.7,
+      vx: (dx / len) * (0.08 + Math.random() * 0.25) + (Math.random() - 0.5) * 0.2,
+      vy: (dy / len) * (0.08 + Math.random() * 0.25) + (Math.random() - 0.5) * 0.2,
       size: 0.6 + Math.random() * 1.4,
       life: 1,
       decay: 0.012 + Math.random() * 0.018,
@@ -255,7 +255,7 @@ function mezclarColor(c1, c2, factor) {
     const ctx = document.createElement("canvas").getContext("2d");
     ctx.fillStyle = c;
     const color = ctx.fillStyle;
-    const rgb = color.match(/\d+/g);
+    const rgb = color.match(/\d+/g) || [0, 234, 255];
     return rgb ? rgb.map(Number) : [0, 234, 255];
   };
 
