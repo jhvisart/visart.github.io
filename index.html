@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="page-home">
+<body class="page-home" data-tipo="destacado">
   <div class="bg-grid"></div>
 
   <header class="header">
@@ -23,8 +23,8 @@
           <svg viewBox="0 0 100 100" class="v-nav" aria-hidden="true">
             <defs>
               <linearGradient id="vGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#00d4ff"/>
-                <stop offset="100%" stop-color="#3b82f6"/>
+                <stop offset="0%" stop-color="var(--accent1)" />
+                <stop offset="100%" stop-color="var(--accent2)" />
               </linearGradient>
             </defs>
 
@@ -154,7 +154,7 @@
         <div class="glass contact-box">
           <h2>Contacto</h2>
 
-          <div class="hero-actions" style="justify-content:center;">
+          <div class="hero-actions center-actions">
             <a class="btn btn-primary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">VISART</a>
             <a class="btn btn-secondary" href="#inicio">Volver arriba</a>
           </div>
