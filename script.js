@@ -198,7 +198,7 @@ function iniciarParticulasV() {
       y,
       vx: (dx / len) * (0.25 + Math.random() * 0.8) + (Math.random() - 0.5) * 0.7,
       vy: (dy / len) * (0.25 + Math.random() * 0.8) + (Math.random() - 0.5) * 0.7,
-      size: 1.2 + Math.random() * 2.4,
+      size: 0.6 + Math.random() * 1.4,
       life: 1,
       decay: 0.012 + Math.random() * 0.018,
       color: colores[Math.floor(Math.random() * colores.length)]
@@ -210,7 +210,7 @@ function iniciarParticulasV() {
 
     ctx.clearRect(0, 0, rect.width, rect.height);
 
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2; i++) {
       crearParticula();
     }
 
@@ -223,7 +223,7 @@ function iniciarParticulasV() {
 
       ctx.save();
       ctx.globalAlpha = Math.max(p.life, 0);
-      ctx.shadowBlur = 14;
+      ctx.shadowBlur = 8;
       ctx.shadowColor = p.color;
       ctx.fillStyle = p.color;
       ctx.beginPath();
