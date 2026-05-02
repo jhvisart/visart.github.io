@@ -245,8 +245,8 @@ const colores = [
 }
 
 function getCssVar(nombre) {
-  return getComputedStyle(document.documentElement).getPropertyValue(nombre).trim()
-    || getComputedStyle(document.body).getPropertyValue(nombre).trim()
+  return getComputedStyle(document.document.body).getPropertyValue(nombre).trim()
+    || getComputedStyle(documentElement).getPropertyValue(nombre).trim()
     || "#00eaff";
   function mezclarColor(c1, c2, factor) {
   const parse = (c) => {
