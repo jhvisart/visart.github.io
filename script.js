@@ -183,15 +183,15 @@ function iniciarParticulasV() {
     const len = Math.sqrt(dx * dx + dy * dy) || 1;
 
     const accent1 = getCssVar("--accent1");
-const accent2 = getCssVar("--accent2");
+    const accent2 = getCssVar("--accent2");
 
-const colores = [
-  accent1,
-  accent2,
-  mezclarColor(accent1, accent2, 0.5),
-  mezclarColor(accent1, "#ffffff", 0.3),
-  mezclarColor(accent2, "#ffffff", 0.3)
-];
+    const colores = [
+      accent1,
+      accent2,
+      mezclarColor(accent1, accent2, 0.5),
+      mezclarColor(accent1, "#ffffff", 0.28),
+      mezclarColor(accent2, "#ffffff", 0.28)
+    ];
 
     particles.push({
       x,
@@ -223,7 +223,7 @@ const colores = [
 
       ctx.save();
       ctx.globalAlpha = Math.max(p.life, 0);
-      ctx.shadowBlur = 12;
+      ctx.shadowBlur = 14;
       ctx.shadowColor = p.color;
       ctx.fillStyle = p.color;
       ctx.beginPath();
@@ -244,7 +244,7 @@ const colores = [
   animar();
 }
 
- function getCssVar(nombre) {
+function getCssVar(nombre) {
   return getComputedStyle(document.body).getPropertyValue(nombre).trim()
     || getComputedStyle(document.documentElement).getPropertyValue(nombre).trim()
     || "#00eaff";
@@ -255,8 +255,8 @@ function mezclarColor(c1, c2, factor) {
     const ctx = document.createElement("canvas").getContext("2d");
     ctx.fillStyle = c;
     const color = ctx.fillStyle;
-    const rgb = color.match(/\d+/g).map(Number);
-    return rgb;
+    const rgb = color.match(/\d+/g);
+    return rgb ? rgb.map(Number) : [0, 234, 255];
   };
 
   const [r1, g1, b1] = parse(c1);
