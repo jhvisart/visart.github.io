@@ -1,19 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const heroCard = document.querySelector(".hero-card");
-  const projectsContainer = document.getElementById("projects-container");
-
-  iniciarHeroTilt(heroCard);
+  iniciarHeroTilt();
   iniciarParticulasV();
-  iniciarProyectos(projectsContainer);
+  iniciarProyectos();
   iniciarVideoFondo();
   iniciarFondoCanvas();
 });
 
-// =====================================================
-// 1. ANIMACIÓN DEL HERO
-// =====================================================
-
-function iniciarHeroTilt(heroCard) {
+function iniciarHeroTilt() {
+  const heroCard = document.querySelector(".hero-card");
   if (!heroCard) return;
 
   window.addEventListener("mousemove", (e) => {
@@ -30,9 +24,119 @@ function iniciarHeroTilt(heroCard) {
   });
 }
 
-// =====================================================
-// 2. PARTÍCULAS EN LA V
-// =====================================================
+function iniciarProyectos() {
+  const container = document.getElementById("projects-container");
+  if (!container) return;
+
+  const tipoPagina = document.body.dataset.tipo || "todos";
+
+  fetch("/data/proyectos.json")
+    .catch(() => fetch("data/proyectos.json"))
+    .then(res => {
+      if (!res.ok) throw new Error("No se pudo cargar proyectos.json");
+      return res.json();
+    })
+    .then(data => {
+      const proyectos = data.proyectos || [];
+
+      const filtrados = proyectos
+        .filter(p => tipoPagina === "todos" ? true : p.tipo === tipoPagina)
+        .sort((a, b) => new Date(b.fecha || 0) - new Date(a.fecha || 0));
+
+      container.innerHTML = "";
+
+      if (!filtrados.length) {
+        container.innerHTML = `
+          <article class="project-card">
+            <div class="project-body">
+              <h3>No hay proyectos para esta sección</h3>
+              <p>Agrega en el JSON un proyecto con tipo: <strong>${tipoPagina}</strong>.</p>
+            </div>
+          </article>
+        `;
+        return;
+      }
+
+      filtrados.forEach(p => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+
+        card.innerHTML = `
+          <div class="project-thumb">
+            <img src="${resolverRuta(p.img)}" alt="${limpiar(p.titulo)}" loading="lazy">
+            <span class="project-badge">${limpiar(p.labelTipo || p.tipo || "Proyecto")}</span>
+          </div>
+
+          <div class="project-body">
+            <div class="project-top">
+              <h3>${limpiar(p.titulo)}</h3>
+              <span class="project-tag">${limpiar(p.categoria || "Proyecto")}</span>
+            </div>
+
+            <p>${limpiar(p.descripcion || "")}</p>
+
+            <div class="project-actions">
+              <a class="btn btn-primary" href="${p.manifestacion}" target="_blank" rel="noopener noreferrer">
+                Ver demo
+              </a>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    })
+    .catch(err => {
+      console.error("Error cargando JSON:", err);
+
+      container.innerHTML = `
+        <article class="project-card">
+          <div class="project-body">
+            <h3>No se pudieron cargar los proyectos</h3>
+            <p>Revisa que exista: <strong>/data/proyectos.json</strong></p>
+          </div>
+        </article>
+      `;
+    });
+}
+
+function resolverRuta(ruta) {
+  if (!ruta) return "";
+  if (ruta.startsWith("http") || ruta.startsWith("/")) return ruta;
+  return "/" + ruta;
+}
+
+function limpiar(texto) {
+  return String(texto || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function iniciarVideoFondo() {
+  const video = document.querySelector(".bg-video");
+  if (!video) return;
+
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.autoplay = true;
+
+  const playSafe = () => {
+    if (video.paused) video.play().catch(() => {});
+  };
+
+  video.addEventListener("loadeddata", playSafe);
+  video.addEventListener("canplay", playSafe);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) playSafe();
+  });
+
+  playSafe();
+}
 
 function iniciarParticulasV() {
   const canvas = document.querySelector(".v-canvas");
@@ -45,416 +149,23 @@ function iniciarParticulasV() {
   const particles = [];
   const pathLength = path.getTotalLength();
 
-  let dpr = Math.min(window.devicePixelRatio || 1, 2);
-
   function resize() {
     const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-    canvas.width = Math.max(1, Math.floor(rect.width * dpr));
-    canvas.height = Math.max(1, Math.floor(rect.height * dpr));
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
   function crearParticula() {
-    const canvasRect = canvas.getBoundingClientRect();
-    const t = Math.random() * pathLength;
-    const point = path.getPointAtLength(t);
+    const rect = canvas.getBoundingClientRect();
+    const point = path.getPointAtLength(Math.random() * pathLength);
     const viewBox = svg.viewBox.baseVal;
 
-    const x = ((point.x - viewBox.x) / viewBox.width) * canvasRect.width;
-    const y = ((point.y - viewBox.y) / viewBox.height) * canvasRect.height;
-
-    const centerX = canvasRect.width / 2;
-    const centerY = canvasRect.height / 2;
-
-    const dx = x - centerX;
-    const dy = y - centerY;
-    const len = Math.hypot(dx, dy) || 1;
-
-    const force = 0.18 + Math.random() * 0.65;
-
-    particles.push({
-      x,
-      y,
-      vx: (dx / len) * force + (Math.random() - 0.5) * 1.1,
-      vy: (dy / len) * force - Math.random() * 0.55,
-      life: 1,
-      decay: 0.015 + Math.random() * 0.018,
-      size: 0.45 + Math.random() * 1.1,
-      glow: 4 + Math.random() * 7
-    });
-  }
-
-  function pintarParticula(p) {
-    const alpha = Math.max(0, p.life);
-    const color = getParticleColor(alpha);
-
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size * (0.6 + alpha), 0, Math.PI * 2);
-    ctx.fillStyle = color;
-    ctx.shadowBlur = p.glow;
-    ctx.shadowColor = color;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-  }
-
-  function loop() {
-    const rect = canvas.getBoundingClientRect();
-
-    ctx.clearRect(0, 0, rect.width, rect.height);
-
-    for (let i = 0; i < 2; i++) {
-      crearParticula();
-    }
-
-    for (let i = particles.length - 1; i >= 0; i--) {
-      const p = particles[i];
-
-      p.x += p.vx;
-      p.y += p.vy;
-
-      p.vx *= 0.985;
-      p.vy *= 0.985;
-      p.vy += 0.012;
-
-      p.life -= p.decay;
-
-      if (p.life <= 0) {
-        particles.splice(i, 1);
-        continue;
-      }
-
-      pintarParticula(p);
-    }
-
-    if (particles.length > 90) {
-      particles.splice(0, particles.length - 90);
-    }
-
-    requestAnimationFrame(loop);
-  }
-
-  resize();
-  window.addEventListener("resize", resize);
-  loop();
-}
-
-// =====================================================
-// 3. PROYECTOS DESDE JSON
-// =====================================================
-
-function iniciarProyectos(projectsContainer) {
-  if (!projectsContainer) return;
-
-  const tipoPagina = document.body.dataset.tipo || "destacado";
-
-  cargarJSON("/data/proyectos.json")
-    .catch(() => cargarJSON("data/proyectos.json"))
-    .then(data => {
-      const listaProyectos = data.proyectos || [];
-
-      const proyectosFiltrados = listaProyectos
-        .filter(p => {
-          if (tipoPagina === "destacado") {
-            return p.destacado === true || p.estado === "destacado";
-          }
-
-          return p.tipo === tipoPagina;
-        })
-        .sort((a, b) => new Date(b.fecha || 0) - new Date(a.fecha || 0));
-
-      if (proyectosFiltrados.length === 0) {
-        projectsContainer.innerHTML = `
-          <article class="project-card">
-            <div class="project-body">
-              <h3>No hay proyectos para esta sección</h3>
-              <p>Revisa que el campo <strong>tipo</strong> o <strong>destacado</strong> del JSON coincida con esta página.</p>
-            </div>
-          </article>
-        `;
-        return;
-      }
-
-      projectsContainer.innerHTML = "";
-
-      proyectosFiltrados.forEach(p => {
-        const demoURL = p.manifestacion || p.demo || p.link || "#";
-
-        const card = document.createElement("article");
-        card.className = "project-card";
-
-        card.innerHTML = `
-          <div class="project-thumb">
-            <img src="${resolverRuta(p.img)}" alt="${escaparHTML(p.titulo || "Proyecto VisArt")}" loading="lazy">
-            <span class="project-badge">${escaparHTML(p.labelTipo || "Demo en vivo")}</span>
-          </div>
-
-          <div class="project-body">
-            <div class="project-top">
-              <h3>${escaparHTML(p.titulo || "Proyecto sin título")}</h3>
-              <span class="project-tag">${escaparHTML(p.categoria || "Proyecto")}</span>
-            </div>
-
-            <p>${escaparHTML(p.descripcion || "")}</p>
-
-            <div class="project-actions">
-              <a class="btn btn-primary" href="${demoURL}" target="_blank" rel="noopener noreferrer">
-                Ver demo
-              </a>
-            </div>
-          </div>
-        `;
-
-        projectsContainer.appendChild(card);
-
-        const img = card.querySelector("img");
-        const badge = card.querySelector(".project-badge");
-
-        aplicarColorDominante(img, badge);
-      });
-    })
-    .catch(err => {
-      console.error("Error cargando JSON:", err);
-
-      projectsContainer.innerHTML = `
-        <article class="project-card">
-          <div class="project-body">
-            <h3>No se pudieron cargar los proyectos</h3>
-            <p>Revisa la ruta del archivo JSON: <strong>/data/proyectos.json</strong></p>
-          </div>
-        </article>
-      `;
-    });
-}
-
-function cargarJSON(url) {
-  return fetch(url).then(res => {
-    if (!res.ok) {
-      throw new Error(`No se pudo cargar el JSON. Estado: ${res.status}`);
-    }
-
-    return res.json();
-  });
-}
-
-function resolverRuta(ruta) {
-  if (!ruta) return "";
-
-  if (
-    ruta.startsWith("http://") ||
-    ruta.startsWith("https://") ||
-    ruta.startsWith("/")
-  ) {
-    return ruta;
-  }
-
-  return "/" + ruta;
-}
-
-function escaparHTML(texto) {
-  return String(texto)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-// =====================================================
-// 4. COLOR DOMINANTE PARA BADGE
-// =====================================================
-
-function aplicarColorDominante(img, badge) {
-  if (!img || !badge) return;
-
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-
-  img.onload = () => {
-    try {
-      canvas.width = 10;
-      canvas.height = 10;
-
-      ctx.drawImage(img, 0, 0, 10, 10);
-
-      const data = ctx.getImageData(0, 0, 10, 10).data;
-
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      let count = 0;
-
-      for (let i = 0; i < data.length; i += 4) {
-        if (data[i + 3] < 125) continue;
-
-        r += data[i];
-        g += data[i + 1];
-        b += data[i + 2];
-        count++;
-      }
-
-      if (count > 0) {
-        const color =
-          `rgb(${Math.round(r / count)}, ${Math.round(g / count)}, ${Math.round(b / count)})`;
-
-        badge.style.borderColor = color;
-        badge.style.boxShadow = `0 0 14px ${color}`;
-      }
-    } catch (e) {
-      badge.style.borderColor = "var(--accent1)";
-      badge.style.boxShadow = "0 0 14px var(--accent1)";
-    }
-  };
-
-  if (img.complete) {
-    img.onload();
-  }
-}
-
-// =====================================================
-// 5. VIDEO HERO
-// =====================================================
-
-function iniciarVideoFondo() {
-  const video = document.querySelector(".bg-video");
-
-  if (!video) return;
-
-  video.muted = true;
-  video.loop = true;
-  video.playsInline = true;
-  video.autoplay = true;
-
-  const playSafe = () => {
-    if (video.paused) {
-      video.play().catch(() => {});
-    }
-  };
-
-  video.addEventListener("loadeddata", playSafe);
-  video.addEventListener("canplay", playSafe);
-
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) {
-      playSafe();
-    }
-  });
-
-  playSafe();
-}
-
-// =====================================================
-// 6. CANVAS HERO
-// =====================================================
-
-function iniciarFondoCanvas() {
-  const c = document.getElementById("bgFX");
-
-  if (!c) return;
-
-  const ctx = c.getContext("2d");
-  const particulas = [];
-
-  function resize() {
-    c.width = c.offsetWidth;
-    c.height = c.offsetHeight;
-
-    particulas.length = 0;
-
-    for (let i = 0; i < 100; i++) {
-      particulas.push({
-        x: Math.random() * c.width,
-        y: Math.random() * c.height,
-        r: Math.random() * 1.5 + 0.5,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        a: Math.random() * Math.PI * 2
-      });
-    }
-  }
-
-  resize();
-  window.addEventListener("resize", resize);
-
-  function loop() {
-    ctx.clearRect(0, 0, c.width, c.height);
-
-    const [accent1, accent2] = getAccentColors();
-
-    const glow = ctx.createRadialGradient(
-      c.width / 2,
-      c.height / 2,
-      0,
-      c.width / 2,
-      c.height / 2,
-      c.width * 0.6
-    );
-
-    glow.addColorStop(0, hexToRgba(accent2, 0.18));
-    glow.addColorStop(1, "rgba(0,0,0,0)");
-
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, c.width, c.height);
-
-    particulas.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      p.a += 0.02;
-
-      if (p.x < 0 || p.x > c.width) p.vx *= -1;
-      if (p.y < 0 || p.y > c.height) p.vy *= -1;
-
-      const pulse = Math.sin(p.a) * 0.7 + 1;
-      const color = Math.random() > 0.5 ? accent1 : accent2;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = hexToRgba(color, 0.45 * pulse);
-      ctx.shadowBlur = 8;
-      ctx.shadowColor = color;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
-
-    requestAnimationFrame(loop);
-  }
-
-  loop();
-}
-
-// =====================================================
-// 7. COLORES CSS PARA JS
-// =====================================================
-
-function getAccentColors() {
-  const style = getComputedStyle(document.body);
-
-  const c1 = style.getPropertyValue("--accent1").trim() || "#00eaff";
-  const c2 = style.getPropertyValue("--accent2").trim() || "#3b82f6";
-
-  return [c1, c2];
-}
-
-function getParticleColor(alpha = 1) {
-  const colors = getAccentColors();
-  const color = colors[Math.floor(Math.random() * colors.length)];
-
-  return hexToRgba(color, alpha);
-}
-
-function hexToRgba(hex, alpha = 1) {
-  if (!hex || !hex.startsWith("#")) {
-    return `rgba(255,255,255,${alpha})`;
-  }
-
-  const clean = hex.replace("#", "");
-
-  const r = parseInt(clean.slice(0, 2), 16);
-  const g = parseInt(clean.slice(2, 4), 16);
-  const b = parseInt(clean.slice(4, 6), 16);
-
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
+    const x = ((point.x - viewBox.x) / viewBox.width) * rect.width;
+    const y = ((point.y - viewBox.y) / viewBox.height) * rect.height;
+
+    const cx = rect.width / 2;
+    const cy = rect.height /
