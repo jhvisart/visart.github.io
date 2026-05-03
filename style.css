@@ -716,3 +716,119 @@ footer {
     min-height: 300px;
   }
 }
+/* ============================= */
+/* VISART PREMIUM CARDS */
+/* ============================= */
+
+.project-card {
+  isolation: isolate;
+  transform: translateY(18px);
+  opacity: 0;
+  animation: cardReveal .75s ease forwards;
+}
+
+.project-card:nth-child(1) { animation-delay: .05s; }
+.project-card:nth-child(2) { animation-delay: .14s; }
+.project-card:nth-child(3) { animation-delay: .23s; }
+.project-card:nth-child(4) { animation-delay: .32s; }
+
+.project-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      circle at var(--mx, 50%) var(--my, 30%),
+      color-mix(in srgb, var(--accent1) 35%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 28px;
+  background: linear-gradient(
+    135deg,
+    var(--accent1),
+    transparent 35%,
+    var(--accent2)
+  );
+  opacity: .18;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.project-card:hover {
+  transform: translateY(-12px) scale(1.025);
+  box-shadow:
+    0 0 26px color-mix(in srgb, var(--accent1) 32%, transparent),
+    0 0 70px color-mix(in srgb, var(--accent2) 22%, transparent);
+}
+
+.project-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,.72), transparent 58%),
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.18), transparent 42%);
+  opacity: .75;
+  transition: .35s ease;
+  pointer-events: none;
+}
+
+.project-card:hover .project-thumb::after {
+  opacity: .95;
+}
+
+.project-featured {
+  grid-column: span 2;
+  min-height: 100%;
+}
+
+.project-featured .project-thumb {
+  aspect-ratio: 16 / 8;
+}
+
+.project-featured .project-top h3 {
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.project-featured .project-body p {
+  font-size: 1rem;
+}
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(.98);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .project-featured {
+    grid-column: span 1;
+  }
+
+  .project-featured .project-thumb {
+    aspect-ratio: 16 / 9;
+  }
+}
