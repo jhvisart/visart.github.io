@@ -196,9 +196,9 @@ function iniciarParticulasV() {
     particles.push({
       x,
       y,
-      vx: (dx / len) * (0.08 + Math.random() * 0.25) + (Math.random() - 0.5) * 0.2,
-      vy: (dy / len) * (0.08 + Math.random() * 0.25) + (Math.random() - 0.5) * 0.2,
-      size: 0.6 + Math.random() * 1.4,
+      vx: (dx / len) * (0.05 + Math.random() * 0.15) + (Math.random() - 0.5) * 0.1,
+      vy: (dy / len) * (0.05 + Math.random() * 0.15) + (Math.random() - 0.5) * 0.1,
+      size: 0.45 + Math.random() * 0.9,
       life: 1,
       decay: 0.012 + Math.random() * 0.018,
       color: colores[Math.floor(Math.random() * colores.length)]
