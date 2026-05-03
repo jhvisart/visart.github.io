@@ -75,19 +75,21 @@ card.addEventListener("mousemove", (e) => {
   const px = x / rect.width;
   const py = y / rect.height;
 
-  const rotateY = (px - 0.5) * 12;   // derecha/izquierda
-  const rotateX = (0.5 - py) * 12;   // arriba/abajo
+  const rotateY = (px - 0.5) * 10;   // derecha/izquierda
+  const rotateX = (0.5 - py) * 10;   // arriba/abajo
 
   // aplica tilt SIN romper tu hover (sumamos translate/scale)
   
-card.style.setProperty('--tiltX', `${rotateX}deg`);
-card.style.setProperty('--tiltY', `${rotateY}deg`);
+ card.style.setProperty('--tiltX', rotateX + 'deg');
+  card.style.setProperty('--tiltY', rotateY + 'deg');
   // mueve la luz del glass (ya usas --mx/--my en tu CSS)
   card.style.setProperty('--mx', `${px * 100}%`);
   card.style.setProperty('--my', `${py * 100}%`);
 });
 
 card.addEventListener("mouseleave", () => {
+   card.style.setProperty('--tiltX', '0deg');
+  card.style.setProperty('--tiltY', '0deg');
   // vuelve al estado normal (tu CSS hover se encargará)
   card.style.transform = "";
 });
