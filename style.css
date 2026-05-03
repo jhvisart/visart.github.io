@@ -480,13 +480,20 @@ h1 span {
   -webkit-backdrop-filter: blur(22px) saturate(120%);
 }
 
-.project-card:hover {
-  transform: translateY(-12px) scale(1.03);
-  box-shadow:  0 20px 60px rgba(0, 0, 0, 0.55),
-    0 0 40px var(--accent1);
-   border-color: var(--accent1);
-}
 
+.project-card:hover {
+  transform:
+    translateY(-12px)
+    scale(1.03)
+    rotateX(var(--tiltX, 0deg))
+    rotateY(var(--tiltY, 0deg));
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 40px var(--accent1);
+
+  border-color: var(--accent1);
+}
 .project-thumb {
   position: relative;
   aspect-ratio: 16 / 9;
