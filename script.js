@@ -38,12 +38,19 @@ function iniciarProyectos() {
     })
     .then((data) => {
       const proyectos = Array.isArray(data) ? data : data.proyectos || [];
+       
+    const filtrados = proyectos
+       .filter((p) => {
 
-      const filtrados = proyectos
-        .filter((p) => {
-          if (tipoPagina === "todos") return true;
-          return p.tipo === tipoPagina;
-        })
+    // 👉 LANDING (solo los que tú eliges)
+    if (tipoPagina === "todos") {
+      return p.landing === true;
+    }
+
+    // 👉 SUBPÁGINAS (tu sistema actual)
+    return p.tipo === tipoPagina;
+
+  })
         .sort((a, b) => new Date(b.fecha || 0) - new Date(a.fecha || 0));
 
       container.innerHTML = "";
