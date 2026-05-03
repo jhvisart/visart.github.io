@@ -25,7 +25,7 @@ function iniciarHeroTilt() {
 }
 
 function iniciarProyectos() {
-  const container = document.getElementById("projects-container");
+  const container = document.getElementById("projects-grid");
   if (!container) return;
 
   const tipoPagina = document.body.dataset.tipo || "todos";
