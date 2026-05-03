@@ -832,3 +832,134 @@ footer {
     aspect-ratio: 16 / 9;
   }
 }
+/* ============================= */
+/* VISART PREMIUM HERO GLOBAL */
+/* ============================= */
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 16% 22%, color-mix(in srgb, var(--accent1) 28%, transparent), transparent 26%),
+    radial-gradient(circle at 70% 15%, color-mix(in srgb, var(--accent2) 24%, transparent), transparent 28%);
+  pointer-events: none;
+  opacity: .75;
+  z-index: -1;
+}
+
+.hero-content {
+  position: relative;
+}
+
+.hero-content::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: -22px;
+  width: 140px;
+  height: 140px;
+  border-radius: 999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent1) 18%, transparent), transparent 65%);
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.eyebrow {
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--accent1) 22%, transparent),
+    inset 0 0 12px rgba(255,255,255,.04);
+}
+
+h1 {
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+}
+
+h1 span {
+  position: relative;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent1) 45%, transparent));
+}
+
+h1 span::after {
+  content: "";
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  bottom: -8px;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  box-shadow: 0 0 22px color-mix(in srgb, var(--accent1) 45%, transparent);
+  opacity: .75;
+}
+
+.hero-actions .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-actions .btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.45), transparent);
+  transform: translateX(-120%);
+  transition: .6s ease;
+}
+
+.hero-actions .btn-primary:hover::before {
+  transform: translateX(120%);
+}
+
+.hero-card {
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent1) 35%, transparent), transparent 32%),
+    radial-gradient(circle at 90% 20%, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 34%);
+  opacity: .7;
+  pointer-events: none;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 29px;
+  border: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
+}
+
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(0,0,0,.55), transparent 55%),
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.16), transparent 42%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hero-mini-stats {
+  position: relative;
+  z-index: 4;
+}
+
+.mini {
+  backdrop-filter: blur(10px);
+}
+
+.section-head h2 {
+  background: linear-gradient(90deg, var(--accent1), var(--accent2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
