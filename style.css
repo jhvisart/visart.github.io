@@ -963,3 +963,61 @@ h1 span::after {
   background-clip: text;
   color: transparent;
 }
+/* ============================= */
+/* VISART PAGE TRANSITION */
+/* ============================= */
+
+body {
+  opacity: 0;
+  animation: pageFadeIn .75s ease forwards;
+}
+
+body.is-leaving {
+  animation: pageFadeOut .38s ease forwards;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageFadeOut {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+  to {
+    opacity: 0;
+    filter: blur(10px);
+  }
+}
+
+/* ============================= */
+/* VISART SCROLL REVEAL */
+/* ============================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(8px);
+  transition:
+    opacity .8s ease,
+    transform .8s ease,
+    filter .8s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
