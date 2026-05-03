@@ -74,7 +74,7 @@ let currentY = 0;
 let targetX = 0;
 let targetY = 0;
 
-card.addEventListener("mousemove", (e) => {
+card.addEventListener("pointermove", (e) => {
   const rect = card.getBoundingClientRect();
 
   const x = e.clientX - rect.left;
