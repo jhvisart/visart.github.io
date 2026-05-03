@@ -251,12 +251,29 @@ function getCssVar(nombre) {
 }
 
 function mezclarColor(c1, c2, factor) {
-  const parse = (c) => {
-    const ctx = document.createElement("canvas").getContext("2d");
-    ctx.fillStyle = c;
-    const color = ctx.fillStyle;
-    const rgb = color.match(/\d+/g) || [0, 234, 255];
-    return rgb ? rgb.map(Number) : [0, 234, 255];
+  const parse = (color) => {
+    color = String(color).trim();
+
+    if (color.startsWith("#")) {
+      let hex = color.slice(1);
+
+      if (hex.length === 3) {
+        hex = hex.split("").map(x => x + x).join("");
+      }
+
+      const r = parseInt(hex.slice(0, 2), 16);
+      const g = parseInt(hex.slice(2, 4), 16);
+      const b = parseInt(hex.slice(4, 6), 16);
+
+      return [r, g, b];
+    }
+
+    const nums = color.match(/\d+/g);
+    if (nums && nums.length >= 3) {
+      return nums.slice(0, 3).map(Number);
+    }
+
+    return [0, 234, 255];
   };
 
   const [r1, g1, b1] = parse(c1);
