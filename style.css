@@ -1132,3 +1132,20 @@ body.is-leaving {
     rotateX(var(--tiltX, 0deg))
     rotateY(var(--tiltY, 0deg)) !important;
 }
+.project-card::before,
+.project-card::after {
+  pointer-events: none !important;
+}
+
+.project-card * {
+  pointer-events: auto;
+}
+
+.project-card a,
+.project-card button,
+.project-card .btn,
+.project-card .project-link {
+  position: relative;
+  z-index: 30;
+  pointer-events: auto !important;
+}
