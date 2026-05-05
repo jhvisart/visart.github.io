@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  repararBackCacheIOS();
   iniciarTransicionPaginas();
   iniciarScrollReveal();
   iniciarHeroTilt();
@@ -8,22 +9,54 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarFondoCanvas();
 });
 
+function repararBackCacheIOS() {
+  window.addEventListener("pageshow", (event) => {
+    document.body.classList.remove("is-leaving");
+    document.body.style.opacity = "1";
+    document.body.style.filter = "none";
+    document.body.style.transform = "none";
+
+    if (event.persisted) {
+      window.dispatchEvent(new Event("resize"));
+
+      const video = document.querySelector(".bg-video");
+      if (video) {
+        video.muted = true;
+        video.playsInline = true;
+        video.play().catch(() => {});
+      }
+    }
+  });
+}
+
 function iniciarHeroTilt() {
   const heroCard = document.querySelector(".hero-card");
   if (!heroCard) return;
 
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+  if (isTouch) return;
+
+  let raf = null;
+
   window.addEventListener("mousemove", (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 10;
-    const y = (e.clientY / window.innerHeight - 0.5) * 10;
+    if (raf) cancelAnimationFrame(raf);
 
-    heroCard.style.transform =
-      `perspective(900px) rotateY(${x * 0.35}deg) rotateX(${y * -0.25}deg)`;
-  });
+    raf = requestAnimationFrame(() => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 10;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
 
-  window.addEventListener("mouseleave", () => {
+      heroCard.style.transform =
+        `perspective(900px) rotateY(${x * 0.35}deg) rotateX(${y * -0.25}deg)`;
+    });
+  }, { passive: true });
+
+  const resetHeroTilt = () => {
     heroCard.style.transform =
       "perspective(900px) rotateY(0deg) rotateX(0deg)";
-  });
+  };
+
+  window.addEventListener("mouseleave", resetHeroTilt);
+  window.addEventListener("pointerup", resetHeroTilt);
 }
 
 function iniciarProyectos() {
@@ -31,7 +64,7 @@ function iniciarProyectos() {
   if (!container) return;
 
   const tipoPagina = document.body.dataset.tipo || "todos";
-  const jsonPath = document.body.dataset.json || "data/proyectos.json";
+  const jsonPath = document.body.dataset.json || "/data/proyectos.json";
 
   fetch(jsonPath)
     .then((res) => {
@@ -65,62 +98,24 @@ function iniciarProyectos() {
 
       filtrados.forEach((p, index) => {
         const card = document.createElement("article");
-/* TILT PRO SUAVE */
-/* ========================= */
 
-let currentX = 0;
-let currentY = 0;
+        card.className = index === 0 && tipoPagina === "landing"
+          ? "project-card project-featured"
+          : "project-card";
 
-let targetX = 0;
-let targetY = 0;
+        iniciarTiltCard(card);
 
-card.addEventListener("pointermove", (e) => {
-  const rect = card.getBoundingClientRect();
-
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  const px = x / rect.width;
-  const py = y / rect.height;
-
-  targetY = (px - 0.5) * 28;
-  targetX = (0.5 - py) * 28;
-
-  // luz sigue el mouse (esto lo mantienes)
-  card.style.setProperty('--mx', `${px * 100}%`);
-  card.style.setProperty('--my', `${py * 100}%`);
-});
-
-function animateTilt() {
-  currentX += (targetX - currentX) * 0.22;
-  currentY += (targetY - currentY) * 0.22;
-
-  card.style.setProperty('--tiltX', currentX + 'deg');
-  card.style.setProperty('--tiltY', currentY + 'deg');
-
-  requestAnimationFrame(animateTilt);
-}
-
-animateTilt();
-
-card.addEventListener("pointerleave", () => {
-  targetX = 0;
-  targetY = 0;
-});
         card.addEventListener("mouseenter", () => {
           card.style.transform = "";
-          document.body.style.setProperty('--accent1', p.color || "#00eaff");
+          if (p.color) document.body.style.setProperty("--accent1", p.color);
         });
-        card.className = index === 0 && tipoPagina === "landing"
-         ? "project-card project-featured"
-         : "project-card";
 
         const img = resolverRuta(p.img || "");
         const demo = p.manifestacion || p.demo || p.url || "#";
 
         card.innerHTML = `
           <div class="project-thumb">
-            <img src="${img}" alt="${limpiar(p.titulo)}" loading="lazy">
+            <img src="${img}" alt="${limpiar(p.titulo)}" loading="lazy" decoding="async">
             <span class="project-badge">${limpiar(p.labelTipo || p.tipo || "Proyecto")}</span>
           </div>
 
@@ -157,6 +152,63 @@ card.addEventListener("pointerleave", () => {
     });
 }
 
+function iniciarTiltCard(card) {
+  const isTouch = window.matchMedia("(pointer: coarse)").matches;
+
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let activo = true;
+
+  document.addEventListener("visibilitychange", () => {
+    activo = !document.hidden;
+  });
+
+  card.addEventListener("pointermove", (e) => {
+    const rect = card.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const px = x / rect.width;
+    const py = y / rect.height;
+
+    card.style.setProperty("--mx", `${px * 100}%`);
+    card.style.setProperty("--my", `${py * 100}%`);
+
+    if (isTouch) return;
+
+    targetY = (px - 0.5) * 28;
+    targetX = (0.5 - py) * 28;
+  }, { passive: true });
+
+  function animateTilt() {
+    if (activo && !isTouch) {
+      currentX += (targetX - currentX) * 0.22;
+      currentY += (targetY - currentY) * 0.22;
+
+      card.style.setProperty("--tiltX", currentX + "deg");
+      card.style.setProperty("--tiltY", currentY + "deg");
+    }
+
+    requestAnimationFrame(animateTilt);
+  }
+
+  animateTilt();
+
+  card.addEventListener("pointerleave", () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  card.addEventListener("pointercancel", () => {
+    targetX = 0;
+    targetY = 0;
+  });
+}
+
 function resolverRuta(ruta) {
   if (!ruta) return "";
   if (ruta.startsWith("http") || ruta.startsWith("/")) return ruta;
@@ -184,15 +236,29 @@ function iniciarVideoFondo() {
   video.autoplay = true;
 
   const playSafe = () => {
-    if (video.paused) video.play().catch(() => {});
+    video.muted = true;
+    video.playsInline = true;
+
+    if (video.paused || video.readyState < 2) {
+      video.play().catch(() => {});
+    }
   };
 
   video.addEventListener("loadeddata", playSafe);
   video.addEventListener("canplay", playSafe);
+  video.addEventListener("stalled", playSafe);
+  video.addEventListener("suspend", playSafe);
+  video.addEventListener("emptied", () => {
+    video.load();
+    playSafe();
+  });
 
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden) playSafe();
   });
+
+  window.addEventListener("pageshow", playSafe);
+  window.addEventListener("focus", playSafe);
 
   playSafe();
 }
@@ -207,6 +273,11 @@ function iniciarParticulasV() {
   const ctx = canvas.getContext("2d");
   const particles = [];
   const pathLength = path.getTotalLength();
+  let activo = true;
+
+  document.addEventListener("visibilitychange", () => {
+    activo = !document.hidden;
+  });
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -226,13 +297,6 @@ function iniciarParticulasV() {
     const x = ((point.x - viewBox.x) / viewBox.width) * rect.width;
     const y = ((point.y - viewBox.y) / viewBox.height) * rect.height;
 
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-
-    const dx = x - cx;
-    const dy = y - cy;
-    const len = Math.sqrt(dx * dx + dy * dy) || 1;
-
     const accent1 = getCssVar("--accent1");
     const accent2 = getCssVar("--accent2");
 
@@ -244,26 +308,28 @@ function iniciarParticulasV() {
       mezclarColor(accent2, "#ffffff", 0.28)
     ];
 
-   particles.push({
-  x: x + (Math.random() - 0.5) * 1.6,
-  y: y + (Math.random() - 0.5) * 1.6,
-  vx: (Math.random() - 0.5) * 0.18,
-  vy: (Math.random() - 0.5) * 0.18,
-  size: 0.45 + Math.random() * 0.9,
-  life: 1,
-  decay: 0.006 + Math.random() * 0.01,
-  color: colores[Math.floor(Math.random() * colores.length)]
- });
+    particles.push({
+      x: x + (Math.random() - 0.5) * 1.6,
+      y: y + (Math.random() - 0.5) * 1.6,
+      vx: (Math.random() - 0.5) * 0.18,
+      vy: (Math.random() - 0.5) * 0.18,
+      size: 0.45 + Math.random() * 0.9,
+      life: 1,
+      decay: 0.006 + Math.random() * 0.01,
+      color: colores[Math.floor(Math.random() * colores.length)]
+    });
   }
 
   function animar() {
-    const rect = canvas.getBoundingClientRect();
+    if (!activo) {
+      requestAnimationFrame(animar);
+      return;
+    }
 
+    const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
 
-    for (let i = 0; i < 2; i++) {
-      crearParticula();
-    }
+    for (let i = 0; i < 2; i++) crearParticula();
 
     for (let i = particles.length - 1; i >= 0; i--) {
       const p = particles[i];
@@ -282,9 +348,7 @@ function iniciarParticulasV() {
       ctx.fill();
       ctx.restore();
 
-      if (p.life <= 0) {
-        particles.splice(i, 1);
-      }
+      if (p.life <= 0) particles.splice(i, 1);
     }
 
     requestAnimationFrame(animar);
@@ -292,6 +356,7 @@ function iniciarParticulasV() {
 
   resize();
   window.addEventListener("resize", resize);
+  window.addEventListener("pageshow", resize);
   animar();
 }
 
@@ -307,22 +372,16 @@ function mezclarColor(c1, c2, factor) {
 
     if (color.startsWith("#")) {
       let hex = color.slice(1);
-
-      if (hex.length === 3) {
-        hex = hex.split("").map(x => x + x).join("");
-      }
+      if (hex.length === 3) hex = hex.split("").map(x => x + x).join("");
 
       const r = parseInt(hex.slice(0, 2), 16);
       const g = parseInt(hex.slice(2, 4), 16);
       const b = parseInt(hex.slice(4, 6), 16);
-
       return [r, g, b];
     }
 
     const nums = color.match(/\d+/g);
-    if (nums && nums.length >= 3) {
-      return nums.slice(0, 3).map(Number);
-    }
+    if (nums && nums.length >= 3) return nums.slice(0, 3).map(Number);
 
     return [0, 234, 255];
   };
@@ -343,6 +402,11 @@ function iniciarFondoCanvas() {
 
   const ctx = canvas.getContext("2d");
   const puntos = [];
+  let activo = true;
+
+  document.addEventListener("visibilitychange", () => {
+    activo = !document.hidden;
+  });
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -368,8 +432,12 @@ function iniciarFondoCanvas() {
   }
 
   function animar() {
-    const rect = canvas.getBoundingClientRect();
+    if (!activo) {
+      requestAnimationFrame(animar);
+      return;
+    }
 
+    const rect = canvas.getBoundingClientRect();
     ctx.clearRect(0, 0, rect.width, rect.height);
 
     const accent1 = getCssVar("--accent1");
@@ -398,19 +466,25 @@ function iniciarFondoCanvas() {
 
   resize();
   window.addEventListener("resize", resize);
+  window.addEventListener("pageshow", resize);
   animar();
 }
-document.addEventListener("pointermove", (e) => {
-  document.querySelectorAll(".project-card").forEach((card) => {
-    const rect = card.getBoundingClientRect();
 
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+if (window.matchMedia("(pointer:fine)").matches) {
+  document.addEventListener("pointermove", (e) => {
+    document.querySelectorAll(".project-card").forEach((card) => {
+      const rect = card.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
 
-    card.style.setProperty("--mx", `${x}%`);
-    card.style.setProperty("--my", `${y}%`);
-  });
-});
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+      card.style.setProperty("--mx", `${x}%`);
+      card.style.setProperty("--my", `${y}%`);
+    });
+  }, { passive: true });
+}
+
 function iniciarTransicionPaginas() {
   const links = document.querySelectorAll("a[href]");
 
@@ -429,8 +503,9 @@ function iniciarTransicionPaginas() {
     }
 
     link.addEventListener("click", (e) => {
-      e.preventDefault();
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
 
+      e.preventDefault();
       document.body.classList.add("is-leaving");
 
       setTimeout(() => {
@@ -456,9 +531,7 @@ function iniciarScrollReveal() {
         }
       });
     },
-    {
-      threshold: 0.15
-    }
+    { threshold: 0.15 }
   );
 
   elementos.forEach((el) => observer.observe(el));
