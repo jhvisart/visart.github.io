@@ -66,12 +66,17 @@ body.page-interactivos {
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
   background:
     radial-gradient(circle at 20% 20%, var(--glow1), transparent 35%),
     radial-gradient(circle at 80% 10%, var(--glow2), transparent 30%),
@@ -101,6 +106,7 @@ a {
     linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+  -webkit-mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
   opacity: .25;
   z-index: 0;
 }
@@ -112,6 +118,7 @@ a {
   top: 0;
   z-index: 1000;
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   background: rgba(4, 16, 29, 0.65);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -383,19 +390,28 @@ h1 span {
   aspect-ratio: 16 / 9;
   border-radius: 24px;
   overflow: hidden;
-  background: black;
+  background:
+    linear-gradient(135deg, rgba(0, 234, 255, .12), rgba(59, 130, 246, .10)),
+    #050816;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateZ(0);
+  contain: paint;
 }
 
 .bg-video {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
   object-fit: cover;
   z-index: 1;
+  background: #050816;
+  transform: translate3d(0, 0, 0) scale(1.01);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
 }
 
 #bgFX {
@@ -403,6 +419,9 @@ h1 span {
   inset: 0;
   z-index: 2;
   pointer-events: none;
+  display: block;
+  background: transparent;
+  transform: translateZ(0);
 }
 
 .hero-mini-stats {
@@ -460,36 +479,27 @@ h1 span {
 }
 
 .project-card {
-   perspective: 1000px;
+  perspective: 1000px;
   position: relative;
   overflow: hidden;
   border-radius: 28px;
   border: 1px solid color-mix(in srgb, var(--accent1) 25%, transparent);
-  background: rgba(3, 5, 12, 0.72);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-  backdrop-filter: blur(18px);
-  transform-style: preserve-3d;
-  transform:
-  translateY(0)
-  scale(1)
-  rotateX(var(--tiltX, 0deg))
-  rotateY(var(--tiltY, 0deg));
-  will-change: transform;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+    linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03)),
     rgba(3, 5, 12, 0.65);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   backdrop-filter: blur(22px) saturate(120%);
   -webkit-backdrop-filter: blur(22px) saturate(120%);
-}
-
-.project-card * {
-  pointer-events: none;
-}
-
-.project-card {
+  transform-style: preserve-3d;
+  transform:
+    translateY(0)
+    scale(1)
+    rotateX(var(--tiltX, 0deg))
+    rotateY(var(--tiltY, 0deg));
+  will-change: transform;
   pointer-events: auto;
+  isolation: isolate;
 }
-
 
 .project-card:hover {
   transform:
@@ -497,13 +507,12 @@ h1 span {
     scale(1.03)
     rotateX(var(--tiltX, 0deg))
     rotateY(var(--tiltY, 0deg));
-
   box-shadow:
     0 20px 60px rgba(0, 0, 0, 0.55),
     0 0 40px var(--accent1);
-
   border-color: var(--accent1);
 }
+
 .project-thumb {
   position: relative;
   aspect-ratio: 16 / 9;
@@ -638,13 +647,8 @@ footer {
 /* ANIMACIONES */
 
 @keyframes drawV {
-  from {
-    stroke-dashoffset: 200;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
 }
 
 @keyframes glowV {
@@ -653,7 +657,6 @@ footer {
       drop-shadow(0 0 5px var(--accent1))
       drop-shadow(0 0 12px var(--accent2));
   }
-
   50% {
     filter:
       drop-shadow(0 0 12px var(--accent1))
@@ -664,48 +667,27 @@ footer {
 /* RESPONSIVE */
 
 @media (max-width: 980px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-card {
-    min-height: 360px;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-card { min-height: 360px; }
+  .about-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+
   .header-inner {
     padding: 8px 12px;
     align-items: center;
   }
 
-  .brand-text span {
-    font-size: 14px;
-  }
-
-  .brand-text small {
-    font-size: 10px;
-  }
-
-  .nav-links {
-    gap: 10px;
-  }
-
-  .nav-links a {
-    font-size: 12px;
-  }
-
-  .nav-cta {
-    padding: 5px 9px;
-  }
-
-  .hero {
-    padding-top: 64px;
-  }
+  .brand-text span { font-size: 14px; }
+  .brand-text small { font-size: 10px; }
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: 12px; }
+  .nav-cta { padding: 5px 9px; }
+  .hero { padding-top: 64px; }
 
   .btn {
     min-height: 44px;
@@ -713,18 +695,9 @@ footer {
     font-size: 13px;
   }
 
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-mini-stats {
-    flex-direction: column;
-  }
-
-  .footer-line {
-    flex-direction: column;
-    text-align: center;
-  }
+  .projects-grid { grid-template-columns: 1fr; }
+  .hero-mini-stats { flex-direction: column; }
+  .footer-line { flex-direction: column; text-align: center; }
 }
 
 @media (max-width: 520px) {
@@ -747,68 +720,32 @@ footer {
     min-height: 300px;
   }
 }
-/* ============================= */
-/* VISART PREMIUM CARDS */
-/* ============================= */
 
 /* ============================= */
 /* VISART APPLE CARDS FINAL */
 /* ============================= */
 
 .project-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-
-  border: 1px solid color-mix(in srgb, var(--accent1) 25%, transparent);
-  background: rgba(3, 5, 12, 0.72);
-
-  backdrop-filter: blur(18px);
-
-  transition:
-    transform 0.45s cubic-bezier(.2,.8,.2,1),
-    box-shadow 0.45s ease,
-    border-color 0.3s ease;
-
-  transform-style: preserve-3d;
-  will-change: transform;
-  perspective: 1000px;
-
-  isolation: isolate;
-
   opacity: 0;
   animation: cardReveal .75s ease forwards;
 }
 
-/* delays */
 .project-card:nth-child(1) { animation-delay: .05s; }
 .project-card:nth-child(2) { animation-delay: .14s; }
 .project-card:nth-child(3) { animation-delay: .23s; }
 .project-card:nth-child(4) { animation-delay: .32s; }
 
-.project-card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow:
-    0 25px 70px rgba(0,0,0,0.65),
-    0 0 25px var(--accent1),
-    0 0 80px var(--accent2);
-
-  border-color: var(--accent1);
-}
-
 .project-card::before {
   content: "";
   position: absolute;
   inset: 0;
-
   background:
     radial-gradient(
       circle at var(--mx, 50%) var(--my, 30%),
       color-mix(in srgb, var(--accent1) 40%, transparent),
       transparent 40%
     ),
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-
+    linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02));
   opacity: 0.45;
   transition: opacity .35s ease, transform .35s ease;
   pointer-events: none;
@@ -824,50 +761,25 @@ footer {
   position: absolute;
   inset: -1px;
   border-radius: 28px;
-
-  background: linear-gradient(
-    135deg,
-    var(--accent1),
-    transparent 35%,
-    var(--accent2)
-  );
+  background: linear-gradient(135deg, var(--accent1), transparent 35%, var(--accent2));
   box-shadow:
-    inset 0 0 0 1px rgba(255,255,255,.06),
-    0 0 0 1px rgba(255,255,255,.04);
-
+    inset 0 0 0 1px rgba(255, 255, 255, .06),
+    0 0 0 1px rgba(255, 255, 255, .04);
   opacity: .18;
   pointer-events: none;
   z-index: -1;
-}
-
-.project-thumb {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-}
-
-.project-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .5s ease;
-}
-
-.project-card:hover .project-thumb img {
-  transform: scale(1.08);
 }
 
 .project-thumb::after {
   content: "";
   position: absolute;
   inset: 0;
-
   background:
-    linear-gradient(to top, rgba(0,0,0,.72), transparent 58%),
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,.18), transparent 42%);
-
+    linear-gradient(to top, rgba(0, 0, 0, .72), transparent 58%),
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, .18), transparent 42%);
   opacity: .75;
   transition: .35s ease;
+  pointer-events: none;
 }
 
 .project-featured {
@@ -893,7 +805,6 @@ footer {
     transform: translateY(22px) scale(.98);
     filter: blur(8px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -902,14 +813,10 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .project-featured {
-    grid-column: span 1;
-  }
-
-  .project-featured .project-thumb {
-    aspect-ratio: 16 / 9;
-  }
+  .project-featured { grid-column: span 1; }
+  .project-featured .project-thumb { aspect-ratio: 16 / 9; }
 }
+
 /* ============================= */
 /* VISART PREMIUM HERO GLOBAL */
 /* ============================= */
@@ -947,7 +854,7 @@ footer {
 .eyebrow {
   box-shadow:
     0 0 18px color-mix(in srgb, var(--accent1) 22%, transparent),
-    inset 0 0 12px rgba(255,255,255,.04);
+    inset 0 0 12px rgba(255, 255, 255, .04);
 }
 
 h1 {
@@ -982,7 +889,7 @@ h1 span::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.45), transparent);
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, .45), transparent);
   transform: translateX(-120%);
   transition: .6s ease;
 }
@@ -1011,7 +918,7 @@ h1 span::after {
   position: absolute;
   inset: 1px;
   border-radius: 29px;
-  border: 1px solid rgba(255,255,255,.08);
+  border: 1px solid rgba(255, 255, 255, .08);
   pointer-events: none;
 }
 
@@ -1020,8 +927,8 @@ h1 span::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgba(0,0,0,.55), transparent 55%),
-    radial-gradient(circle at 50% 20%, rgba(255,255,255,.16), transparent 42%);
+    linear-gradient(to top, rgba(0, 0, 0, .55), transparent 55%),
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, .16), transparent 42%);
   z-index: 3;
   pointer-events: none;
 }
@@ -1033,6 +940,7 @@ h1 span::after {
 
 .mini {
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .section-head h2 {
@@ -1041,6 +949,7 @@ h1 span::after {
   background-clip: text;
   color: transparent;
 }
+
 /* ============================= */
 /* VISART PAGE TRANSITION */
 /* ============================= */
@@ -1060,7 +969,6 @@ body.is-leaving {
     filter: blur(10px);
     transform: translateY(8px);
   }
-
   to {
     opacity: 1;
     filter: blur(0);
@@ -1073,7 +981,6 @@ body.is-leaving {
     opacity: 1;
     filter: blur(0);
   }
-
   to {
     opacity: 0;
     filter: blur(10px);
@@ -1099,7 +1006,8 @@ body.is-leaving {
   transform: translateY(0);
   filter: blur(0);
 }
-/* ===== TILT FIX (NO rompe nada) ===== */
+
+/* ===== TILT FIX FINAL ===== */
 
 .project-card {
   transform:
@@ -1116,23 +1024,7 @@ body.is-leaving {
     rotateX(var(--tiltX, 0deg))
     rotateY(var(--tiltY, 0deg)) !important;
 }
-/* ===== FIX TILT FORZADO ===== */
 
-.project-card {
-  transform:
-    translateY(0)
-    scale(1)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg)) !important;
-}
-
-.project-card:hover {
-  transform:
-    translateY(-10px)
-    scale(1.03)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg)) !important;
-}
 .project-card::before,
 .project-card::after {
   pointer-events: none !important;
@@ -1149,4 +1041,49 @@ body.is-leaving {
   position: relative;
   z-index: 30;
   pointer-events: auto !important;
+}
+
+/* ============================= */
+/* iPHONE / iPAD STABILITY */
+/* ============================= */
+
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover {
+    transform:
+      translateY(0)
+      scale(1)
+      rotateX(var(--tiltX, 0deg))
+      rotateY(var(--tiltY, 0deg)) !important;
+  }
+
+  .project-card {
+    transition:
+      transform .18s ease,
+      box-shadow .25s ease,
+      border-color .25s ease;
+  }
+
+  .project-card:active {
+    transform:
+      translateY(-3px)
+      scale(0.99)
+      rotateX(var(--tiltX, 0deg))
+      rotateY(var(--tiltY, 0deg)) !important;
+  }
+
+  .btn,
+  a,
+  button,
+  .project-card,
+  .project-actions {
+    touch-action: manipulation;
+  }
+
+  .hero-card,
+  .project-card,
+  .glass,
+  .mini {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
 }
