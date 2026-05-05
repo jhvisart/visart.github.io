@@ -2,27 +2,26 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <title>VISART | Portafolio Creativo</title>
 
   <meta name="google" content="notranslate">
   <meta name="description" content="Portafolio creativo de VISART con proyectos visuales, visualizers e interactivos." />
   <link rel="canonical" href="https://visart.dev/">
-  
+
   <meta property="og:title" content="VISART | Visual Portfolio">
   <meta property="og:description" content="Arte visual interactivo y visualizers audio-reactivos.">
   <meta property="og:image" content="https://visart.dev/assets/preview.png">
   <meta property="og:url" content="https://visart.dev">
   <meta name="twitter:card" content="summary_large_image">
-  
+
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/favicon-192.png">
-  
   <link rel="manifest" href="/site.webmanifest">
 
-  <link rel="stylesheet" href="style.css">
-  
+  <link rel="stylesheet" href="/style.css">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -37,13 +36,13 @@
   </script>
 </head>
 
-<body class="page-home" data-tipo="landing" data-json="data/proyectos.json" data-assets="">
+<body class="page-home" data-tipo="landing" data-json="/data/proyectos.json" data-assets="/">
   <div class="bg-grid"></div>
 
   <header class="header">
     <div class="container header-inner">
 
-      <a href="index.html" class="brand" aria-label="Ir al inicio de VISART">
+      <a href="/" class="brand" aria-label="Ir al inicio de VISART">
         <div class="brand-mark">
           <svg viewBox="0 0 100 100" class="v-nav" aria-hidden="true">
             <defs>
@@ -66,9 +65,9 @@
 
       <nav class="nav-links" aria-label="Navegación principal">
         <a href="#inicio">Inicio</a>
-        <a href="pages/visuales/index.html">Visuales</a>
-        <a href="pages/visualizers/index.html">Visualizers</a>
-        <a href="pages/interactivos/index.html">Interactivos</a>
+        <a href="/pages/visuales/">Visuales</a>
+        <a href="/pages/visualizers/">Visualizers</a>
+        <a href="/pages/interactivos/">Interactivos</a>
         <a href="#sobre-mi">Sobre mí</a>
         <a href="#contacto">Contacto</a>
         <a class="nav-cta" href="#proyectos">Ver trabajos</a>
@@ -107,8 +106,16 @@
 
         <div class="hero-card">
           <div class="hero-visual">
-            <video autoplay muted loop playsinline preload="metadata "class="bg-video">
-              <source src="assets/hero-card.mp4" type="video/mp4">
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              poster="/assets/hero-poster.jpg"
+              class="bg-video"
+            >
+              <source src="/assets/hero-card.mp4" type="video/mp4">
             </video>
 
             <canvas id="bgFX"></canvas>
@@ -193,6 +200,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>
