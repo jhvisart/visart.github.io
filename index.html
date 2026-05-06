@@ -8,12 +8,14 @@
 
   <meta name="google" content="notranslate">
   <meta name="description" content="Portafolio creativo de VISART con proyectos visuales, visualizers e interactivos." />
+
   <link rel="canonical" href="https://visart.dev/">
 
   <meta property="og:title" content="VISART | Visual Portfolio">
   <meta property="og:description" content="Arte visual interactivo y visualizers audio-reactivos.">
   <meta property="og:image" content="https://visart.dev/assets/preview.png">
   <meta property="og:url" content="https://visart.dev">
+
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
@@ -21,22 +23,12 @@
   <link rel="manifest" href="/site.webmanifest">
 
   <link rel="stylesheet" href="/style.css">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "VISART",
-    "url": "https://visart.dev",
-    "logo": "https://visart.dev/assets/favicon-512.png",
-    "sameAs": [
-      "https://github.com/jhvisart"
-    ]
-  }
-  </script>
 </head>
 
 <body class="page-home" data-tipo="landing" data-json="/data/proyectos.json" data-assets="/">
+
+<div class="page-shell">
+
   <div class="bg-grid"></div>
 
   <header class="header">
@@ -53,10 +45,8 @@
             </defs>
             <path d="M10 10 L50 90 L90 10" />
           </svg>
-
           <canvas class="v-canvas" aria-hidden="true"></canvas>
         </div>
-
         <div class="brand-text">
           <span>ISART</span>
           <small>Creative Studio</small>
@@ -77,68 +67,35 @@
   </header>
 
   <main>
+
     <section class="hero" id="inicio">
-      <div class="container hero-grid">
-
-        <div class="hero-content">
-          <div class="eyebrow">Portafolio visual e interactivo</div>
-
-          <h1>
-            Diseños y experiencias <span>creativas</span> con identidad digital.
-          </h1>
-
-          <p>
-            Bienvenido al espacio creativo de <strong>VISART</strong>. Aquí se muestran proyectos experimentales,
-            visuales interactivos y piezas digitales pensadas para impactar.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#proyectos">Explorar proyectos</a>
-            <a class="btn btn-secondary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">Ver visart.dev</a>
-          </div>
-
-          <div class="hero-points">
-            <span>Visual Design</span>
-            <span>Audio Reactive</span>
-            <span>Frontend Pro</span>
-          </div>
+      <div class="hero-content">
+        <div class="eyebrow">Portafolio visual e interactivo</div>
+        <h1>Diseños y experiencias <span>creativas</span> con identidad digital.</h1>
+        <p>Bienvenido al espacio creativo de <strong>VISART</strong>. Aquí se muestran proyectos experimentales, visuales interactivos y piezas digitales pensadas para impactar.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#proyectos">Explorar proyectos</a>
+          <a class="btn btn-secondary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">Ver visart.dev</a>
         </div>
-
-        <div class="hero-card">
-          <div class="hero-visual">
-            <video
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="metadata"
-              poster="/assets/hero-poster.jpg"
-              class="bg-video"
-            >
-              <source src="/assets/hero-card.mp4" type="video/mp4">
-            </video>
-
-            <canvas id="bgFX"></canvas>
-          </div>
-
-          <div class="hero-mini-stats">
-            <div class="mini">
-              <strong>VISART</strong>
-              <small>Creative Studio</small>
-            </div>
-
-            <div class="mini">
-              <strong>Audio Reactive</strong>
-              <small>Visual Systems</small>
-            </div>
-
-            <div class="mini">
-              <strong>LIVE</strong>
-              <small>visart.dev</small>
-            </div>
-          </div>
+        <div class="hero-points">
+          <span>Visual Design</span>
+          <span>Audio Reactive</span>
+          <span>Frontend Pro</span>
         </div>
+      </div>
 
+      <div class="hero-card">
+        <div class="hero-visual">
+          <video autoplay muted loop playsinline preload="metadata" poster="/assets/hero-poster.jpg" class="bg-video">
+            <source src="/assets/hero-card.mp4" type="video/mp4">
+          </video>
+          <canvas id="bgFX"></canvas>
+        </div>
+        <div class="hero-mini-stats">
+          <div class="mini"><strong>VISART</strong><small>Creative Studio</small></div>
+          <div class="mini"><strong>Audio Reactive</strong><small>Visual Systems</small></div>
+          <div class="mini"><strong>LIVE</strong><small>visart.dev</small></div>
+        </div>
       </div>
     </section>
 
@@ -148,34 +105,21 @@
           <h2>Proyectos destacados</h2>
           <p>Una selección de trabajos digitales y visuales cargados dinámicamente desde JSON.</p>
         </div>
-
         <div class="projects-grid" id="projects-container"></div>
       </div>
     </section>
 
     <section class="section" id="sobre-mi">
       <div class="container about-grid">
-
         <div class="glass">
           <h3>Identidad</h3>
-          <p>
-            <strong>VISART</strong> reúne piezas web visuales, visualizers y conceptos creativos modernos.
-          </p>
-
-          <div class="skills">
-            <span>Pages</span>
-            <span>Diseño Visual</span>
-            <span>Frontend</span>
-          </div>
+          <p><strong>VISART</strong> reúne piezas web visuales, visualizers y conceptos creativos modernos.</p>
+          <div class="skills"><span>Pages</span><span>Diseño Visual</span><span>Frontend</span></div>
         </div>
-
         <div class="glass">
           <h3>Estructura</h3>
-          <p>
-            Proyectos organizados por tipo: visuales, visualizers e interactivos.
-          </p>
+          <p>Proyectos organizados por tipo: visuales, visualizers e interactivos.</p>
         </div>
-
       </div>
     </section>
 
@@ -183,7 +127,6 @@
       <div class="container">
         <div class="glass contact-box">
           <h2>Contacto</h2>
-
           <div class="hero-actions center-actions">
             <a class="btn btn-primary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">VISART</a>
             <a class="btn btn-secondary" href="#inicio">Volver arriba</a>
@@ -191,15 +134,11 @@
         </div>
       </div>
     </section>
+
   </main>
 
-  <footer>
-    <div class="container footer-line">
-      <div>© 2026 <strong>VISART</strong>.</div>
-      <div>Diseño web visual Pro Max.</div>
-    </div>
-  </footer>
+</div>
 
-  <script src="/script.js"></script>
+<script src="/script.js"></script>
 </body>
 </html>
