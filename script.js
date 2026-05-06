@@ -1,7 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  repararBackCacheIOS();
-  iniciarTransicionPaginas();
-  iniciarScrollReveal();
   iniciarHeroTilt();
   iniciarParticulasV();
   iniciarProyectos();
@@ -9,221 +6,346 @@ document.addEventListener("DOMContentLoaded", () => {
   iniciarFondoCanvas();
 });
 
-function repararBackCacheIOS() {
-  window.addEventListener("pageshow", (event) => {
-    document.body.classList.remove("is-leaving");
-    const shell = document.querySelector(".page-shell");
-    if (shell) {
-      shell.style.opacity = "1";
-      shell.style.transform = "none";
-      shell.style.filter = "none";
-    }
-    if (event.persisted) {
-      window.dispatchEvent(new Event("resize"));
-      const video = document.querySelector(".bg-video");
-      if (video) {
-        requestAnimationFrame(() => {
-          video.play().catch(() => {});
-        });
-      }
-    }
-  });
-}
-
-function iniciarTransicionPaginas() {
-  document.querySelectorAll("a[href^='/'], a[href^='./'], a[href^='../']").forEach(link => {
-    if (link.target === "_blank") return;
-    if (link.href.includes(window.location.hostname) || link.href.startsWith("/")) {
-      link.addEventListener("click", (e) => {
-        const href = link.getAttribute("href");
-        if (href === "#" || href === "") return;
-        if (href.startsWith("#")) return;
-        e.preventDefault();
-        document.body.classList.add("is-leaving");
-        requestAnimationFrame(() => {
-          setTimeout(() => {
-            window.location.href = href;
-          }, 180);
-        });
-      });
-    }
-  });
-}
-
-function iniciarScrollReveal() {
-  const elementos = document.querySelectorAll(".glass, .project-card, .hero-card");
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = "1";
-        entry.target.style.transform = "translateY(0)";
-      }
-    });
-  }, { threshold: 0.1 });
-  elementos.forEach(el => {
-    el.style.opacity = "0";
-    el.style.transform = "translateY(20px)";
-    el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-    observer.observe(el);
-  });
-}
-
 function iniciarHeroTilt() {
   const heroCard = document.querySelector(".hero-card");
   if (!heroCard) return;
-  const isTouch = window.matchMedia("(pointer: coarse)").matches;
-  if (isTouch) return;
-  let raf = null;
-  heroCard.addEventListener("mousemove", (e) => {
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      const rect = heroCard.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      heroCard.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${y * -5}deg)`;
-    });
-  }, { passive: true });
-  heroCard.addEventListener("mouseleave", () => {
-    heroCard.style.transform = `perspective(900px) rotateY(0deg) rotateX(0deg)`;
-  });
-}
 
-function iniciarVideoFondo() {
-  const video = document.querySelector(".bg-video");
-  if (!video) return;
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  const playSafe = () => video.play().catch(() => {});
-  video.addEventListener("stalled", playSafe);
-  video.addEventListener("suspend", playSafe);
-  if (!isIOS) {
-    video.addEventListener("emptied", () => {
-      video.load();
-      playSafe();
-    });
-  }
-}
+  window.addEventListener("mousemove", (e) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 10;
+    const y = (e.clientY / window.innerHeight - 0.5) * 10;
 
-function iniciarParticulasV() {
-  const canvas = document.querySelector(".v-canvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  let particulas = [];
-  let animacionActiva = true;
-  function resizeCanvas() {
-    const parent = canvas.parentElement;
-    const rect = parent.getBoundingClientRect();
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-  }
-  function crearParticula() {
-    return {
-      x: canvas.width / 2,
-      y: canvas.height / 2,
-      vx: (Math.random() - 0.5) * 1.2,
-      vy: (Math.random() - 0.5) * 1.2,
-      vida: 100,
-      maxVida: 100
-    };
-  }
-  function dibujar() {
-    if (!animacionActiva) return;
-    if (!ctx || !canvas) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particulas = particulas.filter(p => p.vida > 0);
-    for (let i = 0; i < particulas.length; i++) {
-      const p = particulas[i];
-      p.x += p.vx;
-      p.y += p.vy;
-      p.vida -= 1.5;
-      const alpha = p.vida / p.maxVida;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0, 234, 255, ${alpha * 0.7})`;
-      ctx.fill();
-    }
-    const density = window.innerWidth < 768 ? 1 : 2;
-    if (particulas.length < 30) {
-      for (let i = 0; i < density; i++) {
-        particulas.push(crearParticula());
-      }
-    }
-    requestAnimationFrame(dibujar);
-  }
-  window.addEventListener("resize", () => {
-    resizeCanvas();
-    particulas = [];
+    heroCard.style.transform =
+      `perspective(900px) rotateY(${x * 0.35}deg) rotateX(${y * -0.25}deg)`;
   });
-  resizeCanvas();
-  dibujar();
+
+  window.addEventListener("mouseleave", () => {
+    heroCard.style.transform =
+      "perspective(900px) rotateY(0deg) rotateX(0deg)";
+  });
 }
 
 function iniciarProyectos() {
   const container = document.getElementById("projects-container");
   if (!container) return;
-  const jsonUrl = document.body.getAttribute("data-json") || "/data/proyectos.json";
-  fetch(jsonUrl)
-    .then(res => res.json())
-    .then(data => {
-      if (!data.proyectos) return;
-      const proyectosMostrados = data.proyectos.slice(0, 6);
-      container.innerHTML = proyectosMostrados.map(p => `
-        <div class="project-card">
-          <img class="project-img" src="${p.imagen || '/assets/placeholder.jpg'}" alt="${p.titulo}" loading="lazy">
-          <div class="project-info">
-            <h3>${p.titulo}</h3>
-            <p>${p.descripcion || ''}</p>
-            <a href="${p.link || '#'}" class="btn btn-secondary" style="margin-top: 12px; display: inline-block;">Ver más</a>
-          </div>
-        </div>
-      `).join("");
+
+  const tipoPagina = document.body.dataset.tipo || "todos";
+  const jsonPath = document.body.dataset.json || "data/proyectos.json";
+
+  fetch(jsonPath)
+    .then((res) => {
+      if (!res.ok) throw new Error("No se pudo cargar proyectos.json");
+      return res.json();
     })
-    .catch(err => console.warn("Error cargando proyectos:", err));
+    .then((data) => {
+      const proyectos = Array.isArray(data) ? data : data.proyectos || [];
+
+      const filtrados = proyectos
+        .filter((p) => {
+          if (tipoPagina === "todos") return true;
+          return p.tipo === tipoPagina;
+        })
+        .sort((a, b) => new Date(b.fecha || 0) - new Date(a.fecha || 0));
+
+      container.innerHTML = "";
+
+      if (!filtrados.length) {
+        container.innerHTML = `
+          <article class="project-card">
+            <div class="project-body">
+              <h3>No hay proyectos para esta sección</h3>
+              <p>Agrega en el JSON un proyecto con tipo: <strong>${limpiar(tipoPagina)}</strong>.</p>
+            </div>
+          </article>
+        `;
+        return;
+      }
+
+      filtrados.forEach((p) => {
+        const card = document.createElement("article");
+        card.className = "project-card";
+
+        const img = resolverRuta(p.img || "");
+        const demo = p.manifestacion || p.demo || p.url || "#";
+
+        card.innerHTML = `
+          <div class="project-thumb">
+            <img src="${img}" alt="${limpiar(p.titulo)}" loading="lazy">
+            <span class="project-badge">${limpiar(p.labelTipo || p.tipo || "Proyecto")}</span>
+          </div>
+
+          <div class="project-body">
+            <div class="project-top">
+              <h3>${limpiar(p.titulo)}</h3>
+              <span class="project-tag">${limpiar(p.categoria || "Proyecto")}</span>
+            </div>
+
+            <p>${limpiar(p.descripcion || "")}</p>
+
+            <div class="project-actions">
+              <a class="btn btn-primary" href="${demo}" target="_blank" rel="noopener noreferrer">
+                Ver demo
+              </a>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    })
+    .catch((err) => {
+      console.error("Error cargando JSON:", err);
+
+      container.innerHTML = `
+        <article class="project-card">
+          <div class="project-body">
+            <h3>No se pudieron cargar los proyectos</h3>
+            <p>Revisa la ruta del JSON: <strong>${limpiar(jsonPath)}</strong></p>
+          </div>
+        </article>
+      `;
+    });
+}
+
+function resolverRuta(ruta) {
+  if (!ruta) return "";
+  if (ruta.startsWith("http") || ruta.startsWith("/")) return ruta;
+
+  const prefijoAssets = document.body.dataset.assets || "";
+  return prefijoAssets + ruta;
+}
+
+function limpiar(texto) {
+  return String(texto || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function iniciarVideoFondo() {
+  const video = document.querySelector(".bg-video");
+  if (!video) return;
+
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.autoplay = true;
+
+  const playSafe = () => {
+    if (video.paused) video.play().catch(() => {});
+  };
+
+  video.addEventListener("loadeddata", playSafe);
+  video.addEventListener("canplay", playSafe);
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) playSafe();
+  });
+
+  playSafe();
+}
+
+function iniciarParticulasV() {
+  const canvas = document.querySelector(".v-canvas");
+  const svg = document.querySelector(".v-nav");
+  const path = document.querySelector(".v-nav path");
+
+  if (!canvas || !svg || !path) return;
+
+  const ctx = canvas.getContext("2d");
+  const particles = [];
+  const pathLength = path.getTotalLength();
+
+  function resize() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function crearParticula() {
+    const rect = canvas.getBoundingClientRect();
+    const point = path.getPointAtLength(Math.random() * pathLength);
+    const viewBox = svg.viewBox.baseVal;
+
+    const x = ((point.x - viewBox.x) / viewBox.width) * rect.width;
+    const y = ((point.y - viewBox.y) / viewBox.height) * rect.height;
+
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+
+    const dx = x - cx;
+    const dy = y - cy;
+    const len = Math.sqrt(dx * dx + dy * dy) || 1;
+
+    const accent1 = getCssVar("--accent1");
+    const accent2 = getCssVar("--accent2");
+
+    const colores = [
+      accent1,
+      accent2,
+      mezclarColor(accent1, accent2, 0.5),
+      mezclarColor(accent1, "#ffffff", 0.28),
+      mezclarColor(accent2, "#ffffff", 0.28)
+    ];
+
+    particles.push({
+      x,
+      y,
+      vx: (dx / len) * (0.05 + Math.random() * 0.15) + (Math.random() - 0.5) * 0.1,
+      vy: (dy / len) * (0.05 + Math.random() * 0.15) + (Math.random() - 0.5) * 0.1,
+      size: 0.45 + Math.random() * 0.9,
+      life: 1,
+      decay: 0.012 + Math.random() * 0.018,
+      color: colores[Math.floor(Math.random() * colores.length)]
+    });
+  }
+
+  function animar() {
+    const rect = canvas.getBoundingClientRect();
+
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    for (let i = 0; i < 2; i++) {
+      crearParticula();
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= p.decay;
+
+      ctx.save();
+      ctx.globalAlpha = Math.max(p.life, 0);
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = p.color;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      if (p.life <= 0) {
+        particles.splice(i, 1);
+      }
+    }
+
+    requestAnimationFrame(animar);
+  }
+
+  resize();
+  window.addEventListener("resize", resize);
+  animar();
+}
+
+function getCssVar(nombre) {
+  return getComputedStyle(document.body).getPropertyValue(nombre).trim()
+    || getComputedStyle(document.documentElement).getPropertyValue(nombre).trim()
+    || "#00eaff";
+}
+
+function mezclarColor(c1, c2, factor) {
+  const parse = (color) => {
+    color = String(color).trim();
+
+    if (color.startsWith("#")) {
+      let hex = color.slice(1);
+
+      if (hex.length === 3) {
+        hex = hex.split("").map(x => x + x).join("");
+      }
+
+      const r = parseInt(hex.slice(0, 2), 16);
+      const g = parseInt(hex.slice(2, 4), 16);
+      const b = parseInt(hex.slice(4, 6), 16);
+
+      return [r, g, b];
+    }
+
+    const nums = color.match(/\d+/g);
+    if (nums && nums.length >= 3) {
+      return nums.slice(0, 3).map(Number);
+    }
+
+    return [0, 234, 255];
+  };
+
+  const [r1, g1, b1] = parse(c1);
+  const [r2, g2, b2] = parse(c2);
+
+  const r = Math.round(r1 + (r2 - r1) * factor);
+  const g = Math.round(g1 + (g2 - g1) * factor);
+  const b = Math.round(b1 + (b2 - b1) * factor);
+
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
 function iniciarFondoCanvas() {
   const canvas = document.getElementById("bgFX");
   if (!canvas) return;
+
   const ctx = canvas.getContext("2d");
-  let ancho, alto;
-  let puntos = [];
+  const puntos = [];
+
   function resize() {
-    ancho = canvas.clientWidth;
-    alto = canvas.clientHeight;
-    canvas.width = ancho;
-    canvas.height = alto;
-    const total = window.innerWidth < 768 ? 20 : 48;
-    puntos = [];
-    for (let i = 0; i < total; i++) {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.floor(rect.width * dpr);
+    canvas.height = Math.floor(rect.height * dpr);
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    puntos.length = 0;
+
+    for (let i = 0; i < 48; i++) {
       puntos.push({
-        x: Math.random() * ancho,
-        y: Math.random() * alto,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radio: Math.random() * 2 + 1
+        x: Math.random() * rect.width,
+        y: Math.random() * rect.height,
+        r: 1 + Math.random() * 2.5,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        alpha: 0.25 + Math.random() * 0.45
       });
     }
   }
+
   function animar() {
-    if (!ctx || !canvas) return;
-    ctx.clearRect(0, 0, ancho, alto);
-    for (let i = 0; i < puntos.length; i++) {
-      const p = puntos[i];
+    const rect = canvas.getBoundingClientRect();
+
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    const accent1 = getCssVar("--accent1");
+    const accent2 = getCssVar("--accent2");
+
+    puntos.forEach((p, index) => {
       p.x += p.vx;
       p.y += p.vy;
-      if (p.x < 0) p.x = ancho;
-      if (p.x > ancho) p.x = 0;
-      if (p.y < 0) p.y = alto;
-      if (p.y > alto) p.y = 0;
+
+      if (p.x < 0 || p.x > rect.width) p.vx *= -1;
+      if (p.y < 0 || p.y > rect.height) p.vy *= -1;
+
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.shadowBlur = 18;
+      ctx.shadowColor = index % 2 === 0 ? accent1 : accent2;
+      ctx.fillStyle = index % 2 === 0 ? accent1 : accent2;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radio, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(0, 234, 255, 0.3)`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
-    }
+      ctx.restore();
+    });
+
     requestAnimationFrame(animar);
   }
-  window.addEventListener("resize", () => {
-    resize();
-  });
+
   resize();
+  window.addEventListener("resize", resize);
   animar();
 }
