@@ -28,7 +28,7 @@ function iniciarProyectos() {
   const container = document.getElementById("projects-container");
   if (!container) return;
 
-  const tipoPagina = document.body.dataset.tipo || "todos";
+  const tipoPagina = document.body.dataset.tipo || "landing";
   const jsonPath = document.body.dataset.json || "data/proyectos.json";
 
   fetch(jsonPath)
@@ -41,7 +41,7 @@ function iniciarProyectos() {
 
       const filtrados = proyectos
         .filter((p) => {
-          if (tipoPagina === "todos") return true;
+          if (tipoPagina === "landing") return true;
           return p.tipo === tipoPagina;
         })
         .sort((a, b) => new Date(b.fecha || 0) - new Date(a.fecha || 0));
