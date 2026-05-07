@@ -1,3 +1,35 @@
+/* ===== IOS / SAFARI FIXES ===== */
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+  min-height: 100svh;
+}
+
+video,
+canvas,
+img {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.bg-video {
+  will-change: transform;
+}
+
+.hero-visual,
+.hero-card,
+.project-card {
+  transform: translateZ(0);
+}
 :root {
   --bg: #050816;
   --bg2: #0b1224;
