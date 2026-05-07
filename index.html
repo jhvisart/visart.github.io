@@ -1,18 +1,36 @@
+# index.html
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
 
   <title>VISART | Portafolio Creativo</title>
 
   <meta name="google" content="notranslate">
-  <meta name="description" content="Portafolio creativo de VISART con proyectos visuales, visualizers e interactivos." />
+  <meta
+    name="description"
+    content="Portafolio creativo de VISART con proyectos visuales, visualizers e interactivos."
+  />
+
   <link rel="canonical" href="https://visart.dev/">
 
   <meta property="og:title" content="VISART | Visual Portfolio">
-  <meta property="og:description" content="Arte visual interactivo y visualizers audio-reactivos.">
-  <meta property="og:image" content="https://visart.dev/assets/preview.png">
+  <meta
+    property="og:description"
+    content="Arte visual interactivo y visualizers audio-reactivos."
+  >
+
+  <meta
+    property="og:image"
+    content="https://visart.dev/assets/preview.png"
+  >
+
   <meta property="og:url" content="https://visart.dev">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -36,7 +54,13 @@
   </script>
 </head>
 
-<body class="page-home" data-tipo="landing" data-json="/data/proyectos.json" data-assets="/">
+<body
+  class="page-home"
+  data-tipo="landing"
+  data-json="/data/proyectos.json"
+  data-assets="/"
+>
+
   <div class="bg-grid"></div>
 
   <header class="header">
@@ -44,6 +68,7 @@
 
       <a href="/" class="brand" aria-label="Ir al inicio de VISART">
         <div class="brand-mark">
+
           <svg viewBox="0 0 100 100" class="v-nav" aria-hidden="true">
             <defs>
               <linearGradient id="vGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -51,6 +76,7 @@
                 <stop offset="100%" stop-color="var(--accent2)" />
               </linearGradient>
             </defs>
+
             <path d="M10 10 L50 90 L90 10" />
           </svg>
 
@@ -77,24 +103,43 @@
   </header>
 
   <main>
+
     <section class="hero" id="inicio">
       <div class="container hero-grid">
 
-        <div class="hero-content">
-          <div class="eyebrow">Portafolio visual e interactivo</div>
+        <div class="hero-content reveal">
+
+          <div class="eyebrow">
+            Portafolio visual e interactivo
+          </div>
 
           <h1>
-            Diseños y experiencias <span>creativas</span> con identidad digital.
+            Diseños y experiencias
+            <span>creativas</span>
+            con identidad digital.
           </h1>
 
           <p>
-            Bienvenido al espacio creativo de <strong>VISART</strong>. Aquí se muestran proyectos experimentales,
-            visuales interactivos y piezas digitales pensadas para impactar.
+            Bienvenido al espacio creativo de
+            <strong>VISART</strong>.
+            Aquí se muestran proyectos experimentales,
+            visuales interactivos y piezas digitales
+            pensadas para impactar.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#proyectos">Explorar proyectos</a>
-            <a class="btn btn-secondary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">Ver visart.dev</a>
+            <a class="btn btn-primary" href="#proyectos">
+              Explorar proyectos
+            </a>
+
+            <a
+              class="btn btn-secondary"
+              href="https://visart.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver visart.dev
+            </a>
           </div>
 
           <div class="hero-points">
@@ -102,15 +147,19 @@
             <span>Audio Reactive</span>
             <span>Frontend Pro</span>
           </div>
+
         </div>
 
-        <div class="hero-card">
+        <div class="hero-card reveal">
+
           <div class="hero-visual">
+
             <video
               autoplay
               muted
               loop
               playsinline
+              webkit-playsinline
               preload="metadata"
               poster="/assets/hero-poster.jpg"
               class="bg-video"
@@ -122,6 +171,7 @@
           </div>
 
           <div class="hero-mini-stats">
+
             <div class="mini">
               <strong>VISART</strong>
               <small>Creative Studio</small>
@@ -136,30 +186,40 @@
               <strong>LIVE</strong>
               <small>visart.dev</small>
             </div>
+
           </div>
+
         </div>
 
       </div>
     </section>
 
-    <section class="section" id="proyectos">
+    <section class="section reveal" id="proyectos">
       <div class="container">
+
         <div class="section-head">
           <h2>Proyectos destacados</h2>
-          <p>Una selección de trabajos digitales y visuales cargados dinámicamente desde JSON.</p>
+          <p>
+            Una selección de trabajos digitales y visuales
+            cargados dinámicamente desde JSON.
+          </p>
         </div>
 
         <div class="projects-grid" id="projects-container"></div>
+
       </div>
     </section>
 
-    <section class="section" id="sobre-mi">
+    <section class="section reveal" id="sobre-mi">
       <div class="container about-grid">
 
         <div class="glass">
           <h3>Identidad</h3>
+
           <p>
-            <strong>VISART</strong> reúne piezas web visuales, visualizers y conceptos creativos modernos.
+            <strong>VISART</strong>
+            reúne piezas web visuales,
+            visualizers y conceptos creativos modernos.
           </p>
 
           <div class="skills">
@@ -171,26 +231,45 @@
 
         <div class="glass">
           <h3>Estructura</h3>
+
           <p>
-            Proyectos organizados por tipo: visuales, visualizers e interactivos.
+            Proyectos organizados por tipo:
+            visuales, visualizers e interactivos.
           </p>
         </div>
 
       </div>
     </section>
 
-    <section class="section" id="contacto">
+    <section class="section reveal" id="contacto">
       <div class="container">
+
         <div class="glass contact-box">
+
           <h2>Contacto</h2>
 
           <div class="hero-actions center-actions">
-            <a class="btn btn-primary" href="https://visart.dev" target="_blank" rel="noopener noreferrer">VISART</a>
-            <a class="btn btn-secondary" href="#inicio">Volver arriba</a>
+
+            <a
+              class="btn btn-primary"
+              href="https://visart.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              VISART
+            </a>
+
+            <a class="btn btn-secondary" href="#inicio">
+              Volver arriba
+            </a>
+
           </div>
+
         </div>
+
       </div>
     </section>
+
   </main>
 
   <footer>
