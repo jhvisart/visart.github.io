@@ -198,43 +198,60 @@ function iniciarTiltCard(card) {
   let targetX = 0;
   let targetY = 0;
 
+  let raf = null;
+
   function animateTilt() {
     currentX += (targetX - currentX) * 0.12;
     currentY += (targetY - currentY) * 0.12;
 
-    function updateTilt() {
-  currentX += (targetX - currentX) * 0.14;
-  currentY += (targetY - currentY) * 0.14;
+    card.style.setProperty("--tiltX", `${currentX}deg`);
+    card.style.setProperty("--tiltY", `${currentY}deg`);
 
-  card.style.setProperty("--tiltX", `${currentX}deg`);
-  card.style.setProperty("--tiltY", `${currentY}deg`);
-}
+    const moving =
+      Math.abs(targetX - currentX) > 0.01 ||
+      Math.abs(targetY - currentY) > 0.01;
+
+    if (moving) {
+      raf = requestAnimationFrame(animateTilt);
+    } else {
+      raf = null;
+    }
+  }
+
+  function startTiltAnimation() {
+    if (!raf) {
+      raf = requestAnimationFrame(animateTilt);
+    }
+  }
 
   function handleCardMove(e) {
     const rect = card.getBoundingClientRect();
 
-      const point = visartGetPoint(e);
+    const point = visartGetPoint(e);
 
-  const px = (point.x - rect.left) / rect.width;
-  const py = (point.y - rect.top) / rect.height;
+    const px = (point.x - rect.left) / rect.width;
+    const py = (point.y - rect.top) / rect.height;
 
     targetY = (px - 0.5) * 28;
     targetX = (0.5 - py) * 28;
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
+
+    startTiltAnimation();
   }
 
   card.addEventListener("pointermove", handleCardMove, {
-  passive: true
-});
+    passive: true
+  });
 
-card.addEventListener("pointerleave", () => {
-  targetX = 0;
-  targetY = 0;
-  
-  updateTilt();
-});
+  card.addEventListener("pointerleave", () => {
+    targetX = 0;
+    targetY = 0;
+
+    startTiltAnimation();
+  });
+}
 
 
 /* ======================================= */
