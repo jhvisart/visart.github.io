@@ -216,8 +216,8 @@ function iniciarTiltCard(card) {
   const px = (point.x - rect.left) / rect.width;
   const py = (point.y - rect.top) / rect.height;
 
-    targetY = (px - 0.5) * 22;
-    targetX = (0.5 - py) * 22;
+    targetY = (px - 0.5) * 28;
+    targetX = (0.5 - py) * 28;
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
