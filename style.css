@@ -1091,26 +1091,11 @@ h1 span::after {
 /* ============================= */
 
 body {
-  opacity: 0;
-  animation: pageFadeIn .75s ease forwards;
+  opacity: 1;
 }
 
 body.is-leaving {
   animation: pageFadeOut .38s ease forwards;
-}
-
-@keyframes pageFadeIn {
-  from {
-    opacity: 0;
-    filter: blur(10px);
-    transform: translateY(8px);
-  }
-
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateY(0);
-  }
 }
 
 @keyframes pageFadeOut {
@@ -1144,40 +1129,7 @@ body.is-leaving {
   transform: translateY(0);
   filter: blur(0);
 }
-/* ===== TILT FIX (NO rompe nada) ===== */
 
-.project-card {
-  transform:
-    translateY(0)
-    scale(1)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg)) !important;
-}
-
-.project-card:hover {
-  transform:
-    translateY(-10px)
-    scale(1.03)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg)) !important;
-}
-/* ===== FIX TILT FORZADO ===== */
-
-.project-card {
-  transform:
-    translateY(0)
-    scale(1)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg)) !important;
-}
-
-.project-card:hover {
-  transform:
-    translateY(-10px)
-    scale(1.03)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg)) !important;
-}
 .project-card::before,
 .project-card::after {
   pointer-events: none !important;
