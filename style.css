@@ -13,6 +13,14 @@ body {
   -webkit-overflow-scrolling: touch;
   min-height: 100svh;
 }
+.hero,
+.section,
+.project-card,
+.hero-card,
+.hero-visual,
+.projects-grid {
+  touch-action: pan-y;
+}
 
 video,
 canvas,
@@ -516,7 +524,11 @@ h1 span {
 }
 
 .project-card * {
-  pointer-events: none;
+  pointer-events: auto;
+}
+.project-card {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .project-card {
