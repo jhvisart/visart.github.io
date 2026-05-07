@@ -221,7 +221,7 @@ function iniciarTiltCard(card) {
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
-  });
+  }
 
   card.addEventListener("mouseleave", () => {
     targetX = 0;
