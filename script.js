@@ -202,11 +202,13 @@ function iniciarTiltCard(card) {
     currentX += (targetX - currentX) * 0.12;
     currentY += (targetY - currentY) * 0.12;
 
-    card.style.setProperty("--tiltX", currentX + "deg");
-    card.style.setProperty("--tiltY", currentY + "deg");
+    function updateTilt() {
+  currentX += (targetX - currentX) * 0.14;
+  currentY += (targetY - currentY) * 0.14;
 
-    requestAnimationFrame(animateTilt);
-  }
+  card.style.setProperty("--tiltX", `${currentX}deg`);
+  card.style.setProperty("--tiltY", `${currentY}deg`);
+}
 
   function handleCardMove(e) {
     const rect = card.getBoundingClientRect();
@@ -230,10 +232,10 @@ function iniciarTiltCard(card) {
 card.addEventListener("pointerleave", () => {
   targetX = 0;
   targetY = 0;
+  
+  updateTilt();
 });
 
-  animateTilt();
-}
 
 /* ======================================= */
 /* VIDEO FIX IOS */
