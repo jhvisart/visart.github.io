@@ -1,6 +1,16 @@
 const IS_TOUCH_DEVICE =
   "ontouchstart" in window ||
   navigator.maxTouchPoints > 0;
+window.matchMedia("(pointer: coarse)").matches;
+
+function visartGetPoint(e) {
+  const touch = e.touches?.[0] || e.changedTouches?.[0];
+
+  return {
+    x: touch ? touch.clientX : e.clientX,
+    y: touch ? touch.clientY : e.clientY
+  };
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   iniciarHeroTilt();
@@ -198,11 +208,13 @@ function iniciarTiltCard(card) {
     requestAnimationFrame(animateTilt);
   }
 
-  card.addEventListener("mousemove", (e) => {
+  function handleCardMove(e) {
     const rect = card.getBoundingClientRect();
 
-    const px = (e.clientX - rect.left) / rect.width;
-    const py = (e.clientY - rect.top) / rect.height;
+      const point = visartGetPoint(e);
+
+  const px = (point.x - rect.left) / rect.width;
+  const py = (point.y - rect.top) / rect.height;
 
     targetY = (px - 0.5) * 22;
     targetX = (0.5 - py) * 22;
