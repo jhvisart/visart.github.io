@@ -118,7 +118,7 @@ body {
     radial-gradient(circle at 80% 10%, var(--glow2), transparent 30%),
     radial-gradient(circle at 50% 100%, var(--glow3), transparent 35%),
     linear-gradient(180deg, var(--bg), var(--bg2));
-  background-attachment: fixed;
+  background-attachment: scroll;
   min-height: 100vh;
   overflow-x: hidden;
 }
