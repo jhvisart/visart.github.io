@@ -832,7 +832,9 @@ footer {
 .project-card:nth-child(4) { animation-delay: .32s; }
 
 .project-card:hover {
-  transform: translateY(-10px) scale(1.03);
+  transform: translateY(-10px) scale(1.03)
+   rotateX(var(--tiltX, 0deg))
+   rotateY(var(--tiltY, 0deg));
   box-shadow:
     0 25px 70px rgba(0,0,0,0.65),
     0 0 25px var(--accent1),
