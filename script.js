@@ -190,7 +190,7 @@ function iniciarProyectos() {
 /* ======================================= */
 
 function iniciarTiltCard(card) {
-  if (!card || IS_TOUCH_DEVICE) return;
+  if (!card) return;
 
   let currentX = 0;
   let currentY = 0;
@@ -223,10 +223,14 @@ function iniciarTiltCard(card) {
     card.style.setProperty("--my", `${py * 100}%`);
   }
 
-  card.addEventListener("mouseleave", () => {
-    targetX = 0;
-    targetY = 0;
-  });
+  card.addEventListener("pointermove", handleCardMove, {
+  passive: true
+});
+
+card.addEventListener("pointerleave", () => {
+  targetX = 0;
+  targetY = 0;
+});
 
   animateTilt();
 }
