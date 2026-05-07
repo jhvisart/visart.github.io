@@ -74,7 +74,9 @@ function iniciarProyectos() {
 
       const filtrados = proyectos
         .filter((p) => {
-          if (tipoPagina === "landing") return true;
+         if (tipoPagina === "landing") {
+          return p.landing === true;
+          }
           return p.tipo === tipoPagina;
         })
         .sort((a, b) => {
