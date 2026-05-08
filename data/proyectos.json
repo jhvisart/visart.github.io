@@ -32,6 +32,7 @@
       "descripcion": "Composición visual con apariencia viva y comportamiento fluido.",
       "categoria": "fantasia_surreal",
       "tipo": "interactivo",
+      "landing": true,
       "labelTipo": "Interactivo",
       "img": "assets/axiom.png",
       "manifestacion": "https://visart.dev/axiom/",
