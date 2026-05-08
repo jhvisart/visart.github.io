@@ -163,9 +163,9 @@ function iniciarProyectos() {
         container.appendChild(card);
       });
 
-      requestAnimationFrame(() => {
-        iniciarScrollReveal();
-      });
+    setTimeout(() => {
+  iniciarScrollReveal();
+}, 80);
     })
 
     .catch((err) => {
