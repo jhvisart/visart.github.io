@@ -118,6 +118,11 @@ card.currentY += card.velocityY;
        card.proximity.toFixed(3)
       );
 
+       card.el.style.setProperty(
+         "--energy",
+    VISART_ENGINE.pointer.velocity.toFixed(3)
+      );
+
       card.el.style.setProperty(
         "--magneticX",
         `${card.magneticCurrentX}px`
