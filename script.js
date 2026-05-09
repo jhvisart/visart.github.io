@@ -286,31 +286,21 @@ function iniciarTiltCard(card) {
   let targetX = 0;
   let targetY = 0;
 
-  let raf = null;
+  const engineCard = {
 
-  function animateTilt() {
-    currentX += (targetX - currentX) * 0.12;
-    currentY += (targetY - currentY) * 0.12;
+  el: card,
 
-    card.style.setProperty("--tiltX", `${currentX}deg`);
-    card.style.setProperty("--tiltY", `${currentY}deg`);
+  currentX,
+  currentY,
 
-    const moving =
-      Math.abs(targetX - currentX) > 0.01 ||
-      Math.abs(targetY - currentY) > 0.01;
+  targetX,
+  targetY,
 
-    if (moving) {
-      raf = requestAnimationFrame(animateTilt);
-    } else {
-      raf = null;
-    }
-  }
+  speed: 0.12
 
-  function startTiltAnimation() {
-    if (!raf) {
-      raf = requestAnimationFrame(animateTilt);
-    }
-  }
+};
+
+VISART_ENGINE.addCard(engineCard);
 
   function handleCardMove(e) {
     const rect = card.getBoundingClientRect();
@@ -320,13 +310,11 @@ function iniciarTiltCard(card) {
     const px = (point.x - rect.left) / rect.width;
     const py = (point.y - rect.top) / rect.height;
 
-    targetY = (px - 0.5) * 28;
-    targetX = (0.5 - py) * 28;
+    engineCard.targetY = (px - 0.5) * 28;
+    engineCard.targetX = (0.5 - py) * 28;
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
-
-    startTiltAnimation();
   }
 
   card.addEventListener("pointermove", handleCardMove, {
@@ -334,10 +322,8 @@ function iniciarTiltCard(card) {
   });
 
   card.addEventListener("pointerleave", () => {
-    targetX = 0;
-    targetY = 0;
-
-    startTiltAnimation();
+   engineCard.targetX = 0;
+   engineCard.targetY = 0;
   });
 }
 
@@ -690,3 +676,5 @@ function getCssVar(nombre) {
     "#00eaff"
   );
 }
+
+VISART_ENGINE.start();
