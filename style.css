@@ -545,12 +545,7 @@ h1 span {
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
-.project-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 0.5s;
-}
+
 
 .project-card:hover .project-thumb img {
   transform: scale(1.08);
@@ -889,7 +884,9 @@ backface-visibility: hidden;
   object-fit: cover;
   transition: transform .5s ease;
   
-  transform: translateZ(0);
+transform:
+  translateZ(40px)
+  scale(1.02);
 backface-visibility: hidden;
 -webkit-backface-visibility: hidden;
 will-change: transform;
