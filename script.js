@@ -398,6 +398,7 @@ function iniciarTiltCard(card) {
 VISART_ENGINE.addCard(engineCard);
 
   function handleCardMove(e) {
+    engineCard.hover = true;
     const rect = card.getBoundingClientRect();
 
     const point = visartGetPoint(e);
@@ -420,6 +421,7 @@ VISART_ENGINE.addCard(engineCard);
   });
 
   card.addEventListener("pointerleave", () => {
+   engineCard.hover = false;
    engineCard.targetX = 0;
    engineCard.targetY = 0;
   });
