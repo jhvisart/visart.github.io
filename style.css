@@ -501,42 +501,52 @@ h1 span {
 }
 
 .project-card {
-   perspective: 1000px;
   position: relative;
   overflow: hidden;
+
   border-radius: 28px;
-  border: 1px solid color-mix(in srgb, var(--accent1) 25%, transparent);
-  background: rgba(3, 5, 12, 0.72);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-  backdrop-filter: blur(18px);
-  transform-style: preserve-3d;
-  transform:
-  translate3d(
-    var(--magneticX, 0px),
-    var(--magneticY, 0px),
-    0
-  )
-  scale(1)
-  rotateX(var(--tiltX, 0deg))
-  rotateY(var(--tiltY, 0deg));
-  will-change: transform;
-  --proximity: 0;
+
+  border: 1px solid
+    color-mix(in srgb, var(--accent1) 25%, transparent);
+
   background:
-    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.08),
+      rgba(255,255,255,.03)
+    ),
     rgba(3, 5, 12, 0.65);
+
   backdrop-filter: blur(22px) saturate(120%);
   -webkit-backdrop-filter: blur(22px) saturate(120%);
-}
 
-.project-card * {
-  pointer-events: auto;
-}
-.project-card {
-  -webkit-user-select: none;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+
+  transform:
+    translate3d(
+      var(--magneticX, 0px),
+      var(--magneticY, 0px),
+      0
+    )
+    scale(1)
+    rotateX(var(--tiltX, 0deg))
+    rotateY(var(--tiltY, 0deg));
+
+  transition:
+    transform 0.45s cubic-bezier(.2,.8,.2,1),
+    box-shadow 0.45s ease,
+    border-color 0.3s ease;
+
+  will-change: transform;
+
+  isolation: isolate;
+
+  --proximity: 0;
+
   user-select: none;
-}
+  -webkit-user-select: none;
 
-.project-card {
   pointer-events: auto;
 }
 
