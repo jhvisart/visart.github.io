@@ -8,6 +8,11 @@ const VISART_ENGINE = {
 
   hero: null,
 
+   pointer: {
+  x: window.innerWidth * 0.5,
+  y: window.innerHeight * 0.5
+},
+
   running: false,
 
   addCard(card) {
@@ -110,6 +115,14 @@ function visartGetPoint(e) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  window.addEventListener("pointermove", (e) => {
+
+  VISART_ENGINE.pointer.x = e.clientX;
+  VISART_ENGINE.pointer.y = e.clientY;
+
+}, { passive: true });
+   
   iniciarHeroTilt();
   iniciarParticulasV();
   iniciarProyectos();
