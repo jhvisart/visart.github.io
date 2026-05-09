@@ -60,11 +60,14 @@ const dx =
 const dy =
   VISART_ENGINE.pointer.y - centerY;
 
+const magneticStrength =
+  engineCard.hover ? 0.008 : 0.0025;
+
 card.magneticX =
-  dx * 0.008 * card.proximity;
+  dx * magneticStrength * card.proximity;
 
 card.magneticY =
-  dy * 0.008 * card.proximity;
+  dy * magneticStrength * card.proximity;
 
 card.magneticCurrentX +=
   (card.magneticX - card.magneticCurrentX) * 0.12;
