@@ -797,36 +797,10 @@ footer {
     min-height: 300px;
   }
 }
-/* ============================= */
-/* VISART PREMIUM CARDS */
-/* ============================= */
 
 /* ============================= */
 /* VISART APPLE CARDS FINAL */
 /* ============================= */
-
-.project-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 28px;
-
-  border: 1px solid color-mix(in srgb, var(--accent1) 25%, transparent);
-  background: rgba(3, 5, 12, 0.72);
-
-  backdrop-filter: blur(18px);
-
-  transition:
-    transform 0.45s cubic-bezier(.2,.8,.2,1),
-    box-shadow 0.45s ease,
-    border-color 0.3s ease;
-
-  transform-style: preserve-3d;
-  will-change: transform;
-  perspective: 1000px;
-
-  isolation: isolate;
-}
-
 
 .project-card:hover {
   transform:
