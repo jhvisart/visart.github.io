@@ -49,6 +49,25 @@ const VISART_ENGINE = {
 
     this.cards.forEach(card => {
 
+       const rect = card.el.getBoundingClientRect();
+
+const centerX = rect.left + rect.width * 0.5;
+const centerY = rect.top + rect.height * 0.5;
+
+const dx =
+  VISART_ENGINE.pointer.x - centerX;
+
+const dy =
+  VISART_ENGINE.pointer.y - centerY;
+
+const distance =
+  Math.sqrt(dx * dx + dy * dy);
+
+const maxDistance = 500;
+
+card.proximity =
+  Math.max(0, 1 - distance / maxDistance);
+
       const forceX =
   (card.targetX - card.currentX) * card.speed;
 
@@ -335,7 +354,9 @@ function iniciarTiltCard(card) {
  velocityX: 0,
  velocityY: 0,
 
-  speed: 0.12
+  speed: 0.12,
+     
+  proximity: 0,
 
 };
 
