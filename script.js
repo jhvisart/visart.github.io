@@ -160,10 +160,10 @@ VISART_ENGINE.setHero(heroData);
 window.addEventListener("pointermove", (e) => {
 
   const x =
-    (e.clientX / window.innerWidth - 0.5) * 3.5;
+  (VISART_ENGINE.pointer.x / window.innerWidth - 0.5) * 3.5;
 
-  const y =
-    (e.clientY / window.innerHeight - 0.5) * -2.5;
+const y =
+  (VISART_ENGINE.pointer.y / window.innerHeight - 0.5) * -2.5;
 
   heroData.targetX = x;
   heroData.targetY = y;
@@ -346,8 +346,11 @@ VISART_ENGINE.addCard(engineCard);
 
     const point = visartGetPoint(e);
 
-    const px = (point.x - rect.left) / rect.width;
-    const py = (point.y - rect.top) / rect.height;
+    const px =
+  (VISART_ENGINE.pointer.x - rect.left) / rect.width;
+
+    const py =
+  (VISART_ENGINE.pointer.y - rect.top) / rect.height;
 
     engineCard.targetY = (px - 0.5) * 28;
     engineCard.targetX = (0.5 - py) * 28;
