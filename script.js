@@ -66,6 +66,12 @@ card.magneticX =
 card.magneticY =
   dy * 0.008 * card.proximity;
 
+card.magneticCurrentX +=
+  (card.magneticX - card.magneticCurrentX) * 0.12;
+
+card.magneticCurrentY +=
+  (card.magneticY - card.magneticCurrentY) * 0.12;
+
 const distance =
   Math.sqrt(dx * dx + dy * dy);
 
@@ -106,13 +112,13 @@ card.currentY += card.velocityY;
 
       card.el.style.setProperty(
         "--magneticX",
-        `${card.magneticX}px`
-     );
+        `${card.magneticCurrentX}px`
+      );
 
-     card.el.style.setProperty(
-       "--magneticY",
-       `${card.magneticY}px`
-     );
+      card.el.style.setProperty(
+        "--magneticY",
+        `${card.magneticCurrentY}px`
+      );
 
     });
 
@@ -381,6 +387,9 @@ function iniciarTiltCard(card) {
 
  magneticX: 0,
  magneticY: 0,
+
+ magneticCurrentX: 0,
+ magneticCurrentY: 0,
 
 };
 
