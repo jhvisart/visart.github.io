@@ -8,9 +8,14 @@ const VISART_ENGINE = {
 
   hero: null,
 
-   pointer: {
+ pointer: {
   x: window.innerWidth * 0.5,
-  y: window.innerHeight * 0.5
+  y: window.innerHeight * 0.5,
+
+  lastX: window.innerWidth * 0.5,
+  lastY: window.innerHeight * 0.5,
+
+  velocity: 0
 },
 
   running: false,
@@ -166,9 +171,23 @@ function visartGetPoint(e) {
 document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("pointermove", (e) => {
+   const dx =
+  e.clientX - VISART_ENGINE.pointer.lastX;
+
+const dy =
+  e.clientY - VISART_ENGINE.pointer.lastY;
+
+VISART_ENGINE.pointer.velocity =
+  Math.min(
+    Math.sqrt(dx * dx + dy * dy) * 0.08,
+    1
+  );
 
   VISART_ENGINE.pointer.x = e.clientX;
   VISART_ENGINE.pointer.y = e.clientY;
+
+ VISART_ENGINE.pointer.lastX = e.clientX;
+ VISART_ENGINE.pointer.lastY = e.clientY;
 
 }, { passive: true });
    
