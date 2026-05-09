@@ -44,11 +44,20 @@ const VISART_ENGINE = {
 
     this.cards.forEach(card => {
 
-      card.currentX +=
-        (card.targetX - card.currentX) * card.speed;
+      const forceX =
+  (card.targetX - card.currentX) * card.speed;
 
-      card.currentY +=
-        (card.targetY - card.currentY) * card.speed;
+const forceY =
+  (card.targetY - card.currentY) * card.speed;
+
+card.velocityX += forceX;
+card.velocityY += forceY;
+
+card.velocityX *= 0.72;
+card.velocityY *= 0.72;
+
+card.currentX += card.velocityX;
+card.currentY += card.velocityY;
 
       card.el.style.setProperty(
         "--tiltX",
@@ -309,6 +318,9 @@ function iniciarTiltCard(card) {
 
   targetX,
   targetY,
+
+ velocityX: 0,
+ velocityY: 0,
 
   speed: 0.12
 
