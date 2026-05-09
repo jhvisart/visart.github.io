@@ -553,6 +553,7 @@ h1 span {
 
 .project-badge {
   position: absolute;
+  transform: translateZ(90px);
   top: 12px;
   left: 12px;
   padding: 6px 11px;
@@ -564,6 +565,10 @@ h1 span {
 }
 
 .project-body {
+  position: relative;
+
+  transform: translateZ(65px);
+
   padding: 22px 20px;
 }
 
