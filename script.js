@@ -119,28 +119,42 @@ function iniciarHeroTilt() {
   const heroCard = document.querySelector(".hero-card");
 
   if (!heroCard || IS_TOUCH_DEVICE) return;
+   
+   const heroData = {
 
-  let raf = null;
+  el: heroCard,
 
-  window.addEventListener("mousemove", (e) => {
-    if (raf) cancelAnimationFrame(raf);
+  currentX: 0,
+  currentY: 0,
 
-    raf = requestAnimationFrame(() => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 10;
-      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+  targetX: 0,
+  targetY: 0
 
-      heroCard.style.transform = `
-        perspective(900px)
-        rotateY(${x * 0.35}deg)
-        rotateX(${y * -0.25}deg)
-      `;
-    });
-  }, { passive: true });
+};
 
-  window.addEventListener("mouseleave", () => {
-    heroCard.style.transform =
-      "perspective(900px) rotateY(0deg) rotateX(0deg)";
-  });
+VISART_ENGINE.setHero(heroData);
+
+
+window.addEventListener("pointermove", (e) => {
+
+  const x =
+    (e.clientX / window.innerWidth - 0.5) * 3.5;
+
+  const y =
+    (e.clientY / window.innerHeight - 0.5) * -2.5;
+
+  heroData.targetX = x;
+  heroData.targetY = y;
+
+}, { passive: true });
+
+window.addEventListener("pointerleave", () => {
+
+  heroData.targetX = 0;
+  heroData.targetY = 0;
+
+});
+  
 }
 
 /* ======================================= */
