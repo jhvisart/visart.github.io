@@ -60,6 +60,12 @@ const dx =
 const dy =
   VISART_ENGINE.pointer.y - centerY;
 
+card.magneticX =
+  dx * 0.008 * card.proximity;
+
+card.magneticY =
+  dy * 0.008 * card.proximity;
+
 const distance =
   Math.sqrt(dx * dx + dy * dy);
 
@@ -96,7 +102,17 @@ card.currentY += card.velocityY;
        card.el.style.setProperty(
          "--proximity",
        card.proximity.toFixed(3)
-);
+      );
+
+      card.el.style.setProperty(
+        "--magneticX",
+        `${card.magneticX}px`
+     );
+
+     card.el.style.setProperty(
+       "--magneticY",
+       `${card.magneticY}px`
+     );
 
     });
 
@@ -362,6 +378,9 @@ function iniciarTiltCard(card) {
   speed: 0.12,
      
   proximity: 0,
+
+ magneticX: 0,
+ magneticY: 0,
 
 };
 
