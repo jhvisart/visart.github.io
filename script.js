@@ -1,3 +1,91 @@
+/* =========================================================
+   VISART ENGINE CORE
+========================================================= */
+
+const VISART_ENGINE = {
+
+  cards: [],
+
+  hero: null,
+
+  running: false,
+
+  addCard(card) {
+    this.cards.push(card);
+  },
+
+  setHero(hero) {
+    this.hero = hero;
+  },
+
+  start() {
+
+    if (this.running) return;
+
+    this.running = true;
+
+    const tick = () => {
+
+      this.update();
+
+      requestAnimationFrame(tick);
+
+    };
+
+    requestAnimationFrame(tick);
+
+  },
+
+  update() {
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    this.cards.forEach(card => {
+
+      card.currentX +=
+        (card.targetX - card.currentX) * card.speed;
+
+      card.currentY +=
+        (card.targetY - card.currentY) * card.speed;
+
+      card.el.style.setProperty(
+        "--tiltX",
+        `${card.currentX}deg`
+      );
+
+      card.el.style.setProperty(
+        "--tiltY",
+        `${card.currentY}deg`
+      );
+
+    });
+
+    /* =========================
+       HERO
+    ========================= */
+
+    if (this.hero) {
+
+      this.hero.currentX +=
+        (this.hero.targetX - this.hero.currentX) * 0.08;
+
+      this.hero.currentY +=
+        (this.hero.targetY - this.hero.currentY) * 0.08;
+
+      this.hero.el.style.transform = `
+        perspective(900px)
+        rotateY(${this.hero.currentX}deg)
+        rotateX(${this.hero.currentY}deg)
+      `;
+
+    }
+
+  }
+
+};
+
 const IS_TOUCH_DEVICE =
   "ontouchstart" in window ||
   navigator.maxTouchPoints > 0;
