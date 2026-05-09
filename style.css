@@ -883,6 +883,11 @@ backface-visibility: hidden;
   height: 100%;
   object-fit: cover;
   transition: transform .5s ease;
+  
+  transform: translateZ(0);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
+will-change: transform;
 }
 
 .project-card:hover .project-thumb img {
