@@ -543,6 +543,7 @@ h1 span {
   isolation: isolate;
 
   --proximity: 0;
+  --energy: 0;
 
   user-select: none;
   -webkit-user-select: none;
@@ -830,7 +831,12 @@ footer {
     ),
     linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
 
-  opacity: calc(0.25 + (var(--proximity) * 0.7));
+  opacity:
+  calc(
+    0.22 +
+    (var(--proximity) * 0.55) +
+    (var(--energy) * 0.35)
+  );
   transition: opacity .35s ease, transform .35s ease;
   pointer-events: none;
   z-index: 1;
