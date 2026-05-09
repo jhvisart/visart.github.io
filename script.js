@@ -385,6 +385,8 @@ function iniciarTiltCard(card) {
      
   proximity: 0,
 
+ hover: false,
+
  magneticX: 0,
  magneticY: 0,
 
