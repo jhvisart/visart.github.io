@@ -840,6 +840,11 @@ footer {
   transition: opacity .35s ease, transform .35s ease;
   pointer-events: none;
   z-index: 1;
+
+  will-change: transform, opacity;
+transform: translateZ(0);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
 }
 
 .project-card:hover::before {
