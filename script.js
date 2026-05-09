@@ -93,6 +93,11 @@ card.currentY += card.velocityY;
         `${card.currentY}deg`
       );
 
+       card.el.style.setProperty(
+         "--proximity",
+       card.proximity.toFixed(3)
+);
+
     });
 
     /* =========================
