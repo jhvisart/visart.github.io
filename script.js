@@ -89,22 +89,6 @@ card.lightCurrentX +=
 card.lightCurrentY +=
   (card.lightY - card.lightCurrentY) * 0.08;
 
-const magneticStrength =
-(card.hover ? 0.045 : 0.0012) *
-(0.35 + card.priority);
-
-card.magneticX =
-  dx * magneticStrength * card.proximity;
-
-card.magneticY =
-  dy * magneticStrength * card.proximity;
-
-card.magneticCurrentX +=
-  (card.magneticX - card.magneticCurrentX) * 0.12;
-
-card.magneticCurrentY +=
-  (card.magneticY - card.magneticCurrentY) * 0.12;
-
 const distance =
   Math.sqrt(dx * dx + dy * dy);
 
@@ -121,6 +105,22 @@ card.proximity =
 
     card.priority =
   Math.pow(card.proximity, 1.8);
+
+    const magneticStrength =
+(card.hover ? 0.045 : 0.0012) *
+(0.35 + card.priority);
+
+card.magneticX =
+  dx * magneticStrength * card.proximity;
+
+card.magneticY =
+  dy * magneticStrength * card.proximity;
+
+card.magneticCurrentX +=
+  (card.magneticX - card.magneticCurrentX) * 0.12;
+
+card.magneticCurrentY +=
+  (card.magneticY - card.magneticCurrentY) * 0.12;
 
  card.currentX +=
   Math.sin(
