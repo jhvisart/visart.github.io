@@ -129,6 +129,14 @@ card.currentY +=
     performance.now() * 0.0012 +
     distance * 0.008
   ) * fieldInfluence * 0.015;
+
+    const ambientFloat =
+  Math.sin(
+    performance.now() * 0.0008 +
+    distance * 0.002
+  ) * 0.12;
+
+card.currentY += ambientFloat;
     
  const adaptiveSpeed =
   card.speed +
