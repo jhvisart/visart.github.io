@@ -158,8 +158,8 @@ const forceY =
 card.velocityX += forceX;
 card.velocityY += forceY;
 
-card.velocityX *= 0.58;
-card.velocityY *= 0.58;
+card.velocityX *= 0.72;
+card.velocityY *= 0.72;
 
 card.currentX += card.velocityX;
 card.currentY += card.velocityY;
