@@ -69,7 +69,7 @@ const dy =
   VISART_ENGINE.pointer.y - centerY;
 
 const magneticStrength =
-card.hover ? 0.018 : 0.0025;
+card.hover ? 0.045 : 0.0012;
 
 card.magneticX =
   dx * magneticStrength * card.proximity;
