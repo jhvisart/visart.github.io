@@ -829,8 +829,10 @@ footer {
     rotateX(var(--tiltX, 0deg))
     rotateY(var(--tiltY, 0deg));
 
-  box-shadow:
-    0 35px 90px rgba(0,0,0,0.72),
+    calc(var(--tiltY, 0deg) * 1.8)
+    calc(35px + (var(--tiltX, 0deg) * -1.4))
+    90px
+    rgba(0,0,0,0.72),
 
     0 0 calc(
       35px +
