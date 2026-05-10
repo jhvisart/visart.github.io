@@ -187,6 +187,16 @@ card.currentY += card.velocityY;
     `${card.lightCurrentY}%`
     );
 
+    const lightBreath =
+  Math.sin(
+    performance.now() * 0.002
+  ) * 0.5 + 0.5;
+
+card.el.style.setProperty(
+  "--breath",
+  lightBreath.toFixed(3)
+);
+
       card.el.style.setProperty(
         "--magneticX",
         `${card.magneticCurrentX}px`
