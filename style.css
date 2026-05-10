@@ -524,11 +524,11 @@ h1 span {
   transform-style: preserve-3d;
 
   transform:
-    translate3d(
-      var(--magneticX, 0px),
-      var(--magneticY, 0px),
-      0
-    )
+   translate3d(
+  calc(var(--magneticX, 0px) * 2.4),
+  calc(var(--magneticY, 0px) * 2.4),
+  0
+  )
     scale(1)
     rotateX(var(--tiltX, 0deg))
     rotateY(var(--tiltY, 0deg));
@@ -580,6 +580,7 @@ h1 span {
 
 .project-body {
   position: relative;
+  z-index: 2;
 
   transform:
   translateZ(
@@ -918,7 +919,7 @@ backface-visibility: hidden;
 
   opacity: .18;
   pointer-events: none;
-  z-index: -1;
+  z-index: -0;
 }
 
 .project-thumb {
@@ -928,6 +929,7 @@ backface-visibility: hidden;
 }
 
 .project-thumb img {
+  z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: cover;
