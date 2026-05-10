@@ -564,7 +564,7 @@ h1 span {
 
 .project-badge {
   position: absolute;
-  transform: translateZ(90px)
+  transform: translateZ(180px)
   translateX(calc(var(--tiltY, 0deg) * 0.12))
   translateY(calc(var(--tiltX, 0deg) * -0.12));
   top: 12px;
@@ -583,8 +583,8 @@ h1 span {
   transform:
   translateZ(
     calc(
-      65px +
-      (var(--proximity) * 12px)
+      120px +
+      (var(--proximity) * 35px)
     )
   )
   translateX(
@@ -926,8 +926,8 @@ backface-visibility: hidden;
 transform:
   translateZ(
     calc(
-      40px +
-      (var(--proximity) * 18px)
+      90px +
+      (var(--proximity) * 45px)
     )
   )
   scale(
