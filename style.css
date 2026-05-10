@@ -813,16 +813,44 @@ footer {
 /* ============================= */
 
 .project-card:hover {
+
   transform:
-  translate3d(0, -10px, 0)
-  scale(1.03)
-  rotateX(var(--tiltX, 0deg))
-  rotateY(var(--tiltY, 0deg));
-  
+    translate3d(
+      var(--magneticX, 0px),
+      calc(var(--magneticY, 0px) - 10px),
+      0
+    )
+    scale(
+      calc(
+        1.025 +
+        (var(--energy) * 0.015)
+      )
+    )
+    rotateX(var(--tiltX, 0deg))
+    rotateY(var(--tiltY, 0deg));
+
   box-shadow:
-    0 25px 70px rgba(0,0,0,0.65),
-    0 0 25px var(--accent1),
-    0 0 80px var(--accent2);
+    0 35px 90px rgba(0,0,0,0.72),
+
+    0 0 calc(
+      35px +
+      (var(--energy) * 25px)
+    )
+    color-mix(
+      in srgb,
+      var(--accent1) 70%,
+      transparent
+    ),
+
+    0 0 calc(
+      90px +
+      (var(--energy) * 50px)
+    )
+    color-mix(
+      in srgb,
+      var(--accent2) 60%,
+      transparent
+    );
 
   border-color: var(--accent1);
 }
