@@ -881,6 +881,14 @@ footer {
   transition: opacity .35s ease, transform .35s ease;
   pointer-events: none;
   z-index: 1;
+  mix-blend-mode: screen;
+  filter:
+  blur(
+    calc(
+      35px +
+      (var(--energy) * 28px)
+    )
+  );
 
   will-change: transform, opacity;
 transform: translateZ(0);
