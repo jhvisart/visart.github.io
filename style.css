@@ -830,13 +830,13 @@ footer {
     rotateY(var(--tiltY, 0deg));
 
     calc(var(--tiltY, 0deg) * 1.8)
-    calc(35px + (var(--tiltX, 0deg) * -1.4))
-    90px
+    calc(50px + (var(--tiltX, 0deg) * -1.4))
+    126px
     rgba(0,0,0,0.72),
 
     0 0 calc(
-      35px +
-      (var(--energy) * 25px)
+      55px +
+      (var(--energy) * 40px)
     )
     color-mix(
       in srgb,
@@ -845,8 +845,8 @@ footer {
     ),
 
     0 0 calc(
-      90px +
-      (var(--energy) * 50px)
+      140px +
+      (var(--energy) * 80px)
     )
     color-mix(
       in srgb,
