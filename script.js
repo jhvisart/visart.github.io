@@ -201,6 +201,21 @@ card.el.style.setProperty(
   lightBreath.toFixed(3)
 );
 
+    card.el.style.setProperty(
+  "--cinematic",
+  state.cinematicMode.toFixed(3)
+);
+
+card.el.style.setProperty(
+  "--momentum",
+  state.interactionMomentum.toFixed(3)
+);
+
+card.el.style.setProperty(
+  "--aggression",
+  state.aggressiveMotion.toFixed(3)
+);
+
       card.el.style.setProperty(
         "--magneticX",
         `${card.magneticCurrentX}px`
