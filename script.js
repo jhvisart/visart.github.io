@@ -109,13 +109,28 @@ const distance =
 
 const maxDistance = 500;
 
+const fieldInfluence =
+  VISART_ENGINE.pointer.energy * 0.35;
+
 const normalizedDistance =
   Math.max(0, 1 - distance / maxDistance);
 
 card.proximity =
   normalizedDistance * normalizedDistance;
 
-const adaptiveSpeed =
+ card.currentX +=
+  Math.sin(
+    performance.now() * 0.0015 +
+    distance * 0.01
+  ) * fieldInfluence * 0.015;
+
+card.currentY +=
+  Math.cos(
+    performance.now() * 0.0012 +
+    distance * 0.008
+  ) * fieldInfluence * 0.015;
+    
+ const adaptiveSpeed =
   card.speed +
   (VISART_ENGINE.pointer.energy * 0.12);
 
