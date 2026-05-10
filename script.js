@@ -112,12 +112,16 @@ const maxDistance = 500;
 card.proximity =
   Math.max(0, 1 - distance / maxDistance);
 
-      const forceX =
-  (card.targetX - card.currentX) * card.speed;
+const adaptiveSpeed =
+  card.speed +
+  (VISART_ENGINE.pointer.energy * 0.12);
+
+const forceX =
+  (card.targetX - card.currentX) * adaptiveSpeed;
 
 const forceY =
-  (card.targetY - card.currentY) * card.speed;
-
+  (card.targetY - card.currentY) * adaptiveSpeed;
+    
 card.velocityX += forceX;
 card.velocityY += forceY;
 
