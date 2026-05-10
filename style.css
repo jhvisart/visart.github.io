@@ -580,10 +580,19 @@ h1 span {
 .project-body {
   position: relative;
 
-  transform: translateZ(65px)
-
-  translateX(calc(var(--tiltY, 0deg) * 0.08))
-  translateY(calc(var(--tiltX, 0deg) * -0.08));
+  transform:
+  translateZ(
+    calc(
+      65px +
+      (var(--proximity) * 12px)
+    )
+  )
+  translateX(
+    calc(var(--tiltY, 0deg) * 0.08)
+  )
+  translateY(
+    calc(var(--tiltX, 0deg) * -0.08)
+  );
 
   padding: 22px 20px;
 }
@@ -885,10 +894,24 @@ backface-visibility: hidden;
   transition: transform .5s ease;
   
 transform:
-  translateZ(40px)
-  scale(1.02)
-  translateX(calc(var(--tiltY, 0deg) * 0.15))
-  translateY(calc(var(--tiltX, 0deg) * -0.15));
+  translateZ(
+    calc(
+      40px +
+      (var(--proximity) * 18px)
+    )
+  )
+  scale(
+    calc(
+      1.02 +
+      (var(--energy) * 0.015)
+    )
+  )
+  translateX(
+    calc(var(--tiltY, 0deg) * 0.15)
+  )
+  translateY(
+    calc(var(--tiltX, 0deg) * -0.15)
+  );
 backface-visibility: hidden;
 -webkit-backface-visibility: hidden;
 will-change: transform;
