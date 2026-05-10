@@ -106,12 +106,9 @@ card.proximity =
     card.priority =
   Math.pow(card.proximity, 1.8);
 
-    const magneticStrength =
-(card.hover ? 0.11 : 0.0035) *
-(
-  0.45 +
-  (card.priority * 1.2)
-);
+   const magneticStrength =
+(card.hover ? 0.045 : 0.0012) *
+(0.35 + card.priority);
 
 card.magneticX =
   dx * magneticStrength * card.proximity;
@@ -158,8 +155,8 @@ const forceY =
 card.velocityX += forceX;
 card.velocityY += forceY;
 
-card.velocityX *= 0.72;
-card.velocityY *= 0.72;
+card.velocityX *= 0.58;
+card.velocityY *= 0.58;
 
 card.currentX += card.velocityX;
 card.currentY += card.velocityY;
@@ -202,21 +199,6 @@ card.currentY += card.velocityY;
 card.el.style.setProperty(
   "--breath",
   lightBreath.toFixed(3)
-);
-
-    card.el.style.setProperty(
-  "--cinematic",
-  state.cinematicMode.toFixed(3)
-);
-
-card.el.style.setProperty(
-  "--momentum",
-  state.interactionMomentum.toFixed(3)
-);
-
-card.el.style.setProperty(
-  "--aggression",
-  state.aggressiveMotion.toFixed(3)
 );
 
       card.el.style.setProperty(
