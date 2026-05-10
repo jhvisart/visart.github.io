@@ -15,7 +15,8 @@ const VISART_ENGINE = {
   lastX: window.innerWidth * 0.5,
   lastY: window.innerHeight * 0.5,
 
-  velocity: 0
+  velocity: 0,
+   energy: 0
 },
 
   running: false,
@@ -51,8 +52,10 @@ const VISART_ENGINE = {
     /* =========================
        CARDS
     ========================= */
-
-    this.cards.forEach(card => {
+   this.pointer.energy +=
+  (this.pointer.velocity - this.pointer.energy) * 0.08;
+    
+     this.cards.forEach(card => {
 
        const rect = card.el.getBoundingClientRect();
 
@@ -120,7 +123,7 @@ card.currentY += card.velocityY;
 
        card.el.style.setProperty(
          "--energy",
-    VISART_ENGINE.pointer.velocity.toFixed(3)
+    VISART_ENGINE.pointer.energy.toFixed(3)
       );
 
       card.el.style.setProperty(
