@@ -80,6 +80,15 @@ const percentX =
 const percentY =
   localY / rect.height;
 
+card.lightX = percentX * 100;
+card.lightY = percentY * 100;
+
+card.lightCurrentX +=
+  (card.lightX - card.lightCurrentX) * 0.08;
+
+card.lightCurrentY +=
+  (card.lightY - card.lightCurrentY) * 0.08;
+
 const magneticStrength =
 card.hover ? 0.045 : 0.0012;
 
@@ -140,13 +149,13 @@ card.currentY += card.velocityY;
 
     card.el.style.setProperty(
       "--mx",
-      `${percentX * 100}%`
-    );
-
-    card.el.style.setProperty(
-      "--my",
-      `${percentY * 100}%`
+      `${card.lightCurrentX}%`
      );
+
+   card.el.style.setProperty(
+     "--my",
+    `${card.lightCurrentY}%`
+    );
 
       card.el.style.setProperty(
         "--magneticX",
@@ -444,6 +453,12 @@ function iniciarTiltCard(card) {
 
  magneticCurrentX: 0,
  magneticCurrentY: 0,
+
+lightX: 50,
+lightY: 50,
+
+lightCurrentX: 50,
+lightCurrentY: 50,
 
 };
 
