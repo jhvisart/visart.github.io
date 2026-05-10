@@ -107,8 +107,11 @@ card.proximity =
   Math.pow(card.proximity, 1.8);
 
     const magneticStrength =
-(card.hover ? 0.045 : 0.0012) *
-(0.35 + card.priority);
+(card.hover ? 0.11 : 0.0035) *
+(
+  0.45 +
+  (card.priority * 1.2)
+);
 
 card.magneticX =
   dx * magneticStrength * card.proximity;
