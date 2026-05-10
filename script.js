@@ -55,9 +55,9 @@ const VISART_ENGINE = {
    this.pointer.energy +=
   (this.pointer.velocity - this.pointer.energy) * 0.08;
     
-     this.cards.forEach(card => {
+ this.cards.forEach(card => {
 
-       const rect = card.el.getBoundingClientRect();
+ const rect = card.el.getBoundingClientRect();
 
 const centerX = rect.left + rect.width * 0.5;
 const centerY = rect.top + rect.height * 0.5;
@@ -67,6 +67,18 @@ const dx =
 
 const dy =
   VISART_ENGINE.pointer.y - centerY;
+
+ const localX =
+  VISART_ENGINE.pointer.x - rect.left;
+
+const localY =
+  VISART_ENGINE.pointer.y - rect.top;
+
+const percentX =
+  localX / rect.width;
+
+const percentY =
+  localY / rect.height;
 
 const magneticStrength =
 card.hover ? 0.045 : 0.0012;
@@ -125,6 +137,16 @@ card.currentY += card.velocityY;
          "--energy",
     VISART_ENGINE.pointer.energy.toFixed(3)
       );
+
+    card.el.style.setProperty(
+      "--mx",
+      `${percentX * 100}%`
+    );
+
+    card.el.style.setProperty(
+      "--my",
+      `${percentY * 100}%`
+     );
 
       card.el.style.setProperty(
         "--magneticX",
