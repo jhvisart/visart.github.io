@@ -109,8 +109,11 @@ const distance =
 
 const maxDistance = 500;
 
-card.proximity =
+const normalizedDistance =
   Math.max(0, 1 - distance / maxDistance);
+
+card.proximity =
+  normalizedDistance * normalizedDistance;
 
 const adaptiveSpeed =
   card.speed +
