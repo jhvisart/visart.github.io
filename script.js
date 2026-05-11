@@ -532,14 +532,25 @@ VISART_ENGINE.addCard(engineCard);
 
     const point = visartGetPoint(e);
 
-    const px =
+   const px =
   (VISART_ENGINE.pointer.x - rect.left) / rect.width;
 
-    const py =
+const py =
   (VISART_ENGINE.pointer.y - rect.top) / rect.height;
 
-    engineCard.targetY = (px - 0.5) * 28;
-    engineCard.targetX = (0.5 - py) * 28;
+const centeredX = (px - 0.5);
+const centeredY = (py - 0.5);
+
+const curveX =
+  Math.sign(centeredX) *
+  Math.pow(Math.abs(centeredX), 0.82);
+
+const curveY =
+  Math.sign(centeredY) *
+  Math.pow(Math.abs(centeredY), 0.82);
+
+engineCard.targetY = curveX * 22;
+engineCard.targetX = -curveY * 22;
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
