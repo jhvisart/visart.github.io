@@ -581,24 +581,31 @@ h1 span {
 }
 
 .project-body {
+
   position: relative;
+
   z-index: 2;
 
   transform:
     translateZ(
       calc(
-        34px +
-        (var(--proximity) * 12px)
+        18px +
+        (var(--proximity) * 6px)
       )
     )
-  translateX(
-    calc(var(--tiltY, 0deg) * 0.08)
-  )
-  translateY(
-    calc(var(--tiltX, 0deg) * -0.08)
-  );
+    translateX(
+      calc(var(--tiltY, 0deg) * 0.018)
+    )
+    translateY(
+      calc(var(--tiltX, 0deg) * -0.018)
+    );
 
   padding: 22px 20px;
+
+  will-change: transform;
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .project-top {
