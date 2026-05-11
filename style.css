@@ -823,47 +823,30 @@ touch-action: manipulation;
 
 .project-card:hover {
 
-  transform:
-    translate3d(
-      var(--magneticX, 0px),
-      calc(var(--magneticY, 0px) - 10px),
-      0
-    )
-    scale(
-      calc(
-        1.025 +
-        (var(--energy) * 0.015)
-      )
-    )
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg));
+  border-color: var(--accent1);
 
-    calc(var(--tiltY, 0deg) * 1.8)
-    calc(50px + (var(--tiltX, 0deg) * -1.4))
-    126px
-    rgba(0,0,0,0.72),
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.55),
 
     0 0 calc(
-      55px +
-      (var(--energy) * 40px)
+      40px +
+      (var(--energy) * 22px)
     )
     color-mix(
       in srgb,
-      var(--accent1) 70%,
+      var(--accent1) 38%,
       transparent
     ),
 
     0 0 calc(
-      140px +
-      (var(--energy) * 80px)
+      90px +
+      (var(--energy) * 42px)
     )
     color-mix(
       in srgb,
-      var(--accent2) 60%,
+      var(--accent2) 28%,
       transparent
     );
-
-  border-color: var(--accent1);
 }
 
 .project-card::before {
