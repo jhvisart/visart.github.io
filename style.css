@@ -1049,16 +1049,57 @@ backface-visibility: hidden;
 }
 
 .project-thumb::after {
+
   content: "";
+
   position: absolute;
+
   inset: 0;
 
   background:
-    linear-gradient(to top, rgba(0,0,0,.72), transparent 58%),
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,.18), transparent 42%);
 
-  opacity: .75;
-  transition: .35s ease;
+    linear-gradient(
+      to top,
+      rgba(0,0,0,.78),
+      transparent 62%
+    ),
+
+    radial-gradient(
+
+      circle at
+
+      calc(var(--mx, 50%) + 2%)
+      calc(var(--my, 0%) - 6%),
+
+      rgba(255,255,255,.16),
+
+      transparent 42%
+    );
+
+  opacity:
+    calc(
+      0.62 +
+      (var(--proximity) * 0.12)
+    );
+
+  transition:
+    opacity .55s ease,
+    background-position .8s ease;
+
+  mix-blend-mode: screen;
+
+  transform:
+    translate3d(
+      calc(var(--magneticX, 0px) * -0.04),
+      calc(var(--magneticY, 0px) * -0.04),
+      0
+    );
+
+  will-change:
+    opacity,
+    transform;
+
+  pointer-events: none;
 }
 
 .project-featured {
