@@ -134,11 +134,21 @@ card.currentY +=
     distance * 0.008
   ) * fieldInfluence * 0.015;
 
-    const ambientFloat =
+   const ambientFloat =
+
   Math.sin(
-    performance.now() * 0.0008 +
-    distance * 0.002
-  ) * 0.12;
+
+    performance.now() * 0.00075 +
+
+    card.floatSeed +
+
+    distance * 0.0015
+
+  ) *
+
+  0.08 *
+
+  card.floatIntensity;
 
 card.currentY += ambientFloat;
     
@@ -487,6 +497,11 @@ function iniciarTiltCard(card) {
  velocityY: 0,
 
   speed: 0.12,
+
+   floatSeed: Math.random() * 1000,
+
+floatIntensity:
+  0.85 + Math.random() * 0.35,
      
   proximity: 0,
 
