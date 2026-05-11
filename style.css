@@ -899,46 +899,65 @@ backface-visibility: hidden;
 
   position: absolute;
 
-  inset: -24px;
+  inset: -38px;
 
-  border-radius: 42px;
+  border-radius: 48px;
 
   background:
     radial-gradient(
       circle at var(--mx, 50%) var(--my, 50%),
+
       color-mix(
         in srgb,
-        var(--accent1) 45%,
+        var(--accent1) 38%,
         transparent
-      ),
-      transparent 60%
+      ) 0%,
+
+      color-mix(
+        in srgb,
+        var(--accent2) 18%,
+        transparent
+      ) 28%,
+
+      transparent 72%
     );
 
   opacity:
     calc(
-      0.12 +
-      (var(--proximity) * 0.55) +
-      (var(--energy) * 0.35)
+      0.06 +
+      (var(--proximity) * 0.34) +
+      (var(--energy) * 0.22)
     );
 
   filter:
     blur(
       calc(
-        38px +
-        (var(--energy) * 22px)
+        52px +
+        (var(--energy) * 18px)
       )
     );
 
-  transform: translateZ(0);
+  transform:
+    translate3d(
+      calc(var(--magneticX, 0px) * -0.16),
+      calc(var(--magneticY, 0px) * -0.16),
+      0
+    )
+    scale(
+      calc(
+        1.02 +
+        (var(--energy) * 0.015)
+      )
+    );
 
   pointer-events: none;
 
-  z-index: 0;
+  z-index: -1;
 
   will-change:
+    transform,
     opacity,
-    filter,
-    transform;
+    filter;
 }
 
 .project-thumb {
