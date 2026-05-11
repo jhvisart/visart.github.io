@@ -865,7 +865,9 @@ touch-action: manipulation;
 
   background:
     radial-gradient(
-      circle at var(--mx, 50%) var(--my, 30%),
+     circle at
+     calc(var(--mx, 50%) + 6%)
+     calc(var(--my, 30%) - 4%),
       color-mix(in srgb, var(--accent1) 40%, transparent),
       transparent 40%
     ),
@@ -878,7 +880,10 @@ touch-action: manipulation;
     (var(--energy) * 0.28) +
     (var(--breath) * 0.08)
   );
-  transition: opacity .35s ease, transform .35s ease;
+ transition:
+  opacity .55s ease,
+  transform .65s ease,
+  filter .8s ease;
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: screen;
@@ -891,7 +896,13 @@ touch-action: manipulation;
   );
 
   will-change: transform, opacity;
-transform: translateZ(0);
+transform:
+  translate3d(
+    calc(var(--magneticX, 0px) * -0.08),
+    calc(var(--magneticY, 0px) * -0.08),
+    0
+  );
+
 backface-visibility: hidden;
 -webkit-backface-visibility: hidden;
 }
