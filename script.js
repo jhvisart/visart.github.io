@@ -509,6 +509,7 @@ lightCurrentY: 50,
 VISART_ENGINE.addCard(engineCard);
 
   function handleCardMove(e) {
+     if (IS_TOUCH_DEVICE) return;
     engineCard.hover = true;
     const rect = card.getBoundingClientRect();
 
