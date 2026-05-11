@@ -632,6 +632,9 @@ h1 span {
   display: flex;
   align-items: center;
   gap: 10px;
+  position: relative;
+z-index: 30;
+transform: translateZ(120px);
 }
 
 /* ABOUT / CONTACTO */
@@ -773,6 +776,10 @@ footer {
     min-height: 44px;
     padding: 0 14px;
     font-size: 13px;
+    position: relative;
+z-index: 40;
+pointer-events: auto;
+touch-action: manipulation;
   }
 
   .projects-grid {
