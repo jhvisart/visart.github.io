@@ -165,8 +165,16 @@ const forceY =
 card.velocityX += forceX;
 card.velocityY += forceY;
 
-card.velocityX *= 0.58;
-card.velocityY *= 0.58;
+const adaptiveDamping =
+
+  0.58 +
+
+  (card.proximity * 0.035) -
+
+  (VISART_ENGINE.pointer.energy * 0.025);
+
+card.velocityX *= adaptiveDamping;
+card.velocityY *= adaptiveDamping;
 
 card.currentX += card.velocityX;
 card.currentY += card.velocityY;
