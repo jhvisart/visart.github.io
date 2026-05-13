@@ -506,8 +506,12 @@ h1 span {
 
   border-radius: 28px;
 
-  border: 1px solid
-    color-mix(in srgb, var(--accent1) 25%, transparent);
+ border: 1px solid
+  color-mix(
+    in srgb,
+    var(--accent1) 14%,
+    rgba(255,255,255,.05)
+  );
 
  background:
 
@@ -847,7 +851,12 @@ touch-action: manipulation;
 
 .project-card:hover {
 
-  border-color: var(--accent1);
+  border-color:
+  color-mix(
+    in srgb,
+    var(--accent1) 42%,
+    rgba(255,255,255,.08)
+  );
 
   box-shadow:
     0 28px 80px rgba(0,0,0,.55),
@@ -877,6 +886,7 @@ touch-action: manipulation;
   content: "";
   position: absolute;
   inset: 0;
+  border-radius: inherit;
 
   background:
     radial-gradient(
@@ -935,6 +945,7 @@ backface-visibility: hidden;
   inset: -38px;
 
   border-radius: 48px;
+  mix-blend-mode: plus-lighter;
 
   background:
     radial-gradient(
