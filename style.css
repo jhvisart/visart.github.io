@@ -941,11 +941,15 @@ backface-visibility: hidden;
     );
 
   opacity:
-    calc(
-      0.06 +
-      (var(--proximity) * 0.34) +
-      (var(--energy) * 0.22)
-    );
+  calc(
+    0.04 +
+
+    (var(--proximity) * 0.28) +
+
+    (var(--energy) * 0.18) +
+
+    (var(--breath) * 0.08)
+  );
 
   filter:
     blur(
@@ -962,11 +966,14 @@ backface-visibility: hidden;
       0
     )
     scale(
-      calc(
-        1.02 +
-        (var(--energy) * 0.015)
-      )
-    );
+  calc(
+    1.01 +
+
+    (var(--energy) * 0.010) +
+
+    (var(--breath) * 0.018)
+  )
+);
 
   pointer-events: none;
 
