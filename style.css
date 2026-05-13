@@ -560,6 +560,11 @@ h1 span {
   will-change: transform;
 
   isolation: isolate;
+  opacity:
+  calc(
+    0.72 +
+    (var(--proximity) * 0.28)
+  );
 
   --proximity: 0;
   --energy: 0;
@@ -850,6 +855,7 @@ touch-action: manipulation;
 /* ============================= */
 
 .project-card:hover {
+  opacity: 1;
 
   border-color:
   color-mix(
@@ -1060,6 +1066,12 @@ backface-visibility: hidden;
     );
 
   filter:
+    brightness(
+  calc(
+    0.92 +
+    (var(--proximity) * 0.12)
+  )
+)
     saturate(
       calc(
         1 +
