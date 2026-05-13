@@ -509,13 +509,28 @@ h1 span {
   border: 1px solid
     color-mix(in srgb, var(--accent1) 25%, transparent);
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,.08),
-      rgba(255,255,255,.03)
-    ),
-    rgba(3, 5, 12, 0.65);
+ background:
+
+  radial-gradient(
+
+    circle at
+    50% 38%,
+
+    rgba(255,255,255,.055),
+
+    transparent 58%
+  ),
+
+  linear-gradient(
+
+    180deg,
+
+    rgba(255,255,255,.07),
+
+    rgba(255,255,255,.025)
+  ),
+
+  rgba(3, 5, 12, 0.68);
 
   backdrop-filter: blur(22px) saturate(120%);
   -webkit-backdrop-filter: blur(22px) saturate(120%);
