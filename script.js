@@ -580,10 +580,26 @@ engineCard.targetX = -curveY * 22;
   });
 
   card.addEventListener("pointerleave", () => {
-   engineCard.hover = false;
-   engineCard.targetX = 0;
-   engineCard.targetY = 0;
-  });
+
+  engineCard.hover = false;
+
+  const releaseX =
+    engineCard.velocityX * 0.32;
+
+  const releaseY =
+    engineCard.velocityY * 0.32;
+
+  engineCard.targetX = releaseX;
+  engineCard.targetY = releaseY;
+
+  setTimeout(() => {
+
+    engineCard.targetX = 0;
+    engineCard.targetY = 0;
+
+  }, 120);
+
+});
 }
 
 
