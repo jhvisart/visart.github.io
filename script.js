@@ -8,15 +8,20 @@ const VISART_ENGINE = {
 
   hero: null,
 
- pointer: {
+pointer: {
+
   x: window.innerWidth * 0.5,
   y: window.innerHeight * 0.5,
+
+  targetX: window.innerWidth * 0.5,
+  targetY: window.innerHeight * 0.5,
 
   lastX: window.innerWidth * 0.5,
   lastY: window.innerHeight * 0.5,
 
   velocity: 0,
-   energy: 0
+
+  energy: 0
 },
 
   running: false,
@@ -54,6 +59,12 @@ const VISART_ENGINE = {
     ========================= */
    this.pointer.energy +=
   (this.pointer.velocity - this.pointer.energy) * 0.08;
+     
+   this.pointer.x +=
+  (this.pointer.targetX - this.pointer.x) * 0.16;
+
+this.pointer.y +=
+  (this.pointer.targetY - this.pointer.y) * 0.16;
     
  this.cards.forEach(card => {
 
@@ -284,8 +295,8 @@ VISART_ENGINE.pointer.velocity =
     1
   );
 
-  VISART_ENGINE.pointer.x = e.clientX;
-  VISART_ENGINE.pointer.y = e.clientY;
+ VISART_ENGINE.pointer.targetX = e.clientX;
+VISART_ENGINE.pointer.targetY = e.clientY;
 
  VISART_ENGINE.pointer.lastX = e.clientX;
  VISART_ENGINE.pointer.lastY = e.clientY;
