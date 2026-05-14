@@ -629,14 +629,25 @@ h1 span {
     rgba(255,255,255,.05)
   );
 
- background:
+background:
 
   radial-gradient(
 
     circle at
-    50% 38%,
 
-    rgba(255,255,255,.055),
+    calc(var(--mx, 50%) + 2%)
+    calc(var(--my, 38%) - 2%),
+
+    rgba(
+      255,
+      255,
+      255,
+
+      calc(
+        0.035 +
+        (var(--proximity) * 0.025)
+      )
+    ),
 
     transparent 58%
   ),
@@ -645,12 +656,39 @@ h1 span {
 
     180deg,
 
-    rgba(255,255,255,.07),
+    rgba(
+      255,
+      255,
+      255,
 
-    rgba(255,255,255,.025)
+      calc(
+        0.055 +
+        (var(--energy) * 0.025)
+      )
+    ),
+
+    rgba(
+      255,
+      255,
+      255,
+
+      calc(
+        0.018 +
+        (var(--proximity) * 0.010)
+      )
+    )
   ),
 
-  rgba(3, 5, 12, 0.68);
+  rgba(
+    3,
+    5,
+    12,
+
+    calc(
+      0.72 -
+      (var(--proximity) * 0.04)
+    )
+  );
 
   backdrop-filter: blur(22px) saturate(120%);
   -webkit-backdrop-filter: blur(22px) saturate(120%);
