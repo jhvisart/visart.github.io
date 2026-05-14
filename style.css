@@ -1120,8 +1120,8 @@ backface-visibility: hidden;
   object-fit: cover;
 
   transition:
-    transform .45s cubic-bezier(.22,.61,.36,1),
-    filter .45s ease;
+    transform .72s cubic-bezier(.22,.61,.36,1),
+    filter .65s ease;
 
   transform:
 
@@ -1133,19 +1133,26 @@ backface-visibility: hidden;
     )
 
     scale(
-      calc(
-        1.018 +
-        (var(--energy) * 0.010)
-      )
-    )
+  calc(
+    1.012 +
 
-    translateX(
-      calc(var(--tiltY, 0deg) * 0.045)
-    )
+    (var(--energy) * 0.008) +
 
-    translateY(
-      calc(var(--tiltX, 0deg) * -0.045)
-    );
+    (var(--breath) * 0.006)
+  )
+)
+
+   translateX(
+  calc(
+    var(--tiltY, 0deg) * 0.032
+  )
+)
+
+translateY(
+  calc(
+    var(--tiltX, 0deg) * -0.032
+  )
+)
 
   filter:
     
