@@ -929,6 +929,11 @@ touch-action: manipulation;
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  clip-path:
+  inset(
+    0 round
+    30px 27px 31px 28px
+  );
 
 background:
 
@@ -1024,6 +1029,11 @@ backface-visibility: hidden;
 
   border-radius: 48px;
   mix-blend-mode: plus-lighter;
+  clip-path:
+  inset(
+    0 round
+    46px 50px 47px 49px
+  );
 
   background:
     radial-gradient(
