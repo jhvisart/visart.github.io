@@ -1355,17 +1355,57 @@ translateY(
 /* ============================= */
 
 .hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 16% 22%, color-mix(in srgb, var(--accent1) 28%, transparent), transparent 26%),
-    radial-gradient(circle at 70% 15%, color-mix(in srgb, var(--accent2) 24%, transparent), transparent 28%);
-  pointer-events: none;
-  opacity: .75;
-  z-index: -1;
-}
 
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+
+    radial-gradient(
+
+      circle at 16% 22%,
+
+      color-mix(
+        in srgb,
+        var(--accent1) 22%,
+        transparent
+      ),
+
+      transparent 28%
+    ),
+
+    radial-gradient(
+
+      circle at 70% 15%,
+
+      color-mix(
+        in srgb,
+        var(--accent2) 18%,
+        transparent
+      ),
+
+      transparent 32%
+    );
+
+  pointer-events: none;
+
+  opacity: .52;
+
+  filter:
+    blur(12px);
+
+  z-index: -1;
+
+  transform:
+    translateZ(0);
+
+  will-change:
+    opacity,
+    filter;
+}
 .hero-content {
   position: relative;
 }
