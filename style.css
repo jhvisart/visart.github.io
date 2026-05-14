@@ -1025,13 +1025,13 @@ background:
  opacity:
   calc(
 
-    0.12 +
+    0.06 +
 
-    (var(--proximity) * 0.38) +
+    (var(--proximity) * 0.42) +
 
-    (var(--energy) * 0.22) +
+    (var(--energy) * 0.16) +
 
-    (var(--breath) * 0.14)
+    (var(--breath) * 0.10)
   );
 transition:
 
@@ -1106,15 +1106,16 @@ backface-visibility: hidden;
       transparent 72%
     );
 
-  opacity:
+ opacity:
   calc(
-    0.04 +
 
-    (var(--proximity) * 0.28) +
+    0.025 +
 
-    (var(--energy) * 0.18) +
+    (var(--proximity) * 0.34) +
 
-    (var(--breath) * 0.08)
+    (var(--energy) * 0.12) +
+
+    (var(--breath) * 0.06)
   );
 
   filter:
