@@ -930,15 +930,40 @@ touch-action: manipulation;
   inset: 0;
   border-radius: inherit;
 
-  background:
-    radial-gradient(
-     circle at
-     calc(var(--mx, 50%) + 6%)
-     calc(var(--my, 30%) - 4%),
-      color-mix(in srgb, var(--accent1) 40%, transparent),
-      transparent 40%
-    ),
-    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+background:
+
+  radial-gradient(
+
+    circle at
+
+    calc(var(--mx, 50%) + 6%)
+    calc(var(--my, 30%) - 4%),
+
+    color-mix(
+      in srgb,
+      var(--accent1) 32%,
+      transparent
+    ) 0%,
+
+    color-mix(
+      in srgb,
+      var(--accent2) 12%,
+      transparent
+    ) 24%,
+
+    transparent 58%
+  ),
+
+  linear-gradient(
+
+    145deg,
+
+    rgba(255,255,255,.085),
+
+    rgba(255,255,255,.015) 42%,
+
+    rgba(0,0,0,.08)
+  );
 
  opacity:
   calc(
