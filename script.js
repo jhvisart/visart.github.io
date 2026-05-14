@@ -239,7 +239,7 @@ const microMotion =
 
   ) *
 
-  0.018 *
+  0.010 *
 
   card.proximity;
 
@@ -645,8 +645,8 @@ const curveY =
   Math.sign(centeredY) *
   Math.pow(Math.abs(centeredY), 0.82);
 
-engineCard.targetY = curveX * 22;
-engineCard.targetX = -curveY * 22;
+engineCard.targetY = curveX * 18;
+engineCard.targetX = -curveY * 18;
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
