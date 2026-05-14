@@ -57,8 +57,21 @@ pointer: {
     /* =========================
        CARDS
     ========================= */
-   this.pointer.energy +=
-  (this.pointer.velocity - this.pointer.energy) * 0.08;
+  const targetEnergy =
+
+  this.pointer.velocity *
+
+  (
+    this.pointer.velocity > 0.08
+      ? 1
+      : 0.35
+  );
+
+this.pointer.energy +=
+  (
+    targetEnergy -
+    this.pointer.energy
+  ) * 0.055;
      
    this.pointer.x +=
   (this.pointer.targetX - this.pointer.x) * 0.16;
