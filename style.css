@@ -942,25 +942,36 @@ touch-action: manipulation;
 
  opacity:
   calc(
-    0.18 +
-    (var(--proximity) * 0.45) +
-    (var(--energy) * 0.28) +
-    (var(--breath) * 0.08)
+
+    0.12 +
+
+    (var(--proximity) * 0.38) +
+
+    (var(--energy) * 0.22) +
+
+    (var(--breath) * 0.14)
   );
- transition:
-  opacity .55s ease,
-  transform .65s ease,
-  filter .8s ease;
+transition:
+
+  opacity .9s ease,
+
+  transform 1.1s cubic-bezier(.22,.61,.36,1),
+
+  filter 1.2s ease;
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: screen;
   filter:
+
   blur(
     calc(
-      35px +
-      (var(--energy) * 28px)
+      42px +
+      (var(--energy) * 18px) +
+      (var(--breath) * 12px)
     )
-  );
+  )
+
+  saturate(1.12);
 
   will-change: transform, opacity;
 transform:
