@@ -660,15 +660,15 @@ h1 span {
 
  transform:
 
-  translate3d(
+ translate3d(
 
-    calc(var(--magneticX, 0px) * 2.4),
+  calc(var(--magneticX, 0px) * 1.55),
 
-    calc(var(--magneticY, 0px) * 2.4),
+  calc(var(--magneticY, 0px) * 1.55),
 
-    calc(
-      (var(--breath, 0) - 0.5) * 6px
-    )
+   calc(
+  (var(--breath, 0) - 0.5) * 3px
+   )
   )
 
   scale(1)
