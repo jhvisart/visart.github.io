@@ -112,7 +112,49 @@ const normalizedDistance =
   Math.max(0, 1 - distance / maxDistance);
 
 card.proximity =
-  normalizedDistance * normalizedDistance;
+
+  (
+    normalizedDistance *
+    normalizedDistance
+  );
+
+const ambientBleed =
+
+  VISART_ENGINE.cards.reduce(
+
+    (acc, otherCard) => {
+
+      if (otherCard === card) return acc;
+
+      const otherRect =
+        otherCard.el.getBoundingClientRect();
+
+      const ox =
+        otherRect.left + otherRect.width * 0.5;
+
+      const oy =
+        otherRect.top + otherRect.height * 0.5;
+
+      const ddx = centerX - ox;
+      const ddy = centerY - oy;
+
+      const dist =
+        Math.sqrt(ddx * ddx + ddy * ddy);
+
+      return (
+        acc +
+        Math.max(0, 1 - dist / 420) *
+        otherCard.proximity *
+        0.035
+      );
+
+    },
+
+    0
+
+  );
+
+card.proximity += ambientBleed;
 
     card.priority =
   Math.pow(card.proximity, 1.8);
