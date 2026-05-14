@@ -1030,27 +1030,32 @@ touch-action: manipulation;
   );
 
   box-shadow:
-    0 28px 80px rgba(0,0,0,.55),
 
-    0 0 calc(
-      40px +
-      (var(--energy) * 22px)
-    )
-    color-mix(
-      in srgb,
-      var(--accent1) 38%,
-      transparent
-    ),
+  0 18px 42px
+  rgba(0,0,0,.42),
 
-    0 0 calc(
-      90px +
-      (var(--energy) * 42px)
-    )
-    color-mix(
-      in srgb,
-      var(--accent2) 28%,
-      transparent
-    );
+  0 42px 110px
+  rgba(0,0,0,.22),
+
+  0 0 calc(
+    28px +
+    (var(--energy) * 14px)
+  )
+  color-mix(
+    in srgb,
+    var(--accent1) 22%,
+    transparent
+  ),
+
+  0 0 calc(
+    72px +
+    (var(--energy) * 28px)
+  )
+  color-mix(
+    in srgb,
+    var(--accent2) 16%,
+    transparent
+  );
 }
 
 .project-card::before {
