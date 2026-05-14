@@ -658,15 +658,24 @@ h1 span {
   perspective: 1000px;
   transform-style: preserve-3d;
 
-  transform:
-   translate3d(
-  calc(var(--magneticX, 0px) * 2.4),
-  calc(var(--magneticY, 0px) * 2.4),
-  0
+ transform:
+
+  translate3d(
+
+    calc(var(--magneticX, 0px) * 2.4),
+
+    calc(var(--magneticY, 0px) * 2.4),
+
+    calc(
+      (var(--breath, 0) - 0.5) * 6px
+    )
   )
-    scale(1)
-    rotateX(var(--tiltX, 0deg))
-    rotateY(var(--tiltY, 0deg));
+
+  scale(1)
+
+  rotateX(var(--tiltX, 0deg))
+
+  rotateY(var(--tiltY, 0deg));
 
   transition:
     transform 0.45s cubic-bezier(.2,.8,.2,1),
