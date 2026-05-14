@@ -279,10 +279,28 @@ card.currentY +=
     `${card.lightCurrentY}%`
     );
 
-    const lightBreath =
+   const idleField =
+
   Math.sin(
-    performance.now() * 0.002
-  ) * 0.5 + 0.5;
+    performance.now() * 0.00045 +
+    card.floatSeed
+  ) *
+
+  0.5 +
+
+  0.5;
+
+const lightBreath =
+
+  (
+    Math.sin(
+      performance.now() * 0.002
+    ) * 0.5 + 0.5
+  ) *
+
+  0.72 +
+
+  idleField * 0.28;
 
 card.el.style.setProperty(
   "--breath",
