@@ -596,10 +596,10 @@ h1 span {
   will-change: transform;
 
   isolation: isolate;
-  opacity:
+ opacity:
   calc(
-    0.72 +
-    (var(--proximity) * 0.28)
+    0.58 +
+    (var(--proximity) * 0.42)
   );
 
   --proximity: 0;
@@ -1113,6 +1113,13 @@ backface-visibility: hidden;
     );
 
   filter:
+    
+    blur(
+  calc(
+    0.6px -
+    (var(--proximity) * 0.45px)
+  )
+)
     brightness(
   calc(
     0.92 +
