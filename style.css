@@ -168,14 +168,42 @@ a {
   z-index: 0;
 
   transform:
-    translate3d(
-      calc(var(--mx, 50%) * 0.002),
-      calc(var(--my, 50%) * 0.002),
-      0
-    );
+
+  translate3d(
+
+    calc(
+      (var(--mx, 50%) - 50%) * 0.012
+    ),
+
+    calc(
+      (var(--my, 50%) - 50%) * 0.012
+    ),
+
+    0
+  )
+
+  scale(
+    calc(
+      1 +
+      (var(--energy, 0) * 0.006)
+    )
+  );
 
   filter:
-    blur(.2px);
+
+  blur(
+    calc(
+      .18px +
+      (var(--energy, 0) * .4px)
+    )
+  )
+
+  brightness(
+    calc(
+      0.92 +
+      (var(--energy, 0) * 0.08)
+    )
+  );
 
   will-change:
     transform,
