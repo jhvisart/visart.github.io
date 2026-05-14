@@ -599,13 +599,15 @@ h1 span {
     );
 
   opacity:
-    calc(
-      0.08 +
-      (var(--breath, 0) * 0.06)
-    );
+  calc(
+
+    0.045 +
+
+    (var(--breath, 0) * 0.035)
+  );
 
   filter:
-    blur(80px);
+    blur(64px);
 
   pointer-events: none;
 
@@ -1346,10 +1348,14 @@ translateY(
     );
 
   opacity:
-    calc(
-      0.62 +
-      (var(--proximity) * 0.12)
-    );
+  calc(
+
+    0.42 +
+
+    (var(--proximity) * 0.18) +
+
+    (var(--energy) * 0.04)
+  );
 
   transition:
     opacity .55s ease,
