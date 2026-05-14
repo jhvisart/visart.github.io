@@ -187,8 +187,25 @@ const adaptiveDamping =
 card.velocityX *= adaptiveDamping;
 card.velocityY *= adaptiveDamping;
 
-card.currentX += card.velocityX;
-card.currentY += card.velocityY;
+const microMotion =
+
+  Math.sin(
+
+    performance.now() * 0.0012 +
+
+    card.floatSeed
+
+  ) *
+
+  0.018 *
+
+  card.proximity;
+
+card.currentX +=
+  card.velocityX + microMotion;
+
+card.currentY +=
+  card.velocityY + (microMotion * 0.7);
 
       card.el.style.setProperty(
         "--tiltX",
