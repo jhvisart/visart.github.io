@@ -741,12 +741,6 @@ background:
   pointer-events: auto;
 }
 
-.project-thumb {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-}
-
 
 .project-card:hover .project-thumb img {
   transform: scale(1.08);
@@ -1238,6 +1232,25 @@ backface-visibility: hidden;
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
+
+  background:
+
+  radial-gradient(
+
+    circle at 50% 50%,
+
+    rgba(255,255,255,.022),
+
+    transparent 72%
+  );
+
+isolation: isolate;
+
+transform:
+  translateZ(0);
+
+will-change:
+  transform;
 }
 
 .project-thumb img {
@@ -1245,6 +1258,8 @@ backface-visibility: hidden;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform-origin:
+  center center;
   transition: transform .5s ease;
   
   z-index: 2;
