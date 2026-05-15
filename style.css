@@ -1023,6 +1023,69 @@ touch-action: manipulation;
     flex-direction: column;
     text-align: center;
   }
+
+  .project-card::before {
+
+  opacity:
+    calc(
+      0.04 +
+      (var(--proximity) * 0.12)
+    );
+
+  filter:
+    blur(22px);
+
+}
+
+.project-card::after {
+
+  opacity:
+    calc(
+      0.004 +
+      (var(--proximity) * 0.08)
+    );
+
+  filter:
+    blur(28px);
+}
+
+  .project-card {
+
+  transform:
+
+    translate3d(
+
+      calc(var(--magneticX, 0px) * 0.55),
+
+      calc(var(--magneticY, 0px) * 0.55),
+
+      0
+    )
+
+    rotateX(
+      calc(var(--tiltX, 0deg) * 0.42)
+    )
+
+    rotateY(
+      calc(var(--tiltY, 0deg) * 0.42)
+    );
+ }
+
+  .bg-video {
+
+  filter:
+    brightness(.74)
+    saturate(.82)
+    contrast(1.01);
+
+}
+
+  .bg-grid {
+
+  opacity: .08;
+
+  filter: blur(.3px);
+}
 }
 
 @media (max-width: 520px) {
