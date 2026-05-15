@@ -1187,16 +1187,14 @@ backface-visibility: hidden;
       transparent 72%
     );
 
- opacity:
+opacity:
   calc(
 
-    0.025 +
+    0.008 +
 
-    (var(--proximity) * 0.34) +
+    (var(--proximity) * 0.18) +
 
-    (var(--energy) * 0.12) +
-
-    (var(--breath) * 0.06)
+    (var(--energy) * 0.045)
   );
 
   filter:
