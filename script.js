@@ -200,21 +200,30 @@ card.currentY +=
     distance * 0.008
   ) * fieldInfluence * 0.015;
 
-   const ambientFloat =
+  const restDecay =
+
+  Math.max(
+    0.08,
+    VISART_ENGINE.pointer.energy
+  );
+
+const ambientFloat =
 
   Math.sin(
 
-    performance.now() * 0.00075 +
+    performance.now() * 0.00045 +
 
     card.floatSeed +
 
-    distance * 0.0015
+    distance * 0.0008
 
   ) *
 
-  0.08 *
+  0.018 *
 
-  card.floatIntensity;
+  card.floatIntensity *
+
+  restDecay;
 
 card.currentY += ambientFloat;
     
