@@ -366,6 +366,36 @@ a {
   padding: 92px 0 58px;
 }
 
+.hero-silence-layer {
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  background:
+
+    radial-gradient(
+
+      circle at center,
+
+      transparent 0%,
+
+      rgba(0,0,0,.04) 58%,
+
+      rgba(0,0,0,.16) 100%
+    );
+
+  opacity: 0.92;
+
+  mix-blend-mode: normal;
+
+  will-change: opacity;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.15fr .85fr;
@@ -1506,7 +1536,15 @@ h1 {
 
 h1 span {
   position: relative;
-  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent1) 45%, transparent));
+  filter:
+  drop-shadow(
+    0 0 8px
+    color-mix(
+      in srgb,
+      var(--accent1) 18%,
+      transparent
+    )
+  );
 }
 
 h1 span::after {
@@ -1551,7 +1589,7 @@ h1 span::after {
   background:
     radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent1) 35%, transparent), transparent 32%),
     radial-gradient(circle at 90% 20%, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 34%);
-  opacity: .7;
+  opacity: .32;
   pointer-events: none;
 }
 
