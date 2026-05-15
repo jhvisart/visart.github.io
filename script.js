@@ -251,19 +251,28 @@ const adaptiveDamping =
 card.velocityX *= adaptiveDamping;
 card.velocityY *= adaptiveDamping;
 
+const residualEnergy =
+
+  Math.max(
+    0,
+    VISART_ENGINE.pointer.energy - 0.06
+  );
+
 const microMotion =
 
   Math.sin(
 
-    performance.now() * 0.0012 +
+    performance.now() * 0.0008 +
 
     card.floatSeed
 
   ) *
 
-  0.010 *
+  0.0035 *
 
-  card.proximity;
+  card.proximity *
+
+  residualEnergy;
 
 card.currentX +=
   card.velocityX + microMotion;
