@@ -1276,58 +1276,51 @@ will-change:
     transform .72s cubic-bezier(.22,.61,.36,1),
     filter .65s ease;
 
-  transform:
+ transform:
 
-    translateZ(
-      calc(
-        32px +
-        (var(--proximity) * 14px)
-      )
+  translateZ(
+    calc(
+      14px +
+      (var(--proximity) * 6px)
     )
-
-    scale(
-  calc(
-    1.012 +
-
-    (var(--energy) * 0.008) +
-
-    (var(--breath) * 0.006)
   )
-)
 
-   translateX(
-  calc(
-    var(--tiltY, 0deg) * 0.032
+  scale(
+    calc(
+      1.003 +
+      (var(--energy) * 0.003)
+    )
   )
-)
 
-translateY(
-  calc(
-    var(--tiltX, 0deg) * -0.032
+  translateX(
+    calc(
+      var(--tiltY, 0deg) * 0.010
+    )
   )
-)
+
+  translateY(
+    calc(
+      var(--tiltX, 0deg) * -0.010
+    )
+  );
 
   filter:
-    
-    blur(
-  calc(
-    0.6px -
-    (var(--proximity) * 0.45px)
-  )
-)
-    brightness(
-  calc(
-    0.92 +
-    (var(--proximity) * 0.12)
-  )
-)
-    saturate(
-      calc(
-        1 +
-        (var(--proximity) * 0.12)
-      )
+
+  brightness(
+    calc(
+      0.96 +
+      (var(--proximity) * 0.04)
     )
-    contrast(1.04);
+  )
+
+  saturate(
+    calc(
+      1 +
+      (var(--proximity) * 0.035)
+    )
+  )
+
+  contrast(1.015);
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
