@@ -394,7 +394,7 @@ a {
       rgba(0,0,0,.16) 100%
     );
 
-  opacity: 0.92;
+  opacity: 0.78;
 
   mix-blend-mode: normal;
 
@@ -402,6 +402,9 @@ a {
 }
 
 .hero-grid {
+  position: relative;
+
+  z-index: 2;
   display: grid;
   grid-template-columns: 1.15fr .85fr;
   gap: 28px;
@@ -697,13 +700,13 @@ border:
   opacity:
   calc(
 
-    0.045 +
+    0.022 +
 
     (var(--breath, 0) * 0.035)
   );
 
   filter:
-    blur(64px);
+    blur(42px);
 
   pointer-events: none;
 
@@ -1641,7 +1644,7 @@ will-change:
 
   pointer-events: none;
 
-  opacity: .58;
+  opacity: .46;
 
   filter:
     blur(18px);
