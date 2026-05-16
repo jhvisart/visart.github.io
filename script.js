@@ -228,15 +228,15 @@ const ambientFloat =
 
   Math.sin(
 
-    performance.now() * 0.00045 +
+    performance.now() * 0.00022 +
 
     card.floatSeed +
 
-    distance * 0.0008
+    distance * 0.00035
 
   ) *
 
-  0.010 *
+  0.0045 *
 
   card.floatIntensity *
 
@@ -282,13 +282,13 @@ const microMotion =
 
   Math.sin(
 
-    performance.now() * 0.0008 +
+    performance.now() * 0.00042 +
 
     card.floatSeed
 
   ) *
 
-  0.0018 *
+  0.00065 *
 
   card.proximity *
 
