@@ -705,16 +705,35 @@ const py =
 const centeredX = (px - 0.5);
 const centeredY = (py - 0.5);
 
+const responseCurve = 1.18;
+
 const curveX =
   Math.sign(centeredX) *
-  Math.pow(Math.abs(centeredX), 0.82);
+
+  Math.pow(
+    Math.abs(centeredX),
+    responseCurve
+  );
 
 const curveY =
   Math.sign(centeredY) *
-  Math.pow(Math.abs(centeredY), 0.82);
 
-engineCard.targetY = curveX * 18;
-engineCard.targetX = -curveY * 18;
+  Math.pow(
+    Math.abs(centeredY),
+    responseCurve
+  );
+
+const cinematicTilt =
+
+  15 +
+
+  (engineCard.proximity * 4);
+
+engineCard.targetY =
+  curveX * cinematicTilt;
+
+engineCard.targetX =
+  -curveY * cinematicTilt;
 
     card.style.setProperty("--mx", `${px * 100}%`);
     card.style.setProperty("--my", `${py * 100}%`);
