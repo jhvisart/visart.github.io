@@ -119,7 +119,14 @@ const distance =
 const maxDistance = 420;
 
 const fieldInfluence =
-  VISART_ENGINE.pointer.energy * 0.22;
+
+  VISART_ENGINE.pointer.energy *
+
+  (
+    0.08 +
+
+    (card.proximity * 0.16)
+  );
 
 const normalizedDistance =
   Math.max(0, 1 - distance / maxDistance);
