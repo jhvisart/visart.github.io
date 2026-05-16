@@ -1315,9 +1315,9 @@ backface-visibility: hidden;
 
   position: absolute;
 
-  inset: -24px;
+  inset: -42px;
 
-  border-radius: 48px;
+  border-radius: 64px;
   mix-blend-mode: plus-lighter;
   clip-path:
   inset(
@@ -1347,21 +1347,20 @@ backface-visibility: hidden;
 opacity:
   calc(
 
-    0.008 +
+    0.0015 +
 
-    (var(--proximity) * 0.18) +
+    (var(--proximity) * 0.095) +
 
-    (var(--energy) * 0.045)
+    (var(--energy) * 0.018)
   );
 
   filter:
-    blur(
-      calc(
-        34px +
-        (var(--energy) * 10px)
-      )
-    );
-
+  blur(
+    calc(
+      58px +
+      (var(--energy) * 18px)
+    )
+  );
   transform:
     translate3d(
       calc(var(--magneticX, 0px) * -0.16),
