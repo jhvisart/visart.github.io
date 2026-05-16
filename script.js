@@ -71,13 +71,13 @@ this.pointer.energy +=
   (
     targetEnergy -
     this.pointer.energy
-  ) * 0.04;
+  ) * 0.032;
      
    this.pointer.x +=
-  (this.pointer.targetX - this.pointer.x) * 0.16;
+  (this.pointer.targetX - this.pointer.x) * 0.11;
 
 this.pointer.y +=
-  (this.pointer.targetY - this.pointer.y) * 0.16;
+  (this.pointer.targetY - this.pointer.y) * 0.11;
     
  this.cards.forEach(card => {
 
@@ -119,7 +119,7 @@ const distance =
 const maxDistance = 500;
 
 const fieldInfluence =
-  VISART_ENGINE.pointer.energy * 0.35;
+  VISART_ENGINE.pointer.energy * 0.22;
 
 const normalizedDistance =
   Math.max(0, 1 - distance / maxDistance);
@@ -271,7 +271,7 @@ const microMotion =
 
   ) *
 
-  0.0035 *
+  0.0018 *
 
   card.proximity *
 
