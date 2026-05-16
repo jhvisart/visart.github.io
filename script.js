@@ -366,10 +366,10 @@ card.el.style.setProperty(
     if (this.hero) {
 
       this.hero.currentX +=
-        (this.hero.targetX - this.hero.currentX) * 0.08;
+        (this.hero.targetX - this.hero.currentX) * 0.045;
 
       this.hero.currentY +=
-        (this.hero.targetY - this.hero.currentY) * 0.08;
+        (this.hero.targetY - this.hero.currentY) * 0.045;
 
       this.hero.el.style.transform = `
         perspective(900px)
@@ -457,10 +457,10 @@ VISART_ENGINE.setHero(heroData);
 window.addEventListener("pointermove", (e) => {
 
   const x =
-  (VISART_ENGINE.pointer.x / window.innerWidth - 0.5) * 3.5;
+  (VISART_ENGINE.pointer.x / window.innerWidth - 0.5) * 1.8;
 
 const y =
-  (VISART_ENGINE.pointer.y / window.innerHeight - 0.5) * -2.5;
+  (VISART_ENGINE.pointer.y / window.innerHeight - 0.5) * -1.2;
 
   heroData.targetX = x;
   heroData.targetY = y;
@@ -976,13 +976,13 @@ function iniciarFondoCanvas() {
 
     puntos.length = 0;
 
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 18; i++) {
       puntos.push({
         x: Math.random() * rect.width,
         y: Math.random() * rect.height,
         r: 1 + Math.random() * 2.5,
-        vx: (Math.random() - 0.5) * 0.09,
-        vy: (Math.random() - 0.5) * 0.09,
+        vx: (Math.random() - 0.5) * 0.045,
+        vy: (Math.random() - 0.5) * 0.045,
         alpha: 0.25 + Math.random() * 0.45
       });
     }
