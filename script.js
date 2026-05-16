@@ -116,7 +116,7 @@ card.lightCurrentY +=
 const distance =
   Math.sqrt(dx * dx + dy * dy);
 
-const maxDistance = 500;
+const maxDistance = 420;
 
 const fieldInfluence =
   VISART_ENGINE.pointer.energy * 0.22;
@@ -158,7 +158,7 @@ const ambientBleed =
         acc +
         Math.max(0, 1 - dist / 420) *
         otherCard.proximity *
-        0.035
+        0.018
       );
 
     },
@@ -224,7 +224,7 @@ const ambientFloat =
 
   ) *
 
-  0.018 *
+  0.010 *
 
   card.floatIntensity *
 
@@ -348,7 +348,7 @@ const lightBreath =
 
   restEnergy +
 
-  idleField * 0.12;
+  idleField * 0.07;
 
 card.el.style.setProperty(
   "--breath",
