@@ -187,11 +187,23 @@ card.magneticX =
 card.magneticY =
   dy * magneticStrength * card.proximity;
 
+const magneticCompression =
+
+  0.052 +
+
+  (card.priority * 0.012);
+
 card.magneticCurrentX +=
-  (card.magneticX - card.magneticCurrentX) * 0.08;
+  (
+    card.magneticX -
+    card.magneticCurrentX
+  ) * magneticCompression;
 
 card.magneticCurrentY +=
-  (card.magneticY - card.magneticCurrentY) * 0.08;
+  (
+    card.magneticY -
+    card.magneticCurrentY
+  ) * magneticCompression;
 
  card.currentX +=
   Math.sin(
@@ -247,11 +259,11 @@ card.velocityY += forceY;
 
 const adaptiveDamping =
 
-  0.58 +
+  0.62 +
 
-  (card.proximity * 0.035) -
+  (card.proximity * 0.028) -
 
-  (VISART_ENGINE.pointer.energy * 0.025);
+  (VISART_ENGINE.pointer.energy * 0.018);
 
 card.velocityX *= adaptiveDamping;
 card.velocityY *= adaptiveDamping;
