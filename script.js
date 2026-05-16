@@ -330,12 +330,13 @@ card.currentY +=
     `${card.lightCurrentY}%`
     );
 
-   const restEnergy =
+const restEnergy =
 
-  Math.max(
-    0.04,
-    VISART_ENGINE.pointer.energy * 0.65
-  );
+  VISART_ENGINE.pointer.energy > 0.025
+
+    ? VISART_ENGINE.pointer.energy * 0.52
+
+    : 0;
 
 const idleField =
 
@@ -352,15 +353,15 @@ const lightBreath =
 
   (
     Math.sin(
-      performance.now() * 0.0007
+      performance.now() * 0.00045
     ) * 0.5 + 0.5
   ) *
 
-  0.28 *
+  0.16 *
 
   restEnergy +
 
-  idleField * 0.07;
+  idleField * 0.018;
 
 card.el.style.setProperty(
   "--breath",
