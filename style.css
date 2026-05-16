@@ -1563,6 +1563,8 @@ will-change:
 /* VISART PREMIUM HERO GLOBAL */
 /* ============================= */
 
+
+
 .hero::before {
 
   content: "";
@@ -1575,46 +1577,56 @@ will-change:
 
     radial-gradient(
 
-      circle at 16% 22%,
+      circle at 18% 22%,
 
       color-mix(
         in srgb,
-        var(--accent1) 22%,
+        var(--accent1) 12%,
         transparent
       ),
 
-      transparent 28%
+      transparent 34%
     ),
 
     radial-gradient(
 
-      circle at 70% 15%,
+      circle at 72% 14%,
 
       color-mix(
         in srgb,
-        var(--accent2) 18%,
+        var(--accent2) 10%,
         transparent
       ),
 
-      transparent 32%
+      transparent 38%
+    ),
+
+    radial-gradient(
+
+      circle at 50% 120%,
+
+      rgba(255,255,255,.025),
+
+      transparent 62%
     );
 
   pointer-events: none;
 
-  opacity: .52;
+  opacity: .58;
 
   filter:
-    blur(12px);
+    blur(18px);
 
   z-index: -1;
 
   transform:
-    translateZ(0);
+    translate3d(0,0,0);
 
   will-change:
     opacity,
     filter;
 }
+
 .hero-content {
   position: relative;
   z-index: 4;
@@ -1625,11 +1637,11 @@ will-change:
   position: absolute;
   left: -28px;
   top: -22px;
-  width: 140px;
-  height: 140px;
+  width: 92px;
+  height: 92px;
   border-radius: 999px;
   background: radial-gradient(circle, color-mix(in srgb, var(--accent1) 18%, transparent), transparent 65%);
-  filter: blur(8px);
+  filter: blur(16px);
   pointer-events: none;
   z-index: -1;
 }
@@ -1753,6 +1765,11 @@ h1 span::after {
 
 .mini {
   backdrop-filter: blur(10px);
+  opacity: .88;
+
+backdrop-filter:
+  blur(8px)
+  saturate(105%);
 }
 
 .section-head h2 {
