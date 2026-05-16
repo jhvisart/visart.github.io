@@ -126,9 +126,9 @@ const normalizedDistance =
 
 card.proximity =
 
-  (
-    normalizedDistance *
-    normalizedDistance
+  Math.pow(
+    normalizedDistance,
+    2.4
   );
 
 const ambientBleed =
@@ -170,11 +170,16 @@ const ambientBleed =
 card.proximity += ambientBleed;
 
     card.priority =
-  Math.pow(card.proximity, 1.8);
+  Math.pow(card.proximity, 2.1);
 
    const magneticStrength =
-(card.hover ? 0.045 : 0.0012) *
-(0.35 + card.priority);
+
+(card.hover ? 0.032 : 0.0008) *
+
+Math.pow(
+  0.35 + card.priority,
+  1.18
+);
 
 card.magneticX =
   dx * magneticStrength * card.proximity;
@@ -409,10 +414,18 @@ document.addEventListener("DOMContentLoaded", () => {
 const dy =
   e.clientY - VISART_ENGINE.pointer.lastY;
 
-VISART_ENGINE.pointer.velocity =
+const rawVelocity =
+
   Math.min(
     Math.sqrt(dx * dx + dy * dy) * 0.08,
     1
+  );
+
+VISART_ENGINE.pointer.velocity =
+
+  Math.pow(
+    rawVelocity,
+    1.45
   );
 
  VISART_ENGINE.pointer.targetX = e.clientX;
