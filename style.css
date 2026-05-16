@@ -585,7 +585,7 @@ will-change:
   saturate(.88)
   contrast(1.02);
 
-transform: scale(1.028);
+transform: scale(1.018);
 }
 
 #bgFX {
@@ -1336,7 +1336,7 @@ backface-visibility: hidden;
 
   position: absolute;
 
-  inset: -38px;
+  inset: -24px;
 
   border-radius: 48px;
   mix-blend-mode: plus-lighter;
@@ -1391,9 +1391,9 @@ opacity:
     )
     scale(
   calc(
-    1.01 +
+    1.004 +
 
-    (var(--energy) * 0.010) +
+    (var(--energy) * 0.004) +
 
     (var(--breath) * 0.018)
   )
@@ -1510,7 +1510,7 @@ will-change:
 
 
 .project-card:hover .project-thumb img {
-  transform: scale(1.08);
+  transform: scale(1.035);
 }
 
 .project-thumb::after {
