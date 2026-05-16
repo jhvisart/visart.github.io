@@ -809,12 +809,12 @@ background:
 
  translate3d(
 
-  calc(var(--magneticX, 0px) * 1.55),
+  calc(var(--magneticX, 0px) * 1.08),
 
-  calc(var(--magneticY, 0px) * 1.55),
+  calc(var(--magneticY, 0px) * 1.08),
 
    calc(
-  (var(--breath, 0) - 0.5) * 3px
+  (var(--breath, 0) - 0.5) * 1.2px
    )
   )
 
@@ -825,7 +825,7 @@ background:
   rotateY(var(--tiltY, 0deg));
 
   transition:
-    transform 0.45s cubic-bezier(.2,.8,.2,1),
+    transform 0.72s cubic-bezier(.22,.61,.36,1),
     box-shadow 0.45s ease,
     border-color 0.3s ease;
 
