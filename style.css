@@ -739,11 +739,11 @@ transform-style:
 
   border-radius: 28px;
 
- border: 1px solid
+border: 1px solid
   color-mix(
     in srgb,
-    var(--accent1) 9%,
-    rgba(255,255,255,.05)
+    var(--accent1) 5%,
+    rgba(255,255,255,.04)
   );
 
 background:
@@ -786,8 +786,21 @@ background:
     )
   );
 
-  backdrop-filter: blur(22px) saturate(120%);
-  -webkit-backdrop-filter: blur(22px) saturate(120%);
+ backdrop-filter:
+
+  blur(18px)
+
+  saturate(108%)
+
+  brightness(0.96);
+
+-webkit-backdrop-filter:
+
+  blur(18px)
+
+  saturate(108%)
+
+  brightness(0.96);
 
   perspective: 1000px;
   transform-style: preserve-3d;
@@ -1184,13 +1197,13 @@ touch-action: manipulation;
     rgba(255,255,255,.08)
   );
 
-  box-shadow:
+box-shadow:
 
-  0 18px 42px
-  rgba(0,0,0,.42),
+  0 12px 32px
+  rgba(0,0,0,.34),
 
-  0 42px 110px
-  rgba(0,0,0,.22),
+  0 34px 92px
+  rgba(0,0,0,.18),
 
   0 0 calc(
     28px +
