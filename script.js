@@ -71,7 +71,7 @@ this.pointer.energy +=
   (
     targetEnergy -
     this.pointer.energy
-  ) * 0.055;
+  ) * 0.04;
      
    this.pointer.x +=
   (this.pointer.targetX - this.pointer.x) * 0.16;
@@ -183,10 +183,10 @@ card.magneticY =
   dy * magneticStrength * card.proximity;
 
 card.magneticCurrentX +=
-  (card.magneticX - card.magneticCurrentX) * 0.12;
+  (card.magneticX - card.magneticCurrentX) * 0.08;
 
 card.magneticCurrentY +=
-  (card.magneticY - card.magneticCurrentY) * 0.12;
+  (card.magneticY - card.magneticCurrentY) * 0.08;
 
  card.currentX +=
   Math.sin(
@@ -250,6 +250,9 @@ const adaptiveDamping =
 
 card.velocityX *= adaptiveDamping;
 card.velocityY *= adaptiveDamping;
+    
+card.velocityX *= 0.985;
+card.velocityY *= 0.985;
 
 const residualEnergy =
 
@@ -332,7 +335,7 @@ const lightBreath =
 
   (
     Math.sin(
-      performance.now() * 0.0011
+      performance.now() * 0.0007
     ) * 0.5 + 0.5
   ) *
 
