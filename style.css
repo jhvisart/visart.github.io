@@ -528,9 +528,9 @@ transform:
   rgba(255,255,255,.06);
  box-shadow:
 
-  0 18px 42px rgba(0,0,0,.34),
+ 0 14px 30px rgba(0,0,0,.28),
 
-  0 42px 110px rgba(0,0,0,.18),
+  0 34px 82px rgba(0,0,0,.14),
 
   0 0 0 1px rgba(255,255,255,.025);
   display: flex;
@@ -1220,8 +1220,8 @@ touch-action: manipulation;
   ),
 
   0 0 calc(
-    72px +
-    (var(--energy) * 28px)
+    40px +
+    (var(--energy) * 16px)
   )
   color-mix(
     in srgb,
@@ -1378,8 +1378,8 @@ opacity:
   filter:
     blur(
       calc(
-        52px +
-        (var(--energy) * 18px)
+        34px +
+        (var(--energy) * 10px)
       )
     );
 
