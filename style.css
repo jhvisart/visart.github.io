@@ -121,6 +121,11 @@ body {
   background-attachment: scroll;
   min-height: 100vh;
   overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+
+-webkit-font-smoothing: antialiased;
+
+-moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -515,7 +520,9 @@ transform:
   padding: 24px;
   border-radius: 30px;
   background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .04));
-  border: 1px solid rgba(255, 255, 255, .1);
+  border:
+  1px solid
+  rgba(255,255,255,.06);
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -606,9 +613,12 @@ backface-visibility: hidden;
   flex: 1;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
+ background:
+  rgba(255,255,255,.035);
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+border:
+  1px solid
+  rgba(255,255,255,.045);
 }
 
 .mini strong {
@@ -723,7 +733,7 @@ transform-style:
  border: 1px solid
   color-mix(
     in srgb,
-    var(--accent1) 14%,
+    var(--accent1) 9%,
     rgba(255,255,255,.05)
   );
 
