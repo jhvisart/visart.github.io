@@ -499,6 +499,16 @@ h1 span {
 
 .hero-card {
   position: relative;
+  contain: layout paint style;
+
+isolation: isolate;
+
+transform:
+  translate3d(0,0,0);
+
+  backface-visibility: hidden;
+
+  -webkit-backface-visibility: hidden;
   padding: 24px;
   border-radius: 30px;
   background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .04));
@@ -522,6 +532,16 @@ h1 span {
   display: flex;
   align-items: center;
   justify-content: center;
+  contain: paint;
+
+isolation: isolate;
+
+transform:
+  translate3d(0,0,0);
+
+will-change:
+  transform,
+  opacity;
 }
 
 .bg-video {
@@ -545,6 +565,16 @@ transform: scale(1.015);
   inset: 0;
   z-index: 2;
   pointer-events: none;
+  transform:
+  translate3d(0,0,0);
+
+will-change:
+  transform,
+  opacity;
+
+backface-visibility: hidden;
+
+-webkit-backface-visibility: hidden;
 }
 
 .hero-mini-stats {
@@ -658,6 +688,16 @@ transform: scale(1.015);
 .project-card {
   position: relative;
   overflow: hidden;
+
+  contain:
+  layout paint;
+
+backface-visibility: hidden;
+
+-webkit-backface-visibility: hidden;
+
+transform-style:
+  preserve-3d;
 
   border-radius: 28px;
 
