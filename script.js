@@ -976,13 +976,13 @@ function iniciarFondoCanvas() {
 
     puntos.length = 0;
 
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 24; i++) {
       puntos.push({
         x: Math.random() * rect.width,
         y: Math.random() * rect.height,
         r: 1 + Math.random() * 2.5,
-        vx: (Math.random() - 0.5) * 0.25,
-        vy: (Math.random() - 0.5) * 0.25,
+        vx: (Math.random() - 0.5) * 0.09,
+        vy: (Math.random() - 0.5) * 0.09,
         alpha: 0.25 + Math.random() * 0.45
       });
     }
@@ -1005,7 +1005,7 @@ function iniciarFondoCanvas() {
 
       ctx.save();
       ctx.globalAlpha = p.alpha;
-      ctx.shadowBlur = 16;
+      ctx.shadowBlur = 8;
       ctx.shadowColor =
         index % 2 === 0 ? accent1 : accent2;
 
