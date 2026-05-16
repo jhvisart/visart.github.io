@@ -848,7 +848,7 @@ opacity:
   position: absolute;
 
   transform:
-    translateZ(42px)
+    translateZ(62px)
     translateX(calc(var(--tiltY, 0deg) * 0.035))
     translateY(calc(var(--tiltX, 0deg) * -0.035));
   top: 12px;
@@ -870,8 +870,8 @@ opacity:
   transform:
     translateZ(
       calc(
-        18px +
-        (var(--proximity) * 6px)
+        20px +
+        (var(--proximity) * 10px)
       )
     )
     translateX(
@@ -1440,8 +1440,8 @@ will-change:
 
   translateZ(
     calc(
-      14px +
-      (var(--proximity) * 6px)
+      8px +
+      (var(--proximity) * 4px)
     )
   )
 
