@@ -437,16 +437,20 @@ const dy =
 const rawVelocity =
 
   Math.min(
-    Math.sqrt(dx * dx + dy * dy) * 0.08,
+    Math.sqrt(dx * dx + dy * dy) * 0.065,
     1
   );
-
+     
 VISART_ENGINE.pointer.velocity =
 
-  Math.pow(
-    rawVelocity,
-    1.45
-  );
+  rawVelocity < 0.035
+
+    ? 0
+
+    : Math.pow(
+        rawVelocity,
+        1.72
+      );
 
  VISART_ENGINE.pointer.targetX = e.clientX;
 VISART_ENGINE.pointer.targetY = e.clientY;
