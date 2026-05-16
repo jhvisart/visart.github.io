@@ -748,27 +748,6 @@ transform-style:
 
 background:
 
-  radial-gradient(
-
-    circle at
-
-    calc(var(--mx, 50%) + 2%)
-    calc(var(--my, 38%) - 2%),
-
-    rgba(
-      255,
-      255,
-      255,
-
-      calc(
-        0.035 +
-        (var(--proximity) * 0.025)
-      )
-    ),
-
-    transparent 58%
-  ),
-
   linear-gradient(
 
     180deg,
@@ -779,8 +758,8 @@ background:
       255,
 
       calc(
-        0.055 +
-        (var(--energy) * 0.025)
+        0.032 +
+        (var(--energy) * 0.010)
       )
     ),
 
@@ -790,8 +769,8 @@ background:
       255,
 
       calc(
-        0.018 +
-        (var(--proximity) * 0.010)
+        0.010 +
+        (var(--proximity) * 0.004)
       )
     )
   ),
@@ -802,8 +781,8 @@ background:
     12,
 
     calc(
-      0.72 -
-      (var(--proximity) * 0.04)
+      0.78 -
+      (var(--proximity) * 0.025)
     )
   );
 
