@@ -1345,7 +1345,7 @@ transition:
   filter 1.2s ease;
   pointer-events: none;
   z-index: 1;
-  mix-blend-mode: screen;
+ mix-blend-mode: plus-lighter;
   filter:
 
   blur(
