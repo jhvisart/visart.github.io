@@ -825,8 +825,8 @@ const cinematicTilt =
       )
 
     : (
-        15 +
-        (engineCard.proximity * 4)
+        18 +
+        (engineCard.proximity * 5.8)
       );
 
 engineCard.targetY =
