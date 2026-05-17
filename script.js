@@ -475,8 +475,8 @@ card.el.style.setProperty(
        
        this.hero.el.style.transform = `
         perspective(900px)
-       rotateY(${this.hero.currentX * 0.72}deg)
-       rotateX(${this.hero.currentY * 0.72}deg)
+       rotateY(${this.hero.currentX * 0.9}deg)
+       rotateX(${this.hero.currentY * 0.9}deg)
       `;
 
     }
