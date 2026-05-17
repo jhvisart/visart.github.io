@@ -1260,7 +1260,7 @@ box-shadow:
 
   0 0 calc(
     28px +
-    (var(--energy) * 14px)
+    (var(--energy) * 8px)
   )
   color-mix(
     in srgb,
@@ -1270,7 +1270,7 @@ box-shadow:
 
   0 0 calc(
     40px +
-    (var(--energy) * 16px)
+    (var(--energy) * 10px)
   )
   color-mix(
     in srgb,
@@ -1603,7 +1603,7 @@ will-change:
     opacity .55s ease,
     background-position .8s ease;
 
-  mix-blend-mode: screen;
+  mix-blend-mode: soft-light;
 
   transform:
     translate3d(
