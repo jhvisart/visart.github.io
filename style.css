@@ -862,7 +862,17 @@ background:
     box-shadow 0.45s ease,
     border-color 0.3s ease;
 
-  will-change: transform;
+ will-change:
+
+  transform,
+
+  opacity;
+
+  transform-style:
+  preserve-3d;
+
+contain:
+  layout paint style;
 
   isolation: isolate;
 opacity:
@@ -1170,11 +1180,11 @@ touch-action: manipulation;
     )
 
     rotateX(
-      calc(var(--tiltX, 0deg) * 0.42)
+      calc(var(--tiltX, 0deg) * 0.26)
     )
 
     rotateY(
-      calc(var(--tiltY, 0deg) * 0.42)
+      calc(var(--tiltY, 0deg) * 0.26)
     );
  }
 
@@ -1213,6 +1223,16 @@ touch-action: manipulation;
   .hero-card {
     padding: 16px;
     min-height: 300px;
+    transform:
+
+  translate3d(0,0,0)
+
+  scale(
+    calc(
+      1 +
+      (var(--atmosphere, 0) * 0.002)
+    )
+  );
   }
 }
 
