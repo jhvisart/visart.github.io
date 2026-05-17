@@ -515,7 +515,15 @@ h1 span {
 isolation: isolate;
 
 transform:
-  translate3d(0,0,0);
+
+  translate3d(0,0,0)
+
+  scale(
+    calc(
+      1 +
+      (var(--atmosphere, 0) * 0.004)
+    )
+  );
 
   backface-visibility: hidden;
 
