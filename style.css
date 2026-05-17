@@ -1908,7 +1908,12 @@ h1 span::after {
 
   z-index: 3;
 
-  opacity: 0.88;
+  opacity:
+
+  calc(
+    0.72 +
+    (var(--globalAtmosphere, 0) * 0.12)
+  );
 
   pointer-events: none;
 }
