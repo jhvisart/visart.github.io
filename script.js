@@ -115,7 +115,7 @@ this.pointer.energy +=
   (
     targetEnergy -
     this.pointer.energy
-  ) * 0.032;
+  ) * 0.018;
      
    this.pointer.x +=
   (this.pointer.targetX - this.pointer.x) * 0.11;
