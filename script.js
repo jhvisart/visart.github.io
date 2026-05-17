@@ -463,10 +463,10 @@ card.el.style.setProperty(
     if (this.hero) {
 
       this.hero.currentX +=
-        (this.hero.targetX - this.hero.currentX) * 0.045;
+        (this.hero.targetX - this.hero.currentX) * 0.032;
 
       this.hero.currentY +=
-        (this.hero.targetY - this.hero.currentY) * 0.045;
+        (this.hero.targetY - this.hero.currentY) * 0.032;
 
       this.hero.el.style.setProperty(
       "--atmosphere",
@@ -803,7 +803,10 @@ const curveX =
   Math.sign(centeredX) *
 
   Math.pow(
-    Math.abs(centeredX),
+   Math.min(
+  Math.abs(centeredX),
+  0.92
+)
     responseCurve
   );
 
@@ -811,7 +814,10 @@ const curveY =
   Math.sign(centeredY) *
 
   Math.pow(
-    Math.abs(centeredY),
+   Math.min(
+  Math.abs(centeredY),
+  0.92
+)
     responseCurve
   );
 
