@@ -438,7 +438,12 @@ card.el.style.setProperty(
       this.hero.currentY +=
         (this.hero.targetY - this.hero.currentY) * 0.045;
 
-      this.hero.el.style.transform = `
+      this.hero.el.style.setProperty(
+      "--atmosphere",
+      this.atmosphere.breathing.toFixed(3)
+      );
+       
+       this.hero.el.style.transform = `
         perspective(900px)
         rotateY(${this.hero.currentX}deg)
         rotateX(${this.hero.currentY}deg)
