@@ -93,6 +93,11 @@ this.atmosphere.breathing =
 
   this.atmosphere.current;
 
+   document.body.style.setProperty(
+  "--globalAtmosphere",
+  this.atmosphere.current.toFixed(3)
+);
+
     /* =========================
        CARDS
     ========================= */
