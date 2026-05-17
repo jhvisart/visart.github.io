@@ -26,6 +26,17 @@ pointer: {
 
   running: false,
 
+   atmosphere: {
+
+  current: 0,
+  target: 0,
+
+  pulse: 0,
+
+  breathing: 0
+
+},
+
   addCard(card) {
     this.cards.push(card);
   },
@@ -53,6 +64,34 @@ pointer: {
   },
 
   update() {
+
+     this.atmosphere.target =
+
+  this.pointer.velocity > 0.04
+
+    ? this.pointer.energy
+
+    : 0;
+
+this.atmosphere.current +=
+  (
+    this.atmosphere.target -
+    this.atmosphere.current
+  ) * 0.022;
+
+this.atmosphere.pulse =
+
+  Math.sin(
+    performance.now() * 0.00032
+  ) * 0.5 + 0.5;
+
+this.atmosphere.breathing =
+
+  (
+    this.atmosphere.pulse * 0.12
+  ) *
+
+  this.atmosphere.current;
 
     /* =========================
        CARDS
