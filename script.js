@@ -270,23 +270,30 @@ card.currentY +=
     VISART_ENGINE.pointer.energy
   );
 
+const ambientStillness =
+
+  Math.max(
+    0,
+    restDecay - 0.12
+  );
+
 const ambientFloat =
 
   Math.sin(
 
-    performance.now() * 0.00022 +
+    performance.now() * 0.00018 +
 
     card.floatSeed +
 
-    distance * 0.00035
+    distance * 0.0002
 
   ) *
 
-  0.0045 *
+  0.0022 *
 
   card.floatIntensity *
 
-  restDecay;
+  ambientStillness;
 
 card.currentY += ambientFloat;
     
@@ -305,11 +312,11 @@ card.velocityY += forceY;
 
 const adaptiveDamping =
 
-  0.62 +
+  0.72 +
 
-  (card.proximity * 0.028) -
+  (card.proximity * 0.018) -
 
-  (VISART_ENGINE.pointer.energy * 0.018);
+  (VISART_ENGINE.pointer.energy * 0.012);
 
 card.velocityX *= adaptiveDamping;
 card.velocityY *= adaptiveDamping;
@@ -319,24 +326,34 @@ card.velocityY *= 0.985;
 
 const residualEnergy =
 
+  VISART_ENGINE.pointer.energy > 0.085
+
+    ? (
+        VISART_ENGINE.pointer.energy - 0.085
+      )
+
+    : 0;
+
+const silenceGate =
+
   Math.max(
     0,
-    VISART_ENGINE.pointer.energy - 0.06
+    card.proximity - 0.08
   );
 
 const microMotion =
 
   Math.sin(
 
-    performance.now() * 0.00042 +
+    performance.now() * 0.00032 +
 
     card.floatSeed
 
   ) *
 
-  0.00065 *
+  0.00028 *
 
-  card.proximity *
+  silenceGate *
 
   residualEnergy;
 
