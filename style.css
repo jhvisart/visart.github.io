@@ -926,8 +926,8 @@ opacity:
   transform:
     translateZ(
       calc(
-        20px +
-        (var(--proximity) * 10px)
+        34px +
+        (var(--proximity) * 18px)
       )
     )
     translateX(
@@ -1506,8 +1506,8 @@ will-change:
 
   translateZ(
     calc(
-      8px +
-      (var(--proximity) * 4px)
+      18px +
+      (var(--proximity) * 10px)
     )
   )
 
