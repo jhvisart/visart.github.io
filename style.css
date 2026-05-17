@@ -526,18 +526,33 @@ transform:
   border:
   1px solid
   rgba(255,255,255,.06);
- box-shadow:
+box-shadow:
 
- 0 14px 30px rgba(0,0,0,.28),
+  0 10px 24px rgba(0,0,0,.22),
 
-  0 34px 82px rgba(0,0,0,.14),
+  0 38px 120px rgba(0,0,0,.16),
 
-  0 0 0 1px rgba(255,255,255,.025);
+  0 0 0 1px rgba(255,255,255,.022),
+
+  0 0 120px
+  color-mix(
+    in srgb,
+    var(--accent1) 5%,
+    transparent
+  );
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 420px;
-  transition: transform .15s ease-out;
+  transition:
+
+  transform 0.9s cubic-bezier(.22,.61,.36,1),
+
+  box-shadow 1.2s ease,
+
+  border-color 1s ease,
+
+  background 1.2s ease;
 }
 
 .hero-visual {
@@ -1776,7 +1791,20 @@ h1 span::after {
   background:
     radial-gradient(circle at 20% 0%, color-mix(in srgb, var(--accent1) 35%, transparent), transparent 32%),
     radial-gradient(circle at 90% 20%, color-mix(in srgb, var(--accent2) 30%, transparent), transparent 34%);
-  opacity: .32;
+  opacity:
+
+  calc(
+    0.18 +
+    (var(--atmosphere, 0) * 0.18)
+  );
+  filter:
+
+  blur(
+    calc(
+      24px +
+      (var(--atmosphere, 0) * 18px)
+    )
+  );
   pointer-events: none;
 }
 
