@@ -806,7 +806,7 @@ const curveX =
    Math.min(
   Math.abs(centeredX),
   0.92
-)
+),
     responseCurve
   );
 
@@ -817,7 +817,7 @@ const curveY =
    Math.min(
   Math.abs(centeredY),
   0.92
-)
+),
     responseCurve
   );
 
