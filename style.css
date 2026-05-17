@@ -168,7 +168,12 @@ a {
       transparent 88%
     );
 
-  opacity: .18;
+ opacity:
+
+  calc(
+    0.08 +
+    (var(--globalAtmosphere, 0) * 0.16)
+  );
 
   z-index: 0;
 
@@ -203,12 +208,12 @@ a {
     )
   )
 
-  brightness(
-    calc(
-      0.92 +
-      (var(--energy, 0) * 0.08)
-    )
-  );
+ brightness(
+  calc(
+    0.92 +
+    (var(--globalAtmosphere, 0) * 0.06)
+  )
+);
 
   will-change:
     transform,
@@ -394,7 +399,12 @@ a {
       rgba(0,0,0,.16) 100%
     );
 
-  opacity: 0.78;
+  opacity:
+
+  calc(
+    0.58 +
+    (var(--globalAtmosphere, 0) * 0.12)
+  );
 
   mix-blend-mode: normal;
 
