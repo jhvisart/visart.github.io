@@ -225,7 +225,15 @@ card.proximity += ambientBleed;
 
    const magneticStrength =
 
-(card.hover ? 0.032 : 0.0008) *
+(card.hover ? (
+
+  IS_TOUCH_DEVICE
+
+    ? 0.014
+
+    : 0.032
+
+) : 0.0008) *
 
 Math.pow(
   0.35 + card.priority,
@@ -803,9 +811,17 @@ const curveY =
 
 const cinematicTilt =
 
-  15 +
+  IS_TOUCH_DEVICE
 
-  (engineCard.proximity * 4);
+    ? (
+        7 +
+        (engineCard.proximity * 1.8)
+      )
+
+    : (
+        15 +
+        (engineCard.proximity * 4)
+      );
 
 engineCard.targetY =
   curveX * cinematicTilt;
