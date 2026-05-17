@@ -248,9 +248,9 @@ card.magneticY =
 
 const magneticCompression =
 
-  0.052 +
+  0.034 +
 
-  (card.priority * 0.012);
+  (card.priority * 0.008);
 
 card.magneticCurrentX +=
   (
@@ -791,7 +791,13 @@ const py =
 const centeredX = (px - 0.5);
 const centeredY = (py - 0.5);
 
-const responseCurve = 1.18;
+const responseCurve =
+
+  IS_TOUCH_DEVICE
+
+    ? 1.34
+
+    : 1.22;
 
 const curveX =
   Math.sign(centeredX) *
