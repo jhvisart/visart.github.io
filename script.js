@@ -523,7 +523,7 @@ VISART_ENGINE.pointer.velocity =
 
     : Math.pow(
         rawVelocity,
-        1.72
+        1.58
       );
 
  VISART_ENGINE.pointer.targetX = e.clientX;
