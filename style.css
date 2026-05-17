@@ -1668,10 +1668,28 @@ will-change:
 
   pointer-events: none;
 
-  opacity: .46;
+ opacity:
 
-  filter:
-    blur(18px);
+  calc(
+    0.22 +
+    (var(--globalAtmosphere, 0) * 0.24)
+  );
+
+ filter:
+
+  blur(
+    calc(
+      18px +
+      (var(--globalAtmosphere, 0) * 26px)
+    )
+  )
+
+  saturate(
+    calc(
+      1 +
+      (var(--globalAtmosphere, 0) * 0.08)
+    )
+  );
 
   z-index: -1;
 
